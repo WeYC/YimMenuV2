@@ -11,6 +11,27 @@
 
 namespace YimMenu
 {
+	static const char* TranslateComponent(const std::string& label)
+	{
+		if (label == "Mask") return L("outfit.mask", "Mask");
+		if (label == "Hair") return L("outfit.hair", "Hair");
+		if (label == "Torso") return L("outfit.torso", "Torso");
+		if (label == "Leg") return L("outfit.leg", "Leg");
+		if (label == "Bag") return L("outfit.bag", "Bag");
+		if (label == "Shoe") return L("outfit.shoe", "Shoe");
+		if (label == "Accessory") return L("outfit.accessory", "Accessory");
+		if (label == "Undershirt") return L("outfit.undershirt", "Undershirt");
+		if (label == "Kevlar/Armor") return L("outfit.kevlar", "Kevlar/Armor");
+		if (label == "Decals") return L("outfit.decals", "Decals");
+		if (label == "Tops") return L("outfit.tops", "Tops");
+		if (label == "Hats") return L("outfit.hats", "Hats");
+		if (label == "Glasses") return L("outfit.glasses", "Glasses");
+		if (label == "Ears") return L("outfit.ears", "Ears");
+		if (label == "Watches") return L("outfit.watches", "Watches");
+		if (label == "Bracelets") return L("outfit.bracelets", "Bracelets");
+		return label.c_str();
+	}
+
 	class OutfitEditorMenu
 	{
 		Outfit::OutfitComponents components{};
@@ -50,7 +71,7 @@ namespace YimMenu
 			{
 				auto& item = t.second;
 				ImGui::SetNextItemWidth(120);
-				if (ImGui::InputInt(std::format("{} [0,{}]##1", item.label, item.drawable_id_max).c_str(), &item.drawable_id))
+				if (ImGui::InputInt(std::format("{} [0,{}]##1", TranslateComponent(item.label), item.drawable_id_max).c_str(), &item.drawable_id))
 				{
 					Outfit::OutfitEditor::CheckBoundsDrawable(item, 0);
 					FiberPool::Push([id = t.first, item, this] {
@@ -69,7 +90,7 @@ namespace YimMenu
 			{
 				auto& item = t.second;
 				ImGui::SetNextItemWidth(120);
-				if (ImGui::InputInt(std::format("{} TEX [0,{}]##2", item.label, item.texture_id_max).c_str(), &item.texture_id))
+				if (ImGui::InputInt(std::format("{} TEX [0,{}]##2", TranslateComponent(item.label), item.texture_id_max).c_str(), &item.texture_id))
 				{
 					Outfit::OutfitEditor::CheckBoundsTexture(item, 0);
 					FiberPool::Push([id = t.first, item, this] {
@@ -87,7 +108,7 @@ namespace YimMenu
 			{
 				auto& item = t.second;
 				ImGui::SetNextItemWidth(120);
-				if (ImGui::InputInt(std::format("{} [0,{}]##3", item.label, item.drawable_id_max).c_str(), &item.drawable_id))
+				if (ImGui::InputInt(std::format("{} [0,{}]##3", TranslateComponent(item.label), item.drawable_id_max).c_str(), &item.drawable_id))
 				{
 					Outfit::OutfitEditor::CheckBoundsDrawable(item, -1);
 					FiberPool::Push([id = t.first, item, this] {
@@ -107,7 +128,7 @@ namespace YimMenu
 			{
 				auto& item = t.second;
 				ImGui::SetNextItemWidth(120);
-				if (ImGui::InputInt(std::format("{} TEX [0,{}]##4", item.label, item.texture_id_max).c_str(), &item.texture_id))
+				if (ImGui::InputInt(std::format("{} TEX [0,{}]##4", TranslateComponent(item.label), item.texture_id_max).c_str(), &item.texture_id))
 				{
 					Outfit::OutfitEditor::CheckBoundsTexture(item, -1);
 					FiberPool::Push([id = t.first, item, this] {
@@ -124,9 +145,9 @@ namespace YimMenu
 			{
 				// folders
 				ImGui::SetNextItemWidth(300.f);
-				if (ImGui::BeginCombo("", folder.empty() ? "Root" : folder.c_str()))
+				if (ImGui::BeginCombo("", folder.empty() ? L("outfit.root", "Root") : folder.c_str()))
 				{
-					if (ImGui::Selectable("Root", folder == ""))
+					if (ImGui::Selectable(L("outfit.root", "Root"), folder == ""))
 					{
 						folder.clear();
 						FiberPool::Push([this] {
@@ -149,7 +170,7 @@ namespace YimMenu
 				// files
 				static std::string search;
 				ImGui::SetNextItemWidth(300);
-				if (ImGui::InputTextWithHint("###outfitname", "Search", &search))
+				if (ImGui::InputTextWithHint("###outfitname", L("outfit.search", "Search").c_str(), &search))
 					std::transform(search.begin(), search.end(), search.begin(), tolower);
 				if (ImGui::BeginListBox("##saved_outfits", ImVec2(300, 300)))
 				{
