@@ -172,7 +172,7 @@ namespace YimMenu
 
 		void RenderSaveButton(bool saveToNewFolder)
 		{
-			if (ImGui::Button(L("outfit.save", "Save Outfit")))
+			if (ImGui::Button(L("outfit.save", "Save Outfit").c_str()))
 				FiberPool::Push([saveToNewFolder, this] {
 					std::string fileName = TrimString(outfitName);
 					strcpy(outfitName, "");
@@ -199,15 +199,15 @@ namespace YimMenu
 		{
 			ImGui::BeginGroup();
 			{
-				if (ImGui::Button(L("btn.refresh_list", "Refresh list")))
+				if (ImGui::Button(L("btn.refresh_list", "Refresh list").c_str()))
 					FiberPool::Push([this] {
 						Outfit::OutfitEditor::RefreshList(folder, folders, files);
 					});
 				ImGui::Spacing();
 				static bool applyHair = false;
-				ImGui::Checkbox(L("outfit.apply_hair", "Apply hair"), &applyHair);
+				ImGui::Checkbox(L("outfit.apply_hair", "Apply hair").c_str(), &applyHair);
 				ImGui::Spacing();
-				if (ImGui::Button(L("outfit.apply_selected", "Apply Selected Outfit")))
+				if (ImGui::Button(L("outfit.apply_selected", "Apply Selected Outfit").c_str()))
 					FiberPool::Push([this] {
 						Outfit::OutfitEditor::ApplyOutfitFromJson(folder, file, applyHair);
 						applyHair = false; // reset everytime
@@ -243,12 +243,12 @@ namespace YimMenu
 		auto category = std::make_shared<Category>(L("category.outfit_editor", "Outfit Editor"));
 
 		category->AddItem(std::make_shared<ImGuiItem>([] {
-			if (ImGui::Button(L("outfit.refresh_stats", "Refresh Stats")))
+			if (ImGui::Button(L("outfit.refresh_stats", "Refresh Stats").c_str()))
 				FiberPool::Push([] {
 					editor.RefreshStats();
 				});
 			ImGui::SameLine();
-			if (ImGui::Button(L("outfit.randomize", "Randomize Outfit")))
+			if (ImGui::Button(L("outfit.randomize", "Randomize Outfit").c_str()))
 				FiberPool::Push([] {
 					Self::GetPed().RandomizeOutfit2();
 				});

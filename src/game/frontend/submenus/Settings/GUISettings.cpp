@@ -301,9 +301,9 @@ namespace YimMenu
 		static float scale = io.FontGlobalScale;
 		ImGui::Text("%s", L("gui.font_config", "Font Configuration:"));
 		ImGui::Separator();
-		ImGui::Text(L("gui.current_scale", "Current Scale: %.2f"), io.FontGlobalScale);
-		ImGui::SliderFloat(L("gui.font_scale", "Font Scale"), &scale, 0.5f, 2.0f, "%.2f");
-		if (ImGui::Button(L("gui.apply_font_scale", "Apply Font Scale")))
+		ImGui::Text(L("gui.current_scale", "Current Scale: %.2f").c_str(), io.FontGlobalScale);
+		ImGui::SliderFloat(L("gui.font_scale", "Font Scale").c_str(), &scale, 0.5f, 2.0f, "%.2f");
+		if (ImGui::Button(L("gui.apply_font_scale", "Apply Font Scale").c_str()))
 			io.FontGlobalScale = scale;
 	}
 
@@ -316,32 +316,32 @@ namespace YimMenu
 		ImGui::Separator();
 		if (ImGui::BeginTabBar("StyleTabs"))
 		{
-			if (ImGui::BeginTabItem(L("tab.colors", "Colors")))
+			if (ImGui::BeginTabItem(L("tab.colors", "Colors").c_str()))
 			{
 				DrawColorsTab();
 				ImGui::EndTabItem();
 			}
-			if (ImGui::BeginTabItem(L("tab.rounding", "Rounding")))
+			if (ImGui::BeginTabItem(L("tab.rounding", "Rounding").c_str()))
 			{
 				DrawRoundingTab();
 				ImGui::EndTabItem();
 			}
-			if (ImGui::BeginTabItem(L("tab.layout", "Layout")))
+			if (ImGui::BeginTabItem(L("tab.layout", "Layout").c_str()))
 			{
 				DrawLayoutTab();
 				ImGui::EndTabItem();
 			}
-			if (ImGui::BeginTabItem(L("tab.border", "Border")))
+			if (ImGui::BeginTabItem(L("tab.border", "Border").c_str()))
 			{
 				DrawBorderTab();
 				ImGui::EndTabItem();
 			}
-			if (ImGui::BeginTabItem(L("tab.global", "Global")))
+			if (ImGui::BeginTabItem(L("tab.global", "Global").c_str()))
 			{
 				DrawGlobalTab();
 				ImGui::EndTabItem();
 			}
-			if (ImGui::BeginTabItem(L("tab.fonts", "Fonts")))
+			if (ImGui::BeginTabItem(L("tab.fonts", "Fonts").c_str()))
 			{
 				DrawFontTab();
 				ImGui::EndTabItem();

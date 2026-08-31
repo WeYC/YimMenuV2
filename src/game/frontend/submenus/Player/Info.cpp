@@ -34,8 +34,8 @@ namespace YimMenu::Submenus
 		playerOptionsGroup->AddItem(std::make_shared<ImGuiItem>([] {
 			if (Players::GetSelected().IsValid())
 			{
-				ImGui::Text(L("label.rank", "Rank: %d (%d RP)"), Players::GetSelected().GetRank(), Players::GetSelected().GetRP());
-				ImGui::Text(L("label.money", "Money: %d"), Players::GetSelected().GetMoney());
+				ImGui::Text(L("label.rank", "Rank: %d (%d RP)").c_str(), Players::GetSelected().GetRank(), Players::GetSelected().GetRP());
+				ImGui::Text(L("label.money", "Money: %d").c_str(), Players::GetSelected().GetMoney());
 
 				if (Players::GetSelected().GetPed())
 				{
@@ -45,10 +45,10 @@ namespace YimMenu::Submenus
 					ImGui::Text("%s", healthStr.c_str());
 
 					auto coords = Players::GetSelected().GetPed().GetPosition();
-					ImGui::Text(L("label.coords", "Coords: %.2f, %.2f, %.2f"), coords.x, coords.y, coords.z);
+					ImGui::Text(L("label.coords", "Coords: %.2f, %.2f, %.2f").c_str(), coords.x, coords.y, coords.z);
 
 					auto distance = Players::GetSelected().GetPed().GetPosition().GetDistance(Self::GetPed().GetPosition());
-					ImGui::Text(L("label.distance", "Distance: %.2f"), distance);
+					ImGui::Text(L("label.distance", "Distance: %.2f").c_str(), distance);
 				}
 				else
 				{
@@ -109,35 +109,35 @@ namespace YimMenu::Submenus
 					ImGui::SetClipboardText(addr2.c_str());
 				}
 
-				if (ImGui::Button(L("player.add_to_saved", "Add to Saved")))
+				if (ImGui::Button(L("player.add_to_saved", "Add to Saved").c_str()))
 					SavedPlayers::GetPlayerData(Players::GetSelected());
 				ImGui::SameLine();
-				if (ImGui::Button(L("player.view_sc_profile", "View SC Profile")))
+				if (ImGui::Button(L("player.view_sc_profile", "View SC Profile").c_str()))
 					FiberPool::Push([] {
 						uint64_t handle[13];
 						NETWORK::NETWORK_HANDLE_FROM_PLAYER(Players::GetSelected().GetId(), handle, std::size(handle));
 						NETWORK::NETWORK_SHOW_PROFILE_UI(handle);
 					});
 				ImGui::SameLine();
-				if (ImGui::Button(L("player.add_friend", "Add Friend")))
+				if (ImGui::Button(L("player.add_friend", "Add Friend").c_str()))
 					FiberPool::Push([] {
 						uint64_t handle[13];
 						NETWORK::NETWORK_HANDLE_FROM_PLAYER(Players::GetSelected().GetId(), handle, std::size(handle));
 						NETWORK::NETWORK_ADD_FRIEND(handle, "");
 					});
 
-				if (ImGui::Button(L("player.more_info", "More Info")))
+				if (ImGui::Button(L("player.more_info", "More Info").c_str()))
 					ImGui::OpenPopup("##more_info");
 
 				ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 				if (ImGui::BeginPopupModal("##more_info", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_Modal | ImGuiWindowFlags_AlwaysAutoResize))
 				{
-					ImGui::Text(L("label.avg_latency", "Average Latency: %.2f"), Players::GetSelected().GetAverageLatency());
-					ImGui::Text(L("label.packet_loss", "Packet Loss: %.2f"), Players::GetSelected().GetAveragePacketLoss());
+					ImGui::Text(L("label.avg_latency", "Average Latency: %.2f").c_str(), Players::GetSelected().GetAverageLatency());
+					ImGui::Text(L("label.packet_loss", "Packet Loss: %.2f").c_str(), Players::GetSelected().GetAveragePacketLoss());
 
 					ImGui::Spacing();
 
-					if (ImGui::Button(L("btn.close", "Close")) || ((!ImGui::IsWindowHovered() && !ImGui::IsAnyItemHovered()) && ImGui::IsMouseClicked(ImGuiMouseButton_Left)))
+					if (ImGui::Button(L("btn.close", "Close").c_str()) || ((!ImGui::IsWindowHovered() && !ImGui::IsAnyItemHovered()) && ImGui::IsMouseClicked(ImGuiMouseButton_Left)))
 						ImGui::CloseCurrentPopup();
 
 					ImGui::EndPopup();

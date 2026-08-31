@@ -94,7 +94,7 @@ namespace YimMenu::Submenus
 			return true;
 		}();
 
-		ImGui::BeginCombo(L("label.weapons", "Weapons"), selectedWeapon.c_str());
+		ImGui::BeginCombo(L("label.weapons", "Weapons").c_str(), selectedWeapon.c_str());
 		if (ImGui::IsItemActive() && !ImGui::IsPopupOpen("##weaponspopup"))
 		{
 			ImGui::OpenPopup("##weaponspopup");
@@ -142,14 +142,14 @@ namespace YimMenu::Submenus
 			ImGui::EndPopup();
 		}
 
-		if (ImGui::Button(L("weapon.give", "Give Weapon")))
+		if (ImGui::Button(L("weapon.give", "Give Weapon").c_str()))
 		{
 			FiberPool::Push([] {
 				Self::GetPed().GiveWeapon(selectedWeaponHash, true);
 			});
 		}
 		ImGui::SameLine();
-		if (ImGui::Button(L("weapon.remove", "Remove Weapon")))
+		if (ImGui::Button(L("weapon.remove", "Remove Weapon").c_str()))
 		{
 			FiberPool::Push([] {
 				Self::GetPed().RemoveWeapon(selectedWeaponHash);
@@ -158,11 +158,11 @@ namespace YimMenu::Submenus
 
 		if (*Pointers.IsSessionStarted && selectedWeaponHash != 0)
 		{
-			ImGui::Text(L("weapon.kills_with", "Kills With: %d"), kills);
-			ImGui::Text(L("weapon.deaths_by", "Deaths By: %d"), deaths);
-			ImGui::Text(L("weapon.kd_ratio", "K/D Ratio: %.2f"), kdRatio);
-			ImGui::Text(L("weapon.headshots", "Headshots: %d"), headshots);
-			ImGui::Text(L("weapon.accuracy", "Accuracy: %d%%"), accuracy);
+			ImGui::Text(L("weapon.kills_with", "Kills With: %d").c_str(), kills);
+			ImGui::Text(L("weapon.deaths_by", "Deaths By: %d").c_str(), deaths);
+			ImGui::Text(L("weapon.kd_ratio", "K/D Ratio: %.2f").c_str(), kdRatio);
+			ImGui::Text(L("weapon.headshots", "Headshots: %d").c_str(), headshots);
+			ImGui::Text(L("weapon.accuracy", "Accuracy: %d%%").c_str(), accuracy);
 		}
 	}
 
