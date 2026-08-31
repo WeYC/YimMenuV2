@@ -7,6 +7,7 @@
 #include "game/backend/Self.hpp"
 #include "game/frontend/items/Items.hpp"
 #include "game/frontend/items/DrawHotkey.hpp"
+#include "game/frontend/Menu.hpp"
 #include "game/frontend/submenus/Settings/LuaScripts.hpp"
 #include "game/frontend/submenus/Settings/GUISettings.hpp"
 
@@ -68,6 +69,7 @@ namespace YimMenu::Submenus
 			if (ImGui::Combo("##language", &current, languages, 2))
 			{
 				I18n::g_CurrentLanguage = static_cast<I18n::Language>(current);
+				Menu::g_NeedsRebuild = true;
 			}
 		}));
 

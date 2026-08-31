@@ -34,6 +34,13 @@ namespace YimMenu
 			    if (!GUI::IsOpen())
 				    return;
 
+			    if (Menu::g_NeedsRebuild)
+			    {
+				    Menu::g_NeedsRebuild = false;
+				    Menu::Rebuild();
+				    return;
+			    }
+
 			    ImGui::PushFont(Menu::Font::g_DefaultFont);
 			    ImGui::PushStyleColor(ImGuiCol_WindowBg, ImU32(ImColor(15, 15, 15)));
 
@@ -43,6 +50,20 @@ namespace YimMenu
 			    ImGui::PopFont();
 		    },
 		    -1);
+	}
+
+	void Menu::Rebuild()
+	{
+		UIManager::ClearSubmenus();
+		UIManager::AddSubmenu(std::make_shared<Submenus::Self>());
+		UIManager::AddSubmenu(std::make_shared<Submenus::Vehicle>());
+		UIManager::AddSubmenu(std::make_shared<Submenus::Teleport>());
+		UIManager::AddSubmenu(std::make_shared<Submenus::Network>());
+		UIManager::AddSubmenu(std::make_shared<Submenus::Players>());
+		UIManager::AddSubmenu(std::make_shared<Submenus::World>());
+		UIManager::AddSubmenu(std::make_shared<Submenus::Recovery>());
+		UIManager::AddSubmenu(std::make_shared<Submenus::Settings>());
+		UIManager::AddSubmenu(std::make_shared<Submenus::Debug>());
 	}
 
 	static const ImWchar* GetGlyphRangesCyrillicOnly()

@@ -3,7 +3,10 @@
 namespace YimMenu::Menu
 {
 	extern void Init();
+	extern void Rebuild();
 	extern void SetupFonts();
+
+	inline bool g_NeedsRebuild = false;
 
 	namespace Font
 	{

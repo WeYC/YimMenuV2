@@ -67,6 +67,12 @@ namespace YimMenu
 			return GetInstance().m_Submenus;
 		}
 
+		static void ClearSubmenus()
+		{
+			GetInstance().m_Submenus.clear();
+			GetInstance().m_ActiveSubmenu = nullptr;
+		}
+
 		static ImFont* GetOptionsFont()
 		{
 			return GetInstance().m_OptionsFont;
