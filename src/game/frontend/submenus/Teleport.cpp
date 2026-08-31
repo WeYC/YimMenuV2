@@ -26,7 +26,7 @@ namespace YimMenu::Submenus
 
 		if (ImGui::BeginPopupModal("##deletelocation", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove))
 		{
-			ImGui::Text("%s", std::format(L("msg.kill_confirm", "Are you sure you want to delete %s?"), locationToDelete.name.data()).c_str());
+			ImGui::Text("%s", std::vformat(L("msg.kill_confirm", "Are you sure you want to delete {}?"), std::make_format_args(locationToDelete.name)).c_str());
 
 			ImGui::Spacing();
 
@@ -152,7 +152,7 @@ namespace YimMenu::Submenus
 						ImGui::BeginTooltip();
 						if (l.name.length() > 27)
 							ImGui::Text("%s", l.name.data());
-						ImGui::Text("%s", std::format(L("item.dist", "Distance: %f"), GetDistanceFromLocation(l)).c_str());
+						ImGui::Text("%s", std::vformat(L("item.dist", "Distance: {}"), std::make_format_args(GetDistanceFromLocation(l))).c_str());
 						ImGui::EndTooltip();
 					}
 				}
