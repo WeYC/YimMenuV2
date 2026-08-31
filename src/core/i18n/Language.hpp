@@ -254,8 +254,6 @@ namespace YimMenu::I18n
 		{"doomsdayheistcut3.description", "玩家3的分成"},
 		{"doomsdayheistcut4.label", "玩家4"},
 		{"doomsdayheistcut4.description", "玩家4的分成"},
-		{"doomsdayheistcategory.label", "选择抢劫"},
-		{"doomsdayheistcategory.description", "抢劫类别"},
 		{"cayopericoheistcut1.label", "玩家1"},
 		{"cayopericoheistcut1.description", "玩家1的分成"},
 		{"cayopericoheistcut2.label", "玩家2"},
@@ -434,6 +432,62 @@ namespace YimMenu::I18n
 		{"diamondcasinoheistsolomantrap.description", "跳过刷卡过程"},
 		{"diamondcasinoheistinstantfinish.label", "立即完成"},
 		{"diamondcasinoheistinstantfinish.description", "立即完成抢劫"},
+		{"diamondcasinoheistdifficulty.label", "难度"},
+		{"diamondcasinoheistdifficulty.description", "抢劫难度"},
+		{"diamondcasinoheistprimarytarget.label", "主要目标"},
+		{"diamondcasinoheistprimarytarget.description", "选择主要目标"},
+		{"diamondcasinoheistapproach.label", "方式"},
+		{"diamondcasinoheistapproach.description", "抢劫方式"},
+		{"diamondcasinoheistgunman.label", "枪手"},
+		{"diamondcasinoheistgunman.description", "选择枪手"},
+		{"diamondcasinoheistdriver.label", "车手"},
+		{"diamondcasinoheistdriver.description", "选择车手"},
+		{"diamondcasinoheisthacker.label", "黑客"},
+		{"diamondcasinoheisthacker.description", "选择黑客"},
+		{"diamondcasinoheistweapon.label", "武器"},
+		{"diamondcasinoheistweapon.description", "选择武器"},
+		{"diamondcasinoheistvehicle.label", "载具"},
+		{"diamondcasinoheistvehicle.description", "选择载具"},
+		{"diamondcasinoheistcut1.label", "玩家 1"},
+		{"diamondcasinoheistcut1.description", "玩家 1 分成"},
+		{"diamondcasinoheistcut2.label", "玩家 2"},
+		{"diamondcasinoheistcut2.description", "玩家 2 分成"},
+		{"diamondcasinoheistcut3.label", "玩家 3"},
+		{"diamondcasinoheistcut3.description", "玩家 3 分成"},
+		{"diamondcasinoheistcut4.label", "玩家 4"},
+		{"diamondcasinoheistcut4.description", "玩家 4 分成"},
+
+		// Cayo Perico Heist
+		{"cayopericoheistdifficulty.label", "难度"},
+		{"cayopericoheistdifficulty.description", "抢劫难度"},
+		{"cayopericoheistprimarytarget.label", "主要目标"},
+		{"cayopericoheistprimarytarget.description", "选择主要目标"},
+		{"cayopericoheistweapon.label", "武器"},
+		{"cayopericoheistweapon.description", "武器类别"},
+		{"cayopericoheistsetcuts.label", "设置分成"},
+		{"cayopericoheistsetcuts.description", "设置抢劫分成"},
+		{"cayopericoheistforceready.label", "强制准备就绪"},
+		{"cayopericoheistforceready.description", "强制所有玩家准备就绪"},
+		{"cayopericoheistsetup.label", "设置"},
+		{"cayopericoheistsetup.description", "设置佩里科岛抢劫"},
+		{"cayopericoheistsetprimarytargetvalue.label", "设置主要目标价值"},
+		{"cayopericoheistsetprimarytargetvalue.description", "更新主要目标价值"},
+		{"cayopericoheistsetsecondarytakevalue.label", "设置次要收益价值"},
+		{"cayopericoheistsetsecondarytakevalue.description", "更新次要收益价值"},
+		{"cayopericoheistskiphacking.label", "跳过黑客"},
+		{"cayopericoheistskiphacking.description", "跳过黑客入侵过程"},
+		{"cayopericoheistcutsewer.label", "切断下水道"},
+		{"cayopericoheistcutsewer.description", "切断下水道"},
+		{"cayopericoheistcutglass.label", "切割玻璃"},
+		{"cayopericoheistcutglass.description", "切割玻璃"},
+		{"cayopericoheisttakeprimarytarget.label", "拿取主要目标"},
+		{"cayopericoheisttakeprimarytarget.description", "拿取主要目标"},
+		{"cayopericoheistinstantfinish.label", "立即完成"},
+		{"cayopericoheistinstantfinish.description", "立即完成抢劫"},
+
+		// Doomsday Heist
+		{"doomsdayheistcategory.label", "选择抢劫"},
+		{"doomsdayheistcategory.description", "抢劫类别"},
 
 		// Doomsday Heist actions
 		{"doomsdayheistsetcuts.label", "设置分成"},
@@ -448,6 +502,28 @@ namespace YimMenu::I18n
 		{"doomsdayheistinstantfinish.description", "立即完成抢劫"},
 		{"doomsdayheistinstantfinishact3.label", "立即完成（第三幕）"},
 		{"doomsdayheistinstantfinishact3.description", "立即完成末日场景第三幕"},
+
+		// Kortz Center Heist
+		{"kortzcenterheistprimarytarget.label", "主要目标"},
+		{"kortzcenterheistprimarytarget.description", "选择主要目标"},
+		{"kortzcenterheistskipfingerprint.label", "跳过指纹破解"},
+		{"kortzcenterheistskipfingerprint.description", "跳过电脑室指纹破解小游戏"},
+		{"kortzcenterheistskipsignalnodes.label", "跳过信号节点"},
+		{"kortzcenterheistskipsignalnodes.description", "跳过金库键盘信号节点破解"},
+		{"kortzcenterheistskipdatacrack.label", "跳过数据破解"},
+		{"kortzcenterheistskipdatacrack.description", "跳过数据破解小游戏"},
+		{"kortzcenterheistcutglass.label", "切割玻璃"},
+		{"kortzcenterheistcutglass.description", "立即切割展示柜玻璃"},
+		{"kortzcenterheistdisablelaser.label", "禁用激光网格"},
+		{"kortzcenterheistdisablelaser.description", "禁用激光安全网格"},
+		{"kortzcenterheisttakeprimary.label", "拿取主要目标"},
+		{"kortzcenterheisttakeprimary.description", "拿取主要目标画作（站在附近）"},
+		{"kortzcenterheisttakesecondary.label", "拿取次要目标"},
+		{"kortzcenterheisttakesecondary.description", "拿取次要战利品（站在附近）"},
+		{"kortzcenterheistsetup.label", "设置"},
+		{"kortzcenterheistsetup.description", "设置科茨中心抢劫"},
+		{"kortzcenterheistautoenterpcaccesscode.label", "自动输入电脑密码"},
+		{"kortzcenterheistautoenterpcaccesscode.description", "自动输入电脑访问密码"},
 		{"weather.label", "天气"},
 		{"weather.description", "要设置或强制的天气。注意这是本地的，其他玩家看不到"},
 		{"setweather.label", "设置天气"},
@@ -1713,6 +1789,101 @@ namespace YimMenu::I18n
 	{
 		auto result = Get(key);
 		return result.empty() ? std::string(fallback) : std::string(result);
+	}
+
+	// Translate dropdown list item text (e.g. "Normal" -> "普通（Normal）")
+	inline std::string TranslateListItem(std::string_view text)
+	{
+		if (g_CurrentLanguage == Language::EN)
+			return std::string(text);
+
+		static const std::pair<std::string_view, std::string_view> items[] = {
+			// Difficulty
+			{"Normal", "普通（Normal）"},
+			{"Hard", "困难（Hard）"},
+			// Primary Target - Diamond Casino
+			{"Diamonds", "钻石（Diamonds）"},
+			{"Gold", "黄金（Gold）"},
+			{"Artwork", "艺术品（Artwork）"},
+			{"Cash", "现金（Cash）"},
+			// Primary Target - Cayo Perico
+			{"Panther Statue", "黑豹雕像（Panther Statue）"},
+			{"Pink Diamond", "粉钻（Pink Diamond）"},
+			{"Madrazo Files", "马德拉佐文件（Madrazo Files）"},
+			{"Bearer Bonds", "不记名债券（Bearer Bonds）"},
+			{"Ruby Necklace", "红宝石项链（Ruby Necklace）"},
+			{"Sinsimito Tequila", "辛希米托龙舌兰（Sinsimito Tequila）"},
+			// Approach - Diamond Casino
+			{"Silent & Sneaky", "偷偷摸摸（Silent & Sneaky）"},
+			{"The Big Con", "大骗局（The Big Con）"},
+			{"Aggressive", "强攻（Aggressive）"},
+			// Weapon Categories - Cayo Perico
+			{"Aggressor", "侵略者（Aggressor）"},
+			{"Conspirator", "阴谋者（Conspirator）"},
+			{"Crack Shot", "神射手（Crack Shot）"},
+			{"Saboteur", "破坏者（Saboteur）"},
+			{"Marksman", "神枪手（Marksman）"},
+			// Doomsday Heist
+			{"The Data Breaches", "数据入侵（The Data Breaches）"},
+			{"The Bogdan Problem", "博格丹问题（The Bogdan Problem）"},
+			{"The Doomsday Senario", "末日方案（The Doomsday Senario）"},
+			// Crew
+			{"Remove Gunman", "移除枪手（Remove Gunman）"},
+			{"Remove Driver", "移除车手（Remove Driver）"},
+			{"Remove Hacker", "移除黑客（Remove Hacker）"},
+			// Weapon Loadouts
+			{"MK II Shotgun Loadout", "MK II 霰弹枪装备（MK II Shotgun Loadout）"},
+			{"MK II Rifle Loadout", "MK II 步枪装备（MK II Rifle Loadout）"},
+			{"MK II SMG Loadout", "MK II 冲锋枪装备（MK II SMG Loadout）"},
+			{"Rifle Loadout", "步枪装备（Rifle Loadout）"},
+			{"Shotgun Loadout", "霰弹枪装备（Shotgun Loadout）"},
+			{"SMG Loadout", "冲锋枪装备（SMG Loadout）"},
+			{"Combat PDW Loadout", "战斗自卫冲锋枪装备（Combat PDW Loadout）"},
+			{"Combat MG Loadout", "战斗机枪装备（Combat MG Loadout）"},
+			{"Micro SMG Loadout", "微型冲锋枪装备（Micro SMG Loadout）"},
+			{"Machine Pistol Loadout", "机关手枪装备（Machine Pistol Loadout）"},
+			{"Revolver Loadout", "左轮手枪装备（Revolver Loadout）"},
+			// Doomsday Heist Approach
+			{"Lester", "莱斯特（Lester）"},
+			{"Revolver", "左轮手枪（Revolver）"},
+			// Kortz Center Heist
+			{"Headshot", "爆头（Headshot）"},
+			{"Knockout", "击倒（Knockout）"},
+			// Kortz Center Primary Targets (art names)
+			{"La Dernière Débauche", "最后的放纵（La Dernière Débauche）"},
+			{"Hare Oneself Think", "兔子的思考（Hare Oneself Think）"},
+			{"The Downfall Rome", "罗马的陷落（The Downfall Rome）"},
+			{"Brother Brother", "兄弟（Brother Brother）"},
+			{"A Cast Characters", "角色群像（A Cast Characters）"},
+			{"Gone To Seed", "回归自然（Gone To Seed）"},
+			{"True Love", "真爱（True Love）"},
+			{"Breathless", "屏息（Breathless）"},
+			{"Consumato", "消逝（Consumato）"},
+			{"I Hear Voices", "我听见声音（I Hear Voices）"},
+			{"Winter, Nowhere in Particular", "冬日·无处可寻（Winter, Nowhere in Particular）"},
+			{"The Girl With Pearl Necklace", "戴珍珠项链的女孩（The Girl With Pearl Necklace）"},
+			{"Chat on Fruit", "水果茶话会（Chat on Fruit）"},
+			{"Pumpkin", "南瓜（Pumpkin）"},
+			{"Twindifference", "双生差异（Twindifference）"},
+			{"Stacks Study V", "堆叠研究 V（Stacks Study V）"},
+			{"I, Fruit", "我，水果（I, Fruit）"},
+			{"To Beat About Bush", "含沙射影（To Beat About Bush）"},
+			{"In Excess of Success", "过度成功（In Excess of Success）"},
+			{"Juiced", "榨汁（Juiced）"},
+			{"A Winding Road Home", "回家的弯路（A Winding Road Home）"},
+			{"Teckels", "腊肠犬（Teckels）"},
+			{"Trust", "信任（Trust）"},
+			{"Until Death", "至死不渝（Until Death）"},
+			{"What Melons?", "什么瓜？（What Melons?）"},
+			{"The Outcome Endeavour", "结果的努力（The Outcome Endeavour）"},
+			{"Mi O Melee", "我的近战（Mi O Melee）"},
+		};
+
+		for (auto& [en, zh] : items)
+			if (en == text)
+				return std::string(zh);
+
+		return std::string(text);
 	}
 }
 

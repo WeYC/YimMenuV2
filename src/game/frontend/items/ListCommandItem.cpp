@@ -3,6 +3,7 @@
 #include "core/commands/Commands.hpp"
 #include "core/commands/ListCommand.hpp"
 #include "core/frontend/widgets/toggle/imgui_toggle.hpp"
+#include "core/i18n/Language.hpp"
 
 namespace YimMenu
 {
@@ -49,12 +50,16 @@ namespace YimMenu
 			m_ItemWidth = size.x + 40.0f;
 		}
 
+		auto displayLabel = I18n::TranslateListItem(m_LabelOverride.value_or(m_Command->GetLabel()));
+		auto displaySelected = I18n::TranslateListItem(m_SelectedItem.value());
+
 		ImGui::SetNextItemWidth(m_ItemWidth.value());
-		if (ImGui::BeginCombo(m_LabelOverride.value_or(m_Command->GetLabel()).c_str(), m_SelectedItem.value().c_str()))
+		if (ImGui::BeginCombo(displayLabel.c_str(), displaySelected.c_str()))
 		{
 			for (auto& el : list)
 			{
-				if (ImGui::Selectable(el.second, el.first == current_val))
+				auto translated = I18n::TranslateListItem(el.second);
+				if (ImGui::Selectable(translated.c_str(), el.first == current_val))
 				{
 					current_val = el.first;
 					m_Command->SetState(el.first);
