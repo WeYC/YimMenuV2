@@ -24,7 +24,7 @@ namespace YimMenu::Submenus
 		auto enhancements = std::make_shared<Group>(L("group.enhancements", "Enhancements"));
 
 		auto joinSession = std::make_shared<Group>("", 1);
-		joinSession->AddItem(std::make_shared<ListCommandItem>("joinsessiontype"_J, "Session Type"));
+		joinSession->AddItem(std::make_shared<ListCommandItem>("joinsessiontype"_J, L("network.label.session_type", "Session Type")));
 		joinSession->AddItem(std::make_shared<CommandItem>("joinsession"_J, L("btn.join_session", "Join##session")));
 
 		joinGroup->AddItem(joinSession);
@@ -44,7 +44,7 @@ namespace YimMenu::Submenus
 					}
 					else
 					{
-						Notifications::Show("Joiner", "Failed to get RID from username", NotificationType::Error);
+						Notifications::Show(L("network.label.joiner", "Joiner").c_str(), L("network.msg.rid_failed", "Failed to get RID from username").c_str(), NotificationType::Error);
 					}
 				});
 

@@ -742,6 +742,12 @@ namespace YimMenu::I18n
 		{"network.label.host_kick_all", "主机踢出所有"},
 		{"network.label.spoof_region", "伪装区域"},
 		{"network.label.username", "用户名"},
+		{"network.label.session_type", "会话类型"},
+		{"network.label.joiner", "加入器"},
+		{"network.msg.rid_failed", "无法从用户名获取RID"},
+
+		{"notifyonplayerjoin.label", "玩家加入通知"},
+		{"notifyonplayerjoin.description", "当有玩家加入时通知你"},
 		{"hotkey.press_any_button", "按下任意键..."},
 		{"hotkey.no_hotkey", "未分配热键"},
 		{"hotkey.hold_button_hint", "按住命令名称按钮并按键以更改其热键"},
@@ -1800,6 +1806,17 @@ namespace YimMenu::I18n
 			return std::string(text);
 
 		static const std::pair<std::string_view, std::string_view> items[] = {
+			// Session Types
+			{"Public", "公开"},
+			{"Solo Public", "单人公开"},
+			{"SCTV", "SCTV"},
+			{"Crew", "帮会"},
+			{"Join Crew", "加入帮会"},
+			{"Closed Crew", "封闭帮会"},
+			{"Closed Friend", "封闭好友"},
+			{"Find Friend", "寻找好友"},
+			{"Invite Only", "仅邀请"},
+			{"Solo", "单人"},
 			// Vehicle Classes
 			{"Compact", "紧凑型"},
 			{"Sedan", "轿车"},
