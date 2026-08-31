@@ -52,14 +52,14 @@ namespace YimMenu::Submenus
 				}
 				else
 				{
-					ImGui::Text("%s", L("player.ped_missing", "Ped missing or deleted"));
+					ImGui::Text("%s", L("player.ped_missing", "Ped missing or deleted").c_str());
 				}
 
 				auto rid1 = Players::GetSelected().GetRID();
 
 				std::string ridStr = std::to_string(rid1);
 
-				ImGui::Text("%s", L("label.rid", "RID:"));
+				ImGui::Text("%s", L("label.rid", "RID:").c_str());
 				ImGui::SameLine();
 				if (ImGui::SmallButton(std::to_string(rid1).c_str()))
 				{
@@ -70,7 +70,7 @@ namespace YimMenu::Submenus
 				switch (platformAccountId.m_Platform)
 				{
 				case PlatformAccountId::PLATFORM_XBOX:
-					ImGui::Text("%s", L("label.xbox_id", "Xbox User ID:"));
+					ImGui::Text("%s", L("label.xbox_id", "Xbox User ID:").c_str());
 					ImGui::SameLine();
 					if (ImGui::SmallButton(std::to_string(platformAccountId.m_XboxUserId).c_str()))
 					{
@@ -78,7 +78,7 @@ namespace YimMenu::Submenus
 					}
 					break;
 				case PlatformAccountId::PLATFORM_STEAM:
-					ImGui::Text("%s", L("label.steam_id", "Steam ID:"));
+					ImGui::Text("%s", L("label.steam_id", "Steam ID:").c_str());
 					ImGui::SameLine();
 					if (ImGui::SmallButton(std::to_string(platformAccountId.m_SteamId).c_str()))
 					{
@@ -86,7 +86,7 @@ namespace YimMenu::Submenus
 					}
 					break;
 				case PlatformAccountId::PLATFORM_EPIC:
-					ImGui::Text("%s", L("label.epic_id", "Epic Account ID:"));
+					ImGui::Text("%s", L("label.epic_id", "Epic Account ID:").c_str());
 					ImGui::SameLine();
 					if (ImGui::SmallButton(platformAccountId.m_EpicAccountId))
 					{
@@ -102,7 +102,7 @@ namespace YimMenu::Submenus
 
 				auto addr2 = BuildIPStr(ip.m_IpAddress.m_Field1, ip.m_IpAddress.m_Field2, ip.m_IpAddress.m_Field3, ip.m_IpAddress.m_Field4);
 
-				ImGui::Text("%s", L("label.ip_address", "IP Address:"));
+				ImGui::Text("%s", L("label.ip_address", "IP Address:").c_str());
 				ImGui::SameLine();
 				if (ImGui::SmallButton(addr2.c_str()))
 				{
@@ -146,7 +146,7 @@ namespace YimMenu::Submenus
 			else
 			{
 				Players::SetSelected(Self::GetPlayer());
-				ImGui::Text("%s", L("player.no_players", "No players yet!"));
+				ImGui::Text("%s", L("player.no_players", "No players yet!").c_str());
 			}
 		}));
 

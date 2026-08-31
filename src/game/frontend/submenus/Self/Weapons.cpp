@@ -102,7 +102,7 @@ namespace YimMenu::Submenus
 		}
 		if (ImGui::BeginPopup("##weaponspopup", ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove))
 		{
-			ImGui::Text("%s", L("label.search", "Search:"));
+			ImGui::Text("%s", L("label.search", "Search:").c_str());
 			ImGui::SameLine();
 			ImGui::SetNextItemWidth(250.f);
 			ImGui::InputText("##searchweapon", searchWeapon, sizeof(searchWeapon));

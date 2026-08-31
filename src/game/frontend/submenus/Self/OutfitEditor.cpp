@@ -217,14 +217,14 @@ namespace YimMenu
 				ImGui::Spacing();
 
 				// save outfit
-				ImGui::Text("%s", L("outfit.name", "Outfit Name"));
+				ImGui::Text("%s", L("outfit.name", "Outfit Name").c_str());
 				ImGui::SameLine();
 				ImGui::SetNextItemWidth(250);
 				ImGui::InputText("##filename", outfitName, IM_ARRAYSIZE(outfitName));
 
 				if (folder.empty())
 				{
-					ImGui::Text("%s", L("label.folder_name", "Folder Name"));
+					ImGui::Text("%s", L("label.folder_name", "Folder Name").c_str());
 					ImGui::SameLine();
 					ImGui::SetNextItemWidth(250);
 					ImGui::InputText("##foldername", newFolder, IM_ARRAYSIZE(newFolder));
