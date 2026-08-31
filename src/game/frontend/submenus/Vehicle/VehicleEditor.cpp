@@ -153,7 +153,7 @@ namespace YimMenu::Submenus
 			});
 		};
 
-		auto vehicleEditor = std::make_shared<Category>("Vehicle Editor");
+		auto vehicleEditor = std::make_shared<Category>(L("category.vehicle_editor", "Vehicle Editor"));
 
 		vehicleEditor->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!Self::GetVehicle())

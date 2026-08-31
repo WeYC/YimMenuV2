@@ -31,10 +31,10 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildGlobalsMenu()
 	{
-		auto globals = std::make_unique<Category>("Globals");
+		auto globals = std::make_unique<Category>(L("category.globals", "Globals"));
 
-		auto editor = std::make_unique<Group>("Editor");
-		auto saved = std::make_unique<Group>("Saved");
+		auto editor = std::make_unique<Group>(L("group.editor", "Editor"));
+		auto saved = std::make_unique<Group>(L("category.saved", "Saved"));
 
 		static bool ensureVarsLoaded = ([] {
 			SavedVariables::Init();

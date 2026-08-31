@@ -10,17 +10,17 @@ namespace YimMenu::Submenus
 {
 	Network::Network() :
 		#define ICON_FA_ROUTE "\xef\x9b\xbf"
-	    Submenu::Submenu("Network", ICON_FA_ROUTE)
+	    Submenu::Submenu(L("submenu.network", "Network"), ICON_FA_ROUTE)
 	{
 		// TODO: this needs a rework
-		auto session = std::make_shared<Category>("Session");
-		auto joinGroup = std::make_shared<Group>("Join");
-		auto bountyGroup = std::make_shared<Group>("Bounty", 1);
-		auto toxicGroup = std::make_shared<Group>("Toxic");
-		auto teleportGroup = std::make_shared<Group>("Teleport");
-		auto trollGroup = std::make_shared<Group>("Troll");
-		auto miscGroup = std::make_shared<Group>("Misc");
-		auto enhancements = std::make_shared<Group>("Enhancements");
+		auto session = std::make_shared<Category>(L("category.session", "Session"));
+		auto joinGroup = std::make_shared<Group>(L("group.join", "Join"));
+		auto bountyGroup = std::make_shared<Group>(L("group.bounty", "Bounty"), 1);
+		auto toxicGroup = std::make_shared<Group>(L("group.toxic", "Toxic"));
+		auto teleportGroup = std::make_shared<Group>(L("group.teleport", "Teleport"));
+		auto trollGroup = std::make_shared<Group>(L("group.troll", "Troll"));
+		auto miscGroup = std::make_shared<Group>(L("group.misc2", "Misc"));
+		auto enhancements = std::make_shared<Group>(L("group.enhancements", "Enhancements"));
 
 		auto joinSession = std::make_shared<Group>("", 1);
 		joinSession->AddItem(std::make_shared<ListCommandItem>("joinsessiontype"_J, "Session Type"));
@@ -104,8 +104,8 @@ namespace YimMenu::Submenus
 		session->AddItem(miscGroup);
 		session->AddItem(enhancements);
 
-		auto spoofing = std::make_shared<Category>("Spoofing");
-		auto matchmakingGroup = std::make_shared<Group>("Matchmaking (Client)");
+		auto spoofing = std::make_shared<Category>(L("category.spoofing", "Spoofing"));
+		auto matchmakingGroup = std::make_shared<Group>(L("group.matchmaking_client", "Matchmaking (Client)"));
 		matchmakingGroup->AddItem(std::make_shared<BoolCommandItem>("cheaterpool"_J));
 		auto spoofMMRegion = std::make_shared<Group>("", 1);
 		spoofMMRegion->AddItem(std::make_shared<BoolCommandItem>("spoofmmregion"_J, "Spoof Region"));
@@ -114,7 +114,7 @@ namespace YimMenu::Submenus
 		matchmakingGroup->AddItem(std::make_shared<BoolCommandItem>("spoofdatahash"_J));
 		spoofing->AddItem(matchmakingGroup);
 
-		auto matchmakingSrvGroup = std::make_shared<Group>("Matchmaking (Server)");
+		auto matchmakingSrvGroup = std::make_shared<Group>(L("group.matchmaking_server", "Matchmaking (Server)"));
 		auto srvSpoofRegion = std::make_shared<Group>("", 1);
 		srvSpoofRegion->AddItem(std::make_shared<BoolCommandItem>("mmspoofregiontype"_J));
 		srvSpoofRegion->AddItem(std::make_shared<ConditionalItem>("mmspoofregiontype"_J, std::make_shared<ListCommandItem>("mmregiontype"_J, "##mmregiontype")));

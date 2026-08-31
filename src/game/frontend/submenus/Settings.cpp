@@ -44,18 +44,18 @@ namespace YimMenu::Submenus
 
 	Settings::Settings() :
 	#define ICON_FA_GEARS "\xef\x80\x93"
-	    Submenu::Submenu("Settings", ICON_FA_GEARS)
+	    Submenu::Submenu(L("submenu.settings", "Settings"), ICON_FA_GEARS)
 	{
-		auto hotkeys = std::make_shared<Category>("Hotkeys");
-		auto gui = std::make_shared<Category>("GUI");
-		auto game = std::make_shared<Category>("Game");
+		auto hotkeys = std::make_shared<Category>(L("category.hotkeys", "Hotkeys"));
+		auto gui = std::make_shared<Category>(L("category.gui", "GUI"));
+		auto game = std::make_shared<Category>(L("category.game", "Game"));
 
-		auto uiStyle = std::make_shared<Group>("UI");
-		auto playerEsp = std::make_shared<Group>("Player ESP", 10);
-		auto pedEsp = std::make_shared<Group>("Ped ESP", 10);
-		auto objectEsp = std::make_shared<Group>("Object ESP");
-		auto overlay = std::make_shared<Group>("Overlay");
-		auto chat = std::make_shared<Group>("Chat");
+		auto uiStyle = std::make_shared<Group>(L("group.ui", "UI"));
+		auto playerEsp = std::make_shared<Group>(L("group.player_esp", "Player ESP"), 10);
+		auto pedEsp = std::make_shared<Group>(L("group.ped_esp", "Ped ESP"), 10);
+		auto objectEsp = std::make_shared<Group>(L("group.object_esp", "Object ESP"));
+		auto overlay = std::make_shared<Group>(L("group.overlay", "Overlay"));
+		auto chat = std::make_shared<Group>(L("group.chat", "Chat"));
 
 		hotkeys->AddItem(std::make_shared<ImGuiItem>(Hotkeys));
 

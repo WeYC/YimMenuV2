@@ -9,14 +9,14 @@ namespace YimMenu::Submenus
 {
 	Self::Self() :
 		#define ICON_FA_USER "\xef\x80\x87"
-	    Submenu::Submenu("Self", ICON_FA_USER)
+	    Submenu::Submenu(L("submenu.self", "Self"), ICON_FA_USER)
 	{
-		auto main = std::make_shared<Category>("Main");
-		auto globalsGroup = std::make_shared<Group>("Globals");
-		auto movementGroup = std::make_shared<Group>("Movement");
-		auto toolsGroup = std::make_shared<Group>("Tools", 2);
-		auto specialAbilityGroup = std::make_shared<Group>("Special Ability");
-		auto wantedGroup = std::make_shared<Group>("Wanted");
+		auto main = std::make_shared<Category>(L("category.main", "Main"));
+		auto globalsGroup = std::make_shared<Group>(L("group.globals", "Globals"));
+		auto movementGroup = std::make_shared<Group>(L("group.movement", "Movement"));
+		auto toolsGroup = std::make_shared<Group>(L("group.tools", "Tools"), 2);
+		auto specialAbilityGroup = std::make_shared<Group>(L("group.special_ability", "Special Ability"));
+		auto wantedGroup = std::make_shared<Group>(L("group.wanted", "Wanted"));
 
 		globalsGroup->AddItem(std::make_shared<BoolCommandItem>("godmode"_J));
 		globalsGroup->AddItem(std::make_shared<BoolCommandItem>("invis"_J));
@@ -42,7 +42,7 @@ namespace YimMenu::Submenus
 		clearWanted->AddItem(std::make_shared<ConditionalItem>("neverwanted"_J, std::make_shared<CommandItem>("clearwanted"_J), true));
 		clearWanted->AddItem(std::make_shared<BoolCommandItem>("neverwanted"_J));
 		auto setWanted = std::make_shared<Group>("", 1);
-		setWanted->AddItem(std::make_shared<IntCommandItem>("wantedslider"_J, "Level"));
+		setWanted->AddItem(std::make_shared<IntCommandItem>("wantedslider"_J, L("item.level", "Level")));
 		setWanted->AddItem(std::make_shared<ConditionalItem>("freezewanted"_J, std::make_shared<CommandItem>("setwanted"_J), true));
 		setWanted->AddItem(std::make_shared<BoolCommandItem>("freezewanted"_J));
 		wantedGroup->AddItem(std::make_shared<ConditionalItem>("freezewanted"_J, clearWanted, true));
@@ -61,7 +61,7 @@ namespace YimMenu::Submenus
 
 		specialAbilityGroup->AddItem(std::make_shared<BoolCommandItem>("infspecialability"_J));
 		auto specialInMp = std::make_shared<Group>("", 1);
-		specialInMp->AddItem(std::make_shared<BoolCommandItem>("mpspecialability"_J, "Enable in MP"));
+		specialInMp->AddItem(std::make_shared<BoolCommandItem>("mpspecialability"_J, L("item.enable_in_mp", "Enable in MP")));
 		specialInMp->AddItem(std::make_shared<ConditionalItem>("mpspecialability"_J, std::make_shared<ListCommandItem>("selspecialability"_J, "##specialselect")));
 		specialAbilityGroup->AddItem(std::move(specialInMp));
 

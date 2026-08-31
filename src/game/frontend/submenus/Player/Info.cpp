@@ -20,10 +20,10 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildInfoMenu()
 	{
-		auto menu = std::make_shared<Category>("Info");
+		auto menu = std::make_shared<Category>(L("category.info", "Info"));
 
-		auto teleportGroup = std::make_shared<Group>("Teleport");
-		auto playerOptionsGroup = std::make_shared<Group>("Info");
+		auto teleportGroup = std::make_shared<Group>(L("group.teleport", "Teleport"));
+		auto playerOptionsGroup = std::make_shared<Group>(L("category.info", "Info"));
 
 		playerOptionsGroup->AddItem(std::make_shared<ImGuiItem>([] {
 			if (Players::GetSelected().IsValid())

@@ -25,18 +25,18 @@ namespace YimMenu::Submenus
 
 		if (ImGui::BeginPopupModal("##deletelocation", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove))
 		{
-			ImGui::Text("Are you sure you want to delete %s?", locationToDelete.name.data());
+			ImGui::Text("%s", std::format(L("msg.kill_confirm", "Are you sure you want to delete %s?"), locationToDelete.name.data()).c_str());
 
 			ImGui::Spacing();
 
-			if (ImGui::Button("Yes"))
+			if (ImGui::Button(L("item.yes", "Yes").c_str()))
 			{
 				SavedLocations::DeleteSavedLocation(category, locationToDelete.name);
 				locationToDelete.name = "";
 				ImGui::CloseCurrentPopup();
 			}
 			ImGui::SameLine();
-			if (ImGui::Button("No"))
+			if (ImGui::Button(L("item.no", "No").c_str()))
 			{
 				locationToDelete.name = "";
 				ImGui::CloseCurrentPopup();
@@ -49,10 +49,10 @@ namespace YimMenu::Submenus
 		InputTextWithHint("Category", "Category", &category).Draw();
 
 		ImGui::PushItemWidth(200);
-		InputTextWithHint("Location Name", "New location", &newLocationName).Draw();
+		InputTextWithHint("Location Name", L("item.new_location", "New location"), &newLocationName).Draw();
 		ImGui::PopItemWidth();
 
-		if (ImGui::Button("Save Current Location")) // Button widget still crashes
+		if (ImGui::Button(L("item.save_current_location", "Save Current Location").c_str())) // Button widget still crashes
 		{
 			FiberPool::Push([=] {
 				if (newLocationName.empty())
@@ -86,7 +86,7 @@ namespace YimMenu::Submenus
 
 		ImGui::Separator();
 
-		ImGui::Text("Double click to teleport\nShift click to delete");
+		ImGui::Text("%s", L("imsg.double_click_tp", "Double click to teleport\nShift click to delete").c_str());
 
 		ImGui::Spacing();
 
@@ -94,7 +94,7 @@ namespace YimMenu::Submenus
 		InputTextWithHint("##filter", "Search", &filter).Draw();
 
 		ImGui::BeginGroup();
-		ImGui::Text("Categories");
+		ImGui::Text("%s", L("item.categories", "Categories").c_str());
 		if (ImGui::BeginListBox("##categories", {200, -1}))
 		{
 			for (auto& l : SavedLocations::GetAllSavedLocations() | std::ranges::views::keys)
@@ -114,7 +114,7 @@ namespace YimMenu::Submenus
 		ImGui::EndGroup();
 		ImGui::SameLine();
 		ImGui::BeginGroup();
-		ImGui::Text("Locations");
+		ImGui::Text("%s", L("item.locations", "Locations").c_str());
 		if (ImGui::BeginListBox("##saved_locs", {200, -1})) // Need automatic dimensions instead of hard coded
 		{
 			if (SavedLocations::GetAllSavedLocations().find(category) != SavedLocations::GetAllSavedLocations().end())
@@ -151,7 +151,7 @@ namespace YimMenu::Submenus
 						ImGui::BeginTooltip();
 						if (l.name.length() > 27)
 							ImGui::Text("%s", l.name.data());
-						ImGui::Text("Distance: %f", GetDistanceFromLocation(l));
+						ImGui::Text("%s", std::format(L("item.dist", "Distance: %f"), GetDistanceFromLocation(l)).c_str());
 						ImGui::EndTooltip();
 					}
 				}
@@ -191,10 +191,10 @@ namespace YimMenu::Submenus
 
 	Teleport::Teleport() :
 		#define ICON_FA_TELEPORT "\xef\x8f\x85"
-	    Submenu::Submenu("Teleport", ICON_FA_TELEPORT)
+	    Submenu::Submenu(L("submenu.teleport", "Teleport"), ICON_FA_TELEPORT)
 	{
-		auto main = std::make_shared<Category>("Main");
-		auto miscGroup = std::make_shared<Group>("Misc");
+		auto main = std::make_shared<Category>(L("category.main", "Main"));
+		auto miscGroup = std::make_shared<Group>(L("group.misc2", "Misc"));
 
 		miscGroup->AddItem(std::make_shared<ConditionalItem>("autotptowaypoint"_J, std::make_shared<CommandItem>("tptowaypoint"_J), true));
 		miscGroup->AddItem(std::make_shared<BoolCommandItem>("autotptowaypoint"_J));
@@ -205,7 +205,7 @@ namespace YimMenu::Submenus
 
 		main->AddItem(miscGroup);
 
-		auto customteleport = std::make_shared<Category>("Saved");
+		auto customteleport = std::make_shared<Category>(L("category.saved", "Saved"));
 		customteleport->AddItem(std::make_shared<ImGuiItem>([] {
 			RenderCustomTeleport();
 		}));

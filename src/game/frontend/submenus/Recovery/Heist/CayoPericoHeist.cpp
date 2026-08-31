@@ -4,12 +4,12 @@ namespace YimMenu::Submenus
 {
 	std::shared_ptr<TabItem> RenderCayoPericoHeistMenu()
 	{
-		auto tab = std::make_shared<TabItem>("Cayo Perico Heist");
+		auto tab = std::make_shared<TabItem>(L("group.cayo_perico_heist", "Cayo Perico Heist"));
 
-		auto cuts = std::make_shared<Group>("Heist Cuts", 2);
-		auto setups = std::make_shared<Group>("Heist Setups");
-		auto loots = std::make_shared<Group>("Loots", 2);
-		auto misc = std::make_shared<Group>("Misc", 1);
+		auto cuts = std::make_shared<Group>(L("group.heist_cuts", "Heist Cuts"), 2);
+		auto setups = std::make_shared<Group>(L("group.heist_setups", "Heist Setups"));
+		auto loots = std::make_shared<Group>(L("group.loots", "Loots"), 2);
+		auto misc = std::make_shared<Group>(L("group.misc2", "Misc"), 1);
 
 		cuts->AddItem(std::make_shared<IntCommandItem>("cayopericoheistcut1"_J));
 		cuts->AddItem(std::make_shared<IntCommandItem>("cayopericoheistcut3"_J));

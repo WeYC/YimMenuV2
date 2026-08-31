@@ -4,11 +4,11 @@ namespace YimMenu::Submenus
 {
 	std::shared_ptr<Category> BuildTrollMenu()
 	{
-		auto menu = std::make_shared<Category>("Troll");
+		auto menu = std::make_shared<Category>(L("group.troll", "Troll"));
 
-		auto general = std::make_shared<Group>("General");
-		auto bounty = std::make_shared<Group>("Bounty", 1);
-		auto vehicle = std::make_shared<Group>("Vehicle");
+		auto general = std::make_shared<Group>(L("group.general", "General"));
+		auto bounty = std::make_shared<Group>(L("group.bounty", "Bounty"), 1);
+		auto vehicle = std::make_shared<Group>(L("group.vehicle", "Vehicle"));
 
 		general->AddItem(std::make_shared<PlayerCommandItem>("sendsext"_J));
 		general->AddItem(std::make_shared<PlayerCommandItem>("sendphantomcar"_J));

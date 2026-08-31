@@ -502,8 +502,8 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildTransactionsMenu()
 	{
-		auto menu = std::make_shared<Category>("Transactions");
-		auto normal = std::make_shared<Group>("Triggerer");
+		auto menu = std::make_shared<Category>(L("category.transactions", "Transactions"));
+		auto normal = std::make_shared<Group>(L("group.triggerer", "Triggerer"));
 
 		normal->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!NativeInvoker::AreHandlersCached())

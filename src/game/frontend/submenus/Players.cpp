@@ -115,7 +115,7 @@ namespace YimMenu::Submenus
 
 	Players::Players() :
 		#define ICON_FA_USERS "\xef\x83\x80"
-	    Submenu::Submenu("Players", ICON_FA_USERS)
+	    Submenu::Submenu(L("submenu.players", "Players"), ICON_FA_USERS)
 	{
 		AddCategory(std::move(BuildInfoMenu()));
 		AddCategory(std::move(BuildTrollMenu()));

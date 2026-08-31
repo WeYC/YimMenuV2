@@ -482,11 +482,11 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildStatEditorMenu()
 	{
-		auto menu = std::make_shared<Category>("Stat Editor");
-		auto normal = std::make_shared<Group>("Regular");
-		auto packed = std::make_shared<Group>("Packed");
-		auto packed_range = std::make_shared<Group>("Packed Range");
-		auto from_clipboard = std::make_shared<Group>("From Clipboard");
+		auto menu = std::make_shared<Category>(L("category.stat_editor", "Stat Editor"));
+		auto normal = std::make_shared<Group>(L("group.regular", "Regular"));
+		auto packed = std::make_shared<Group>(L("group.packed", "Packed"));
+		auto packed_range = std::make_shared<Group>(L("group.packed_range", "Packed Range"));
+		auto from_clipboard = std::make_shared<Group>(L("group.from_clipboard", "From Clipboard"));
 
 		normal->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!NativeInvoker::AreHandlersCached())

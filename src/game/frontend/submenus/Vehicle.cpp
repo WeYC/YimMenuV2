@@ -8,16 +8,16 @@ namespace YimMenu::Submenus
 {
 	Vehicle::Vehicle() :
 		#define ICON_FA_CAR "\xef\x86\xb9"
-	    Submenu::Submenu("Vehicle", ICON_FA_CAR)
+	    Submenu::Submenu(L("submenu.vehicle", "Vehicle"), ICON_FA_CAR)
 	{
-		auto main = std::make_shared<Category>("Main");
+		auto main = std::make_shared<Category>(L("category.main", "Main"));
 
-		auto globals = std::make_shared<Group>("Globals");
-		auto tools = std::make_shared<Group>("Tools", 2);
-		auto misc = std::make_shared<Group>("Misc");
+		auto globals = std::make_shared<Group>(L("group.globals", "Globals"));
+		auto tools = std::make_shared<Group>(L("group.tools", "Tools"), 2);
+		auto misc = std::make_shared<Group>(L("group.misc2", "Misc"));
 
-		globals->AddItem(std::make_shared<BoolCommandItem>("vehiclegodmode"_J, "Godmode"));
-		globals->AddItem(std::make_shared<BoolCommandItem>("keepfixed"_J, "Keep Fixed"));
+		globals->AddItem(std::make_shared<BoolCommandItem>("vehiclegodmode"_J, L("item.godmode", "Godmode")));
+		globals->AddItem(std::make_shared<BoolCommandItem>("keepfixed"_J, L("item.keep_fixed", "Keep Fixed")));
 		globals->AddItem(std::make_shared<BoolCommandItem>("hornboost"_J));
 		globals->AddItem(std::make_shared<BoolCommandItem>("modifyboostbehavior"_J));
 		globals->AddItem(std::make_shared<ConditionalItem>("modifyboostbehavior"_J, std::make_shared<ListCommandItem>("boostbehavior"_J)));
@@ -32,7 +32,7 @@ namespace YimMenu::Submenus
 
 		misc->AddItem(std::make_shared<BoolCommandItem>("speedometer"_J));
 		misc->AddItem(std::make_shared<BoolCommandItem>("seatbelt"_J));
-		misc->AddItem(std::make_shared<BoolCommandItem>("lowervehiclestance"_J, "Lower Stance"));
+		misc->AddItem(std::make_shared<BoolCommandItem>("lowervehiclestance"_J, L("item.lower_stance", "Lower Stance")));
 		misc->AddItem(std::make_shared<BoolCommandItem>("allowhatsinvehicles"_J));
 		misc->AddItem(std::make_shared<BoolCommandItem>("lsccustomsbypass"_J));
 		misc->AddItem(std::make_shared<BoolCommandItem>("dlcvehicles"_J));

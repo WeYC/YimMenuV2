@@ -55,7 +55,7 @@ namespace YimMenu
 			}
 			ImGui::TextWrapped("%s",
 			    "Check for updates reguarly; we publish new builds every night. But most importantly, mess around and have fun with YimMenu!");
-			if (ImGui::Button("Close"))
+			if (ImGui::Button(L("item.close", "Close").c_str()))
 			{
 				Commands::GetCommand<BoolCommand>("cheaterpool"_J)->SetState(!value);
 				_OnboardingComplete.SetState(true);

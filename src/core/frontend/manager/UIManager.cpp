@@ -15,8 +15,8 @@ namespace YimMenu::Features
 	// Expose as global reference so other code can use it
 	static ListCommand _StyleSelector{
 		"styleselector",
-		"UI Style",
-		"Choose the UI style",
+		L("item.ui_style", "UI Style"),
+		L("hotkey.choose_style", "Choose the UI style"),
 		g_StyleOptions,
 		0};
 }

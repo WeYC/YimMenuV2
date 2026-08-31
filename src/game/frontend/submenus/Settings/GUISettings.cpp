@@ -309,7 +309,7 @@ namespace YimMenu
 	std::shared_ptr<Category> DrawGUISettingsMenu()
 	{
 		InitializeColorCommands();
-		auto imGuiCustomStyle = std::make_shared<Category>("Customize");
+		auto imGuiCustomStyle = std::make_shared<Category>(L("category.customize", "Customize"));
 		imGuiCustomStyle->AddItem(std::make_unique<ImGuiItem>([] {
 			ImGui::Text("ImGui Style Editor");
 			ImGui::Separator();

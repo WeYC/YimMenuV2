@@ -4,14 +4,14 @@ namespace YimMenu::Submenus
 {
 	std::shared_ptr<TabItem> RenderKortzCenterHeistMenu()
 	{
-		auto tab   = std::make_shared<TabItem>("Kortz Center Heist");
+		auto tab   = std::make_shared<TabItem>(L("group.kortz_center_heist", "Kortz Center Heist"));
 
-		auto target    = std::make_shared<Group>("Primary Target", 1);
-		auto general   = std::make_shared<Group>("General", 2);
+		auto target    = std::make_shared<Group>(L("group.primary_target", "Primary Target"), 1);
+		auto general   = std::make_shared<Group>(L("group.general", "General"), 2);
 
-		auto vehicles  = std::make_shared<CollapsingHeaderItem>("Vehicles");
-		auto equipment = std::make_shared<CollapsingHeaderItem>("Equipment");
-		auto intel     = std::make_shared<CollapsingHeaderItem>("Intel");
+		auto vehicles  = std::make_shared<CollapsingHeaderItem>(L("group.vehicles2", "Vehicles"));
+		auto equipment = std::make_shared<CollapsingHeaderItem>(L("group.equipment", "Equipment"));
+		auto intel     = std::make_shared<CollapsingHeaderItem>(L("group.intel", "Intel"));
 
 		auto action    = std::make_shared<Group>("", 1);
 
@@ -47,7 +47,7 @@ namespace YimMenu::Submenus
 		intel->AddItem(std::make_shared<BoolCommandItem>("kortzcenterheistscopesecondary"_J));
 		intel->AddItem(std::make_shared<BoolCommandItem>("kortzcenterheistscopepoi"_J));
 
-		auto inHeist = std::make_shared<Group>("In-Heist", 2);
+		auto inHeist = std::make_shared<Group>(L("group.in_heist", "In-Heist"), 2);
 
 		inHeist->AddItem(std::make_shared<CommandItem>("kortzcenterheistskipfingerprint"_J));
 		inHeist->AddItem(std::make_shared<CommandItem>("kortzcenterheistskipsignalnodes"_J));

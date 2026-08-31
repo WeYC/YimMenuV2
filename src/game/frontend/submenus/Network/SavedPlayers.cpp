@@ -201,11 +201,11 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildSavedPlayersMenu()
 	{
-		auto menu = std::make_shared<Category>("Saved Players");
-		auto players = std::make_shared<Group>("Players");
-		auto new_player = std::make_shared<Group>("New");
-		auto tracking = std::make_shared<Group>("Tracking");
-		auto notifications = std::make_shared<Group>("Notifications");
+		auto menu = std::make_shared<Category>(L("category.saved_players", "Saved Players"));
+		auto players = std::make_shared<Group>(L("group.players", "Players"));
+		auto new_player = std::make_shared<Group>(L("group.new", "New"));
+		auto tracking = std::make_shared<Group>(L("group.tracking", "Tracking"));
+		auto notifications = std::make_shared<Group>(L("group.notifications", "Notifications"));
 
 		players->AddItem(std::make_shared<ImGuiItem>([] {
 			RenderSavedPlayers();

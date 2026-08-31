@@ -13,7 +13,7 @@ namespace YimMenu::Submenus
 {
 	std::shared_ptr<Category> BuildMiscMenu()
 	{
-		auto misc = std::make_unique<Category>("Misc");
+		auto misc = std::make_unique<Category>(L("category.misc", "Misc"));
 
 		misc->AddItem(std::make_unique<ImGuiItem>([] {
 			if (ImGui::Button("Network Bail"))

@@ -127,11 +127,11 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildScriptsMenu()
 	{
-		auto menu = std::make_unique<Category>("Scripts");
+		auto menu = std::make_unique<Category>(L("category.scripts", "Scripts"));
 
-		auto tabBar = std::make_unique<TabBarItem>("Scripts");
-		auto threads = std::make_unique<TabItem>("Threads");
-		auto script = std::make_unique<TabItem>("Start Script");
+		auto tabBar = std::make_unique<TabBarItem>(L("category.scripts", "Scripts"));
+		auto threads = std::make_unique<TabItem>(L("item.threads", "Threads"));
+		auto script = std::make_unique<TabItem>(L("item.start_script", "Start Script"));
 
 		threads->AddItem(std::make_unique<ImGuiItem>([] {
 			static rage::scrThread* curThread = nullptr;

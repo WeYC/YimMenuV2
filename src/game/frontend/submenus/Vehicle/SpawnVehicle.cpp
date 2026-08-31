@@ -17,10 +17,10 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<TabItem> RenderSpawnNewVehicle()
 	{
-		auto tab = std::make_shared<TabItem>("New Vehicle");
+		auto tab = std::make_shared<TabItem>(L("item.new_vehicle", "New Vehicle"));
 
-		auto spawn = std::make_shared<Group>("Spawn");
-		auto settings = std::make_shared<Group>("Settings");
+		auto spawn = std::make_shared<Group>(L("item.spawn", "Spawn"));
+		auto settings = std::make_shared<Group>(L("submenu.settings", "Settings"));
 
 		static std::vector<std::string> vehicleNames{};
 		static std::vector<int> vehicleClasses{};
@@ -138,10 +138,10 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<TabItem> RenderSpawnPersonalVehicle()
 	{
-		auto tab = std::make_shared<TabItem>("Personal Vehicle");
+		auto tab = std::make_shared<TabItem>(L("item.personal_vehicle", "Personal Vehicle"));
 
-		auto spawn = std::make_shared<Group>("Spawn");
-		auto settings = std::make_shared<Group>("Settings");
+		auto spawn = std::make_shared<Group>(L("item.spawn", "Spawn"));
+		auto settings = std::make_shared<Group>(L("submenu.settings", "Settings"));
 
 		static std::string selectedGarageStr{""};
 
@@ -237,9 +237,9 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildSpawnVehicleMenu()
 	{
-		auto menu = std::make_shared<Category>("Spawn");
+		auto menu = std::make_shared<Category>(L("item.spawn", "Spawn"));
 
-		auto tabBar = std::make_shared<TabBarItem>("Spawn");
+		auto tabBar = std::make_shared<TabBarItem>(L("item.spawn", "Spawn"));
 
 		tabBar->AddItem(RenderSpawnNewVehicle());
 		tabBar->AddItem(RenderSpawnPersonalVehicle());

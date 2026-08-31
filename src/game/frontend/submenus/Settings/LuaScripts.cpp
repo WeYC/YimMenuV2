@@ -8,7 +8,7 @@ namespace YimMenu::Submenus
 {
 	std::shared_ptr<Category> BuildLuaScriptsMenu()
 	{
-		auto menu = std::make_shared<Category>("Lua Scripts");
+		auto menu = std::make_shared<Category>(L("category.lua_scripts", "Lua Scripts"));
 
 		static std::shared_ptr<LuaScript> selectedScript;
 

@@ -15,7 +15,7 @@ namespace YimMenu::Submenus
 {
 	std::shared_ptr<Category> BuildSpawnPedMenu()
 	{
-		auto menu = std::make_shared<Category>("Spawn Ped");
+		auto menu = std::make_shared<Category>(L("category.spawn_ped", "Spawn Ped"));
 
 		static bool invincible;
 		static bool spawnDead;
