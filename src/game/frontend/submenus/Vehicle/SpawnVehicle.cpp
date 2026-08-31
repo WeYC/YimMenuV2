@@ -108,7 +108,8 @@ namespace YimMenu::Submenus
 						if (matchesSearch && matchesClass)
 						{
 							ImGui::PushID(hash);
-							if (ImGui::Selectable(name.c_str()))
+							auto translatedName = I18n::TranslateVehicleName(name);
+							if (ImGui::Selectable(translatedName.c_str()))
 							{
 								FiberPool::Push([hash] {
 									auto handle = Vehicle::Create(hash, Vehicle::GetSpawnLocRelToPed(Self::GetPed().GetHandle(), hash), Self::GetPed().GetHeading());
