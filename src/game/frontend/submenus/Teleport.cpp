@@ -152,7 +152,7 @@ namespace YimMenu::Submenus
 						ImGui::BeginTooltip();
 						if (l.name.length() > 27)
 							ImGui::Text("%s", l.name.data());
-						ImGui::Text("%s", std::vformat(L("item.dist", "Distance: {}"), std::make_format_args(GetDistanceFromLocation(l))).c_str());
+						ImGui::Text("%s", (L("item.dist", "Distance: ") + std::to_string(GetDistanceFromLocation(l))).c_str());
 						ImGui::EndTooltip();
 					}
 				}
