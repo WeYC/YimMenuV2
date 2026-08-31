@@ -1,5 +1,6 @@
 #pragma once
 #include "core/util/Joaat.hpp"
+#include "core/i18n/Language.hpp"
 
 #include <nlohmann/json.hpp>
 
@@ -38,14 +39,16 @@ namespace YimMenu
 			return m_Name;
 		}
 
-		const std::string& GetLabel()
+		std::string GetLabel()
 		{
-			return m_Label;
+			auto tr = I18n::Get(m_Name + ".label");
+			return tr.empty() ? m_Label : std::string(tr);
 		}
 
-		const std::string& GetDescription()
+		std::string GetDescription()
 		{
-			return m_Description;
+			auto tr = I18n::Get(m_Name + ".description");
+			return tr.empty() ? m_Description : std::string(tr);
 		}
 
 		joaat_t GetHash()

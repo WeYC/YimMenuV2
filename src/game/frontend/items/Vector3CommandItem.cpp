@@ -110,7 +110,7 @@ namespace YimMenu
 			ImGui::EndPopup();
 		}
 
-		auto& label = m_LabelOverride.has_value() ? m_LabelOverride.value() : m_Command->GetLabel();
+		auto label = m_LabelOverride.has_value() ? m_LabelOverride.value() : m_Command->GetLabel();
 		if (!label.empty())
 		{
 			ImGui::SameLine();

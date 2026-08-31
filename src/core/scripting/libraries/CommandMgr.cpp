@@ -70,7 +70,7 @@ namespace YimMenu::Lua
 			lua_pushnil(state);
 			return 1;
 		}
-		const auto& desc = cmd->GetDescription();
+		auto desc = cmd->GetDescription();
 		lua_pushlstring(state, desc.data(), desc.size());
 		return 1;
 	}
