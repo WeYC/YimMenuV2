@@ -30,14 +30,14 @@ namespace YimMenu::Submenus
 				if (!Self::GetVehicle() || !Self::GetVehicle().IsValid())
 					return;
 
-				if (ImGui::Button("Save"))
+				if (ImGui::Button(L("btn.save", "Save")))
 					FiberPool::Push([saveToNewFolder] {
 						std::string fileName = TrimString(vehicle_file_name_input);
 						strcpy(vehicle_file_name_input, "");
 
 						if (!fileName.size())
 						{
-							Notifications::Show("Saved Vehicles", "Filename empty!", NotificationType::Warning);
+							Notifications::Show(L("notif.saved_vehicles", "Saved Vehicles"), L("notif.filename_empty", "Filename empty!"), NotificationType::Warning);
 							return;
 						}
 
@@ -52,21 +52,21 @@ namespace YimMenu::Submenus
 						SavedVehicles::RefreshList(folder, folders, files);
 					});
 				ImGui::SameLine();
-				if (ImGui::Button("Populate Name"))
+				if (ImGui::Button(L("vehicle.populate_name", "Populate Name")))
 					FiberPool::Push([] {
 						std::string name = Self::GetVehicle().GetFullName();
 						strcpy(vehicle_file_name_input, name.c_str());
 					});
 			};
 
-			if (ImGui::Button("Refresh List"))
+			if (ImGui::Button(L("btn.refresh_list", "Refresh List")))
 				FiberPool::Push([] {
 					SavedVehicles::RefreshList(folder, folders, files);
 				});
 
 			ImGui::SetNextItemWidth(300.f);
 			auto folder_display = folder.empty() ? "Root" : folder.c_str();
-			if (ImGui::BeginCombo("Folder", folder_display))
+			if (ImGui::BeginCombo(L("label.folder", "Folder"), folder_display))
 			{
 				if (ImGui::Selectable("Root", folder == ""))
 				{
@@ -92,10 +92,10 @@ namespace YimMenu::Submenus
 			static std::string search;
 
 			ImGui::SetNextItemWidth(300);
-			if (ImGui::InputTextWithHint("###veh_name", "Search", &search))
+			if (ImGui::InputTextWithHint("###veh_name", L("hint.search", "Search"), &search))
 				std::transform(search.begin(), search.end(), search.begin(), tolower);
 
-			ImGui::Text("Saved Vehicles");
+			ImGui::Text("%s", L("vehicle.saved_vehicles", "Saved Vehicles"));
 
 			static const auto over_30 = (30 * ImGui::GetTextLineHeightWithSpacing() + 2);
 			const auto box_height = files.size() <= 30 ? (files.size() * ImGui::GetTextLineHeightWithSpacing() + 2) : over_30;
@@ -121,13 +121,13 @@ namespace YimMenu::Submenus
 			ImGui::SameLine();
 			ImGui::BeginGroup();
 			{
-				ImGui::Text("File Name");
+				ImGui::Text("%s", L("label.file_name", "File Name"));
 				ImGui::SetNextItemWidth(250);
 				ImGui::InputText("##vehiclefilename", vehicle_file_name_input, IM_ARRAYSIZE(vehicle_file_name_input));
 
 				if (folder.empty())
 				{
-					ImGui::Text("Folder Name");
+					ImGui::Text("%s", L("label.folder_name", "Folder Name"));
 					ImGui::SetNextItemWidth(250);
 					ImGui::InputText("##foldername", newFolder, IM_ARRAYSIZE(newFolder));
 					drawSaveVehicleButton(true);
@@ -141,9 +141,9 @@ namespace YimMenu::Submenus
 				ImGui::OpenPopup("##spawncarmodel2");
 			if (ImGui::BeginPopupModal("##spawncarmodel2", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove))
 			{
-				ImGui::Text("Are you sure you want to spawn %s", file.c_str());
-				ImGui::Spacing();
-				if (ImGui::Button("Yes"))
+			ImGui::Text(L("vehicle.confirm_spawn", "Are you sure you want to spawn %s"), file.c_str());
+			ImGui::Spacing();
+			if (ImGui::Button(L("btn.yes", "Yes")))
 				{
 					FiberPool::Push([] {
 						SavedVehicles::Load(folder, file, spawnInsideSavedVehicle.GetState());
@@ -152,7 +152,7 @@ namespace YimMenu::Submenus
 					ImGui::CloseCurrentPopup();
 				}
 				ImGui::SameLine();
-				if (ImGui::Button("No"))
+				if (ImGui::Button(L("btn.no", "No")))
 				{
 					open_modal = false;
 					ImGui::CloseCurrentPopup();

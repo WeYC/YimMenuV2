@@ -218,7 +218,7 @@ namespace YimMenu
 	static void DrawColorsTab()
 	{
 		bool changed = false;
-		ImGui::Text("Modify Colors:");
+		ImGui::Text("%s", L("gui.modify_colors", "Modify Colors:"));
 		ImGui::Separator();
 		for (int i = 0; i < ImGuiCol_COUNT; ++i)
 		{
@@ -241,7 +241,7 @@ namespace YimMenu
 	static void DrawRoundingTab()
 	{
 		bool changed = false;
-		ImGui::Text("Adjust Rounding:");
+		ImGui::Text("%s", L("gui.adjust_rounding", "Adjust Rounding:"));
 		ImGui::Separator();
 		for (auto& [k, v] : g_RoundingValues)
 			if (ImGui::SliderFloat(PrettyPrintLabel(k).c_str(), &v, 0.0f, 20.0f, "%.1f"))
@@ -257,7 +257,7 @@ namespace YimMenu
 	static void DrawLayoutTab()
 	{
 		auto& s = ImGui::GetStyle();
-		ImGui::Text("Layout & Alignment:");
+		ImGui::Text("%s", L("gui.layout_alignment", "Layout & Alignment:"));
 		ImGui::Separator();
 		DrawStyleVec2("WindowPadding", s.WindowPadding.x, s.WindowPadding.y, 0.f, 32.f);
 		DrawStyleVec2("ItemSpacing", s.ItemSpacing.x, s.ItemSpacing.y, 0.f, 32.f);
@@ -276,7 +276,7 @@ namespace YimMenu
 	static void DrawBorderTab()
 	{
 		auto& s = ImGui::GetStyle();
-		ImGui::Text("Border Sizes:");
+		ImGui::Text("%s", L("gui.border_sizes", "Border Sizes:"));
 		ImGui::Separator();
 		DrawStyleFloat("WindowBorderSize", s.WindowBorderSize, 0.f, 8.f);
 		DrawStyleFloat("FrameBorderSize", s.FrameBorderSize, 0.f, 8.f);
@@ -287,7 +287,7 @@ namespace YimMenu
 	static void DrawGlobalTab()
 	{
 		auto& s = ImGui::GetStyle();
-		ImGui::Text("Global Settings:");
+		ImGui::Text("%s", L("gui.global_settings", "Global Settings:"));
 		ImGui::Separator();
 		DrawStyleFloat("GlobalAlpha", s.Alpha, 0.1f, 1.f);
 		DrawStyleFloat("DisabledAlpha", s.DisabledAlpha, 0.f, 1.f);
@@ -299,11 +299,11 @@ namespace YimMenu
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		static float scale = io.FontGlobalScale;
-		ImGui::Text("Font Configuration:");
+		ImGui::Text("%s", L("gui.font_config", "Font Configuration:"));
 		ImGui::Separator();
-		ImGui::Text("Current Scale: %.2f", io.FontGlobalScale);
-		ImGui::SliderFloat("Font Scale", &scale, 0.5f, 2.0f, "%.2f");
-		if (ImGui::Button("Apply Font Scale"))
+		ImGui::Text(L("gui.current_scale", "Current Scale: %.2f"), io.FontGlobalScale);
+		ImGui::SliderFloat(L("gui.font_scale", "Font Scale"), &scale, 0.5f, 2.0f, "%.2f");
+		if (ImGui::Button(L("gui.apply_font_scale", "Apply Font Scale")))
 			io.FontGlobalScale = scale;
 	}
 
@@ -312,40 +312,40 @@ namespace YimMenu
 		InitializeColorCommands();
 		auto imGuiCustomStyle = std::make_shared<Category>(L("category.customize", "Customize"));
 		imGuiCustomStyle->AddItem(std::make_unique<ImGuiItem>([] {
-			ImGui::Text("ImGui Style Editor");
-			ImGui::Separator();
-			if (ImGui::BeginTabBar("StyleTabs"))
+		ImGui::Text("%s", L("gui.imgui_style_editor", "ImGui Style Editor"));
+		ImGui::Separator();
+		if (ImGui::BeginTabBar("StyleTabs"))
+		{
+			if (ImGui::BeginTabItem(L("tab.colors", "Colors")))
 			{
-				if (ImGui::BeginTabItem("Colors"))
-				{
-					DrawColorsTab();
-					ImGui::EndTabItem();
-				}
-				if (ImGui::BeginTabItem("Rounding"))
-				{
-					DrawRoundingTab();
-					ImGui::EndTabItem();
-				}
-				if (ImGui::BeginTabItem("Layout"))
-				{
-					DrawLayoutTab();
-					ImGui::EndTabItem();
-				}
-				if (ImGui::BeginTabItem("Border"))
-				{
-					DrawBorderTab();
-					ImGui::EndTabItem();
-				}
-				if (ImGui::BeginTabItem("Global"))
-				{
-					DrawGlobalTab();
-					ImGui::EndTabItem();
-				}
-				if (ImGui::BeginTabItem("Fonts"))
-				{
-					DrawFontTab();
-					ImGui::EndTabItem();
-				}
+				DrawColorsTab();
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem(L("tab.rounding", "Rounding")))
+			{
+				DrawRoundingTab();
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem(L("tab.layout", "Layout")))
+			{
+				DrawLayoutTab();
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem(L("tab.border", "Border")))
+			{
+				DrawBorderTab();
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem(L("tab.global", "Global")))
+			{
+				DrawGlobalTab();
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem(L("tab.fonts", "Fonts")))
+			{
+				DrawFontTab();
+				ImGui::EndTabItem();
+			}
 				ImGui::EndTabBar();
 			}
 		}));

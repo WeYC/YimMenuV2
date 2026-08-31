@@ -60,6 +60,29 @@ namespace YimMenu
 		return &ranges[0];
 	}
 
+	static const ImWchar* GetGlyphRangesChinese()
+	{
+		static const ImWchar ranges[] =
+		    {
+		        0x0020,
+		        0x00FF, // Basic Latin + Latin Supplement
+		        0x2000,
+		        0x206F, // General Punctuation
+		        0x3000,
+		        0x303F, // CJK Symbols and Punctuation
+		        0x3200,
+		        0x32FF, // Enclosed CJK Letters and Months
+		        0x4E00,
+		        0x9FFF, // CJK Unified Ideographs
+		        0xF900,
+		        0xFAFF, // CJK Compatibility Ideographs
+		        0xFE30,
+		        0xFE4F, // CJK Compatibility Forms
+		        0,
+		    };
+		return &ranges[0];
+	}
+
 	static ImFont* CreateFontWithCyrillicSupport(ImGuiIO& io, float size)
 	{
 		ImFontConfig FontCfg{};
@@ -67,10 +90,19 @@ namespace YimMenu
 
 		auto font = io.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(Fonts::MainFont), sizeof(Fonts::MainFont), size, &FontCfg, io.Fonts->GetGlyphRangesDefault());
 
-		// just use Arial for Cyrillic
-
+		// Merge Arial for Cyrillic
 		FontCfg.MergeMode = true;
 		io.Fonts->AddFontFromFileTTF((std::filesystem::path(std::getenv("SYSTEMROOT")) / "Fonts" / "arial.ttf").string().c_str(), size, &FontCfg, GetGlyphRangesCyrillicOnly());
+
+		// Merge Chinese font (Microsoft YaHei)
+		auto msyhPath = std::filesystem::path(std::getenv("SYSTEMROOT")) / "Fonts" / "msyh.ttc";
+		auto simheiPath = std::filesystem::path(std::getenv("SYSTEMROOT")) / "Fonts" / "simhei.ttf";
+		if (std::filesystem::exists(msyhPath))
+			io.Fonts->AddFontFromFileTTF(msyhPath.string().c_str(), size, &FontCfg, GetGlyphRangesChinese());
+		else if (std::filesystem::exists(simheiPath))
+			io.Fonts->AddFontFromFileTTF(simheiPath.string().c_str(), size, &FontCfg, GetGlyphRangesChinese());
+
+		// Merge Japanese font
 		io.Fonts->AddFontFromFileTTF((std::filesystem::path(std::getenv("SYSTEMROOT")) / "Fonts" / "meiryo.ttc").string().c_str(), size, &FontCfg, io.Fonts->GetGlyphRangesJapanese());
 
 		io.Fonts->Build();

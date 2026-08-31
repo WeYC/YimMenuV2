@@ -159,7 +159,7 @@ namespace YimMenu::Submenus
 		vehicleEditor->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!Self::GetVehicle())
 			{
-				ImGui::Text("Please enter a vehicle.");
+				ImGui::Text("%s", L("vehicle.enter_vehicle", "Please enter a vehicle."));
 				currentVeh = 0;
 				return;
 			}
@@ -177,7 +177,7 @@ namespace YimMenu::Submenus
 			{
 				ImGui::Text("%s", vehName.c_str());
 				ImGui::SameLine();
-				if (ImGui::Button("Refresh Current Vehicle"))
+				if (ImGui::Button(L("vehicle.refresh", "Refresh Current Vehicle")))
 					FiberPool::Push([] {
 						currentVeh = -1;
 					});
@@ -187,18 +187,18 @@ namespace YimMenu::Submenus
 					ImGui::SetNextItemWidth(150);
 					ImGui::InputTextWithHint("##plate", "Plate Number", plate, sizeof(plate), ImGuiInputTextFlags_None);
 					ImGui::SameLine();
-					if (ImGui::Button("Change Plate"))
+					if (ImGui::Button(L("vehicle.change_plate", "Change Plate")))
 						FiberPool::Push([] {
 							Self::GetVehicle().SetPlateText(plate);
 						});
 					ImGui::SameLine();
-					if (ImGui::Button("Max Vehicle"))
+					if (ImGui::Button(L("vehicle.max", "Max Vehicle")))
 						FiberPool::Push([] {
 							Self::GetVehicle().Upgrade();
 							currentVeh = -1;
 						});
 				}
-				ImGui::SeparatorText("Mod Options");
+				ImGui::SeparatorText(L("sep.modifications", "Modifications"));
 				{
 					if (ImGui::Checkbox("Burstible tires", (bool*)&owned_mods[(int)CustomVehicleModType::MOD_TIRE_CAN_BURST]))
 						FiberPool::Push([] {
@@ -223,11 +223,11 @@ namespace YimMenu::Submenus
 							VEHICLE::TOGGLE_VEHICLE_MOD(currentVeh, (int)VehicleModType::MOD_TYRE_SMOKE, owned_mods[(int)VehicleModType::MOD_TYRE_SMOKE]);
 						});
 				}
-				ImGui::SeparatorText("Mod Slots");
+				ImGui::SeparatorText(L("sep.mod_slots", "Mod Slots"));
 				{
 					ImGui::BeginGroup();
 					{
-						ImGui::Text("Slot");
+						ImGui::Text("%s", L("vehicle.slot", "Slot"));
 						if (ImGui::BeginListBox("##slot", ImVec2(200, 200)))
 						{
 							for (const auto& [slot, name] : slot_display_names)
@@ -259,7 +259,7 @@ namespace YimMenu::Submenus
 						ImGui::SameLine();
 						ImGui::BeginGroup();
 						{
-							ImGui::Text("Mod");
+							ImGui::Text("%s", L("vehicle.mod", "Mod"));
 							if (ImGui::BeginListBox("##mod", ImVec2(240, 200)))
 							{
 								for (const auto& it : mod_display_names[selected_slot])
@@ -318,7 +318,7 @@ namespace YimMenu::Submenus
 							{
 								auto wheel_map = selected_slot == (int)VehicleModType::MOD_REARWHEEL ? rear_wheel_map : front_wheel_map;
 
-								ImGui::Text("Style");
+								ImGui::Text("%s", L("vehicle.style", "Style"));
 								if (ImGui::BeginListBox("##style", ImVec2(200, 200)))
 								{
 									std::string mod_name = mod_display_names[selected_slot][*wheel_stock_mod];
@@ -354,7 +354,7 @@ namespace YimMenu::Submenus
 						}
 					}
 				}
-				ImGui::SeparatorText("Extras");
+				ImGui::SeparatorText(L("sep.extras", "Extras"));
 				{
 					for (int extra = (int)CustomVehicleModType::MOD_EXTRA_1; extra >= (int)CustomVehicleModType::MOD_EXTRA_14; extra--)
 						if (owned_mods.find(extra) != owned_mods.end())
@@ -372,7 +372,7 @@ namespace YimMenu::Submenus
 						}
 					ImGui::NewLine();
 				}
-				ImGui::SeparatorText("Neon Light Options");
+				ImGui::SeparatorText(L("sep.neon_light", "Neon Light Options"));
 				{
 					ImGui::PushID("##headlight_en");
 					if (ImGui::Checkbox("Headlight", (bool*)&owned_mods[(int)VehicleModType::MOD_XENON_LIGHTS]))
@@ -401,7 +401,7 @@ namespace YimMenu::Submenus
 							VEHICLE::SET_VEHICLE_NEON_ENABLED(currentVeh, (int)NeonLightLocations::NEON_BACK, owned_mods[(int)CustomVehicleModType::MOD_NEON_BACK_ON]);
 						});
 				}
-				ImGui::SeparatorText("Color Options");
+				ImGui::SeparatorText(L("sep.color_options", "Color Options"));
 				{
 					static int color_to_change = 0;
 					static int color_type = 9;

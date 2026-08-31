@@ -1053,6 +1053,309 @@ namespace YimMenu::I18n
 		{"msg.kill_confirm", "确定要删除 %s 吗?"},
 		{"msg.spawn_confirm", "确定要生成 %s 吗"},
 		{"msg.already_exists", "名称为 {} 的位置已存在"},
+
+		// Weapons
+		{"category.weapons", "武器"},
+		{"group.globals", "全局"},
+		{"group.tools", "工具"},
+		{"group.ammu_nation", "武装国度"},
+		{"group.aimbot", "自瞄"},
+		{"group.custom_weapons", "自定义武器"},
+		{"weapon.give", "给予武器"},
+		{"weapon.remove", "移除武器"},
+		{"weapon.kills_with", "使用击杀: %d"},
+		{"weapon.deaths_by", "被杀次数: %d"},
+		{"weapon.kd_ratio", "K/D比: %.2f"},
+		{"weapon.headshots", "爆头数: %d"},
+		{"weapon.accuracy", "命中率: %d%%"},
+
+		// Outfit Editor
+		{"category.outfit_editor", "服装编辑器"},
+		{"outfit.save", "保存服装"},
+		{"outfit.refresh_stats", "刷新属性"},
+		{"outfit.randomize", "随机服装"},
+		{"outfit.apply_selected", "应用选中服装"},
+		{"outfit.apply_hair", "应用发型"},
+		{"outfit.name", "服装名称"},
+		{"outfit.filename_empty", "文件名为空!"},
+
+		// GUI Settings
+		{"gui.modify_colors", "修改颜色:"},
+		{"gui.adjust_rounding", "调整圆角:"},
+		{"gui.layout_alignment", "布局与对齐:"},
+		{"gui.border_sizes", "边框大小:"},
+		{"gui.global_settings", "全局设置:"},
+		{"gui.font_config", "字体配置:"},
+		{"gui.imgui_style_editor", "ImGui样式编辑器"},
+		{"gui.current_scale", "当前缩放: %.2f"},
+		{"gui.apply_font_scale", "应用字体缩放"},
+
+		// Tabs
+		{"tab.colors", "颜色"},
+		{"tab.rounding", "圆角"},
+		{"tab.layout", "布局"},
+		{"tab.border", "边框"},
+		{"tab.global", "全局"},
+		{"tab.fonts", "字体"},
+
+		// Items
+		{"item.unknown", "未知!"},
+		{"item.unknown_color_picker", "未知颜色选择器!"},
+		{"item.unknown_list", "未知列表!"},
+		{"item.unknown_string_cmd", "未知字符串命令!"},
+		{"label.search", "搜索:"},
+		{"label.categories", "分类"},
+		{"label.locations", "位置"},
+
+		// Hotkey
+		{"hotkey.press_any_button", "按下任意键..."},
+		{"hotkey.no_hotkey", "未分配热键"},
+
+		// Buttons
+		{"btn.save", "保存"},
+		{"btn.delete", "删除"},
+		{"btn.close", "关闭"},
+		{"btn.clear", "清除"},
+		{"btn.join", "加入"},
+		{"btn.remove", "移除"},
+		{"btn.add", "添加"},
+		{"btn.yes", "是"},
+		{"btn.no", "否"},
+		{"btn.current", "当前"},
+		{"btn.saved", "已保存..."},
+		{"btn.reload", "重新加载"},
+		{"btn.unload", "卸载"},
+		{"btn.refresh_list", "刷新列表"},
+		{"btn.refresh", "刷新"},
+		{"btn.remove_all", "移除全部"},
+
+		// Player Info
+		{"player.ped_missing", "玩家模型缺失或已删除"},
+		{"player.no_players", "暂无玩家!"},
+		{"player.add_to_saved", "添加到已保存"},
+		{"player.view_sc_profile", "查看SC档案"},
+		{"player.add_friend", "添加好友"},
+		{"player.more_info", "更多信息"},
+		{"player.no_saved", "无已保存玩家"},
+		{"player.not_fetched", "数据尚未获取"},
+		{"player.track", "追踪玩家"},
+		{"label.rid", "RID:"},
+		{"label.xbox_id", "Xbox用户ID:"},
+		{"label.steam_id", "Steam ID:"},
+		{"label.epic_id", "Epic账户ID:"},
+		{"label.ip_address", "IP地址:"},
+		{"label.rank", "等级: %d (%d RP)"},
+		{"label.money", "金钱: %d"},
+		{"label.coords", "坐标: %.2f, %.2f, %.2f"},
+		{"label.distance", "距离: %.2f"},
+		{"label.avg_latency", "平均延迟: %.2f"},
+		{"label.packet_loss", "丢包率: %.2f"},
+		{"label.session_type", "会话类型: %s"},
+		{"label.host_of_session", "会话房主: %s"},
+		{"label.is_spectating", "正在观战: %s"},
+		{"label.is_job_lobby", "任务大厅: %s"},
+		{"label.host_of_job_lobby", "任务大厅房主: %s"},
+		{"label.mission_type", "任务类型: %s"},
+		{"label.mission_name", "任务名称: %s"},
+
+		// Vehicle
+		{"vehicle.enter_vehicle", "请进入载具。"},
+		{"vehicle.slot", "插槽"},
+		{"vehicle.mod", "改装"},
+		{"vehicle.style", "样式"},
+		{"vehicle.saved_vehicles", "已保存载具"},
+		{"vehicle.confirm_spawn", "确定要生成 %s 吗"},
+		{"vehicle.populate_name", "填充名称"},
+		{"vehicle.refresh", "刷新当前载具"},
+		{"vehicle.change_plate", "更换车牌"},
+		{"vehicle.max", "升级载具"},
+		{"label.file_name", "文件名"},
+		{"label.folder_name", "文件夹名"},
+
+		// Teleport
+		{"v3.click_to_select", "点击选择位置。在 传送 > 已保存 中添加更多"},
+
+		// Recovery
+		{"stat.data_type_not_supported", "数据类型不支持"},
+		{"stat.normalized_name", "规范化名称为: %s"},
+		{"stat.write", "写入"},
+		{"stat.load_clipboard", "从剪贴板加载"},
+
+		// Network
+		{"label.host", "房主: %s"},
+		{"label.state", "状态: %s"},
+		{"label.location", "位置: %d"},
+		{"label.trigger_range", "触发范围: %.2f"},
+		{"label.location_na", "位置: N/A"},
+		{"label.trigger_range_na", "触发范围: N/A"},
+		{"label.username", "用户名"},
+		{"label.name", "名称"},
+		{"label.value", "值"},
+		{"label.type", "类型"},
+		{"label.team", "队伍"},
+		{"label.script", "脚本"},
+		{"label.index", "索引"},
+		{"label.start", "开始"},
+		{"label.end", "结束"},
+		{"label.quantity", "数量"},
+
+		// Events
+		{"events.active_events", "活跃事件: %d/%d"},
+		{"events.launch_event", "启动事件"},
+		{"events.kill_event", "终止事件"},
+		{"events.teleport_to_event", "传送到事件"},
+		{"events.set_cooldown", "设置冷却"},
+		{"events.set_availability", "设置可用性"},
+		{"events.apply_minutes", "以分钟为单位"},
+		{"events.requires_host", "需要自由模式房主。"},
+
+		// Debug
+		{"script.exit_reason", "退出原因: %s"},
+		{"script.thread_id", "线程ID: %d"},
+		{"script.stack_size", "栈大小: %d"},
+		{"script.stack_pointer", "栈指针: 0x%X"},
+		{"script.program_counter", "程序计数器: 0x%X"},
+		{"script.code_size", "代码大小: %d"},
+		{"script.arg_count", "参数数量: %d"},
+		{"script.local_count", "局部变量数: %d"},
+		{"script.global_count", "全局变量数: %d"},
+		{"script.native_count", "原生函数数: %d"},
+		{"script.string_count", "字符串数: %d"},
+		{"script.arg_index", "参数[%d]"},
+		{"script.jump_to_offset", "跳转到偏移"},
+		{"script.kill", "终止"},
+		{"script.log_labels", "日志标签"},
+		{"script.start_script", "启动脚本"},
+		{"script.start_session_script", "启动会话脚本"},
+		{"script.start_with_event", "带事件启动脚本"},
+		{"script.pause_after_starting", "启动后暂停"},
+		{"script.press_enter_write", "按回车键写入。"},
+		{"debug.network_bail", "网络保释"},
+		{"debug.do_teleport", "执行传送"},
+		{"debug.add_offset", "添加偏移"},
+		{"debug.add_read_player_id", "添加读取玩家ID"},
+		{"debug.remove_offset", "移除偏移"},
+		{"label.none", "无"},
+		{"label.invalid", "无效"},
+
+		// Lua
+		{"lua.click_to_load", "点击加载此脚本"},
+
+		// Onboarding
+		{"onboarding.open_github", "打开GitHub"},
+		{"onboarding.open_matrix", "打开Matrix服务器"},
+		{"onboarding.important", "重要！请阅读！"},
+
+		// Misc
+		{"overlay.fps", "FPS: %d"},
+		{"txn.add_item", "添加物品"},
+		{"txn.trigger", "触发"},
+		{"txn.price", "价格"},
+		{"txn.warning", "警告: 你需自行承担使用此工具的一切后果。如果不清楚自己在做什么，很可能会被封禁"},
+
+		// Notifications
+		{"notif.joiner", "加入器"},
+		{"notif.saved_players", "已保存玩家"},
+		{"notif.random_events", "随机事件"},
+		{"notif.spawn_vehicle", "生成个人载具"},
+		{"notif.saved_vehicles", "已保存载具"},
+		{"notif.outfit", "服装"},
+		{"notif.custom_teleport", "自定义传送"},
+		{"notif.start_script", "启动脚本"},
+		{"notif.transactions", "交易"},
+		{"notif.stat_editor", "数据编辑器"},
+
+		// Vehicle Spawn
+		{"vehicle.join_online", "请加入GTA在线模式。"},
+		{"vehicle.garage", "车库"},
+		{"vehicle.class", "类别"},
+
+		// Spawn Ped
+		{"ped.invincible", "无敌"},
+		{"ped.set_player_model", "Ctrl+点击设置玩家模型"},
+
+		// Transactions
+		{"msg.natives_not_cached", "原生函数尚未缓存"},
+		{"msg.catalog_not_loaded", "目录尚未加载"},
+		{"msg.transactions_not_supported", "在线模式不支持交易"},
+
+		// Stat
+		{"stat.not_found", "数据未找到"},
+		{"stat.index_not_valid", "索引无效"},
+		{"stat.date_invalid", "输入的日期或时间无效"},
+
+		// Combo labels
+		{"label.thread", "线程"},
+		{"label.stack_size", "栈大小"},
+		{"label.select_event", "选择事件"},
+		{"label.players", "玩家"},
+		{"label.weapons", "武器"},
+		{"label.category", "类别"},
+		{"label.action", "操作"},
+		{"label.folder", "文件夹"},
+
+		// Tooltips
+		{"tooltip.press_enter", "按回车键写入。"},
+		{"tooltip.click_to_load", "点击加载此脚本"},
+		{"tooltip.requires_host", "需要自由模式房主。"},
+
+		// Onboarding radio
+		{"radio.always_yes", "始终选择\"是\""},
+		{"radio.always_no", "始终选择\"否\""},
+		{"radio.ask_every_time", "每次都询问"},
+
+		// Notifications (referenced)
+		{"notif.failed_rid", "无法从用户名获取RID"},
+		{"notif.filename_empty", "文件名为空!"},
+		{"notif.spawn_confirm", "确定要生成 %s 吗"},
+		{"notif.cant_spawn", "无法生成载具"},
+		{"notif.event_launched", "事件已启动"},
+		{"notif.event_killed", "事件已终止"},
+		{"notif.event_teleported", "已传送到事件"},
+		{"notif.event_cooldown_set", "冷却已设置"},
+		{"notif.event_availability_set", "可用性已设置"},
+		{"notif.script_started", "脚本已启动"},
+		{"notif.script_paused", "脚本已暂停"},
+		{"notif.script_error", "脚本启动失败"},
+		{"notif.stat_written", "数据已写入"},
+		{"notif.stat_error", "数据写入失败"},
+		{"notif.txn_triggered", "交易已触发"},
+		{"notif.txn_error", "交易触发失败"},
+
+		// Separator texts
+		{"sep.cooldown_availability", "冷却与可用性"},
+		{"sep.info", "信息"},
+		{"sep.bytecode", "字节码"},
+		{"sep.damage", "伤害"},
+		{"sep.modifications", "改装"},
+		{"sep.plates", "车牌"},
+		{"sep.cosmetics", "外观"},
+		{"sep.window_tint", "车窗色调"},
+		{"sep.lights", "灯光"},
+		{"sep.possession", "所有权"},
+		{"sep.paint", "喷漆"},
+		{"sep.wheels", "车轮"},
+
+		// Misc labels
+		{"label.rockstar_id", "Rockstar ID"},
+		{"label.hash", "哈希值"},
+		{"label.offset", "偏移"},
+		{"label.size", "大小"},
+		{"label.address", "地址"},
+		{"label.base", "基址"},
+		{"label.add", "添加"},
+
+		// Input hints
+		{"hint.script_name", "脚本名称"},
+		{"hint.search", "搜索"},
+
+		// Additional missing keys
+		{"sep.mod_options", "改装选项"},
+		{"sep.mod_slots", "改装插槽"},
+		{"sep.extras", "附加"},
+		{"sep.neon_light", "霓虹灯选项"},
+		{"sep.color_options", "颜色选项"},
+		{"sep.plate_style", "车牌样式"},
 	};
 
 	// Look up a translation by key

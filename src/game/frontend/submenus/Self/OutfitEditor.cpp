@@ -7,6 +7,7 @@
 #include "game/gta/Natives.hpp"
 #include "core/util/Strings.hpp"
 #include "misc/cpp/imgui_stdlib.h"
+#include "core/i18n/Language.hpp"
 
 namespace YimMenu
 {
@@ -171,14 +172,14 @@ namespace YimMenu
 
 		void RenderSaveButton(bool saveToNewFolder)
 		{
-			if (ImGui::Button("Save Outfit"))
+			if (ImGui::Button(L("outfit.save", "Save Outfit")))
 				FiberPool::Push([saveToNewFolder, this] {
 					std::string fileName = TrimString(outfitName);
 					strcpy(outfitName, "");
 
 					if (!fileName.size())
 					{
-						Notifications::Show("Outfit", "Filename empty!", NotificationType::Warning);
+						Notifications::Show(L("notif.outfit", "Outfit"), L("notif.filename_empty", "Filename empty!"), NotificationType::Warning);
 						return;
 					}
 
@@ -198,15 +199,15 @@ namespace YimMenu
 		{
 			ImGui::BeginGroup();
 			{
-				if (ImGui::Button("Refresh list"))
+				if (ImGui::Button(L("btn.refresh_list", "Refresh list")))
 					FiberPool::Push([this] {
 						Outfit::OutfitEditor::RefreshList(folder, folders, files);
 					});
 				ImGui::Spacing();
 				static bool applyHair = false;
-				ImGui::Checkbox("Apply hair", &applyHair);
+				ImGui::Checkbox(L("outfit.apply_hair", "Apply hair"), &applyHair);
 				ImGui::Spacing();
-				if (ImGui::Button("Apply Selected Outfit"))
+				if (ImGui::Button(L("outfit.apply_selected", "Apply Selected Outfit")))
 					FiberPool::Push([this] {
 						Outfit::OutfitEditor::ApplyOutfitFromJson(folder, file, applyHair);
 						applyHair = false; // reset everytime
@@ -216,14 +217,14 @@ namespace YimMenu
 				ImGui::Spacing();
 
 				// save outfit
-				ImGui::Text("Outfit Name");
+				ImGui::Text("%s", L("outfit.name", "Outfit Name"));
 				ImGui::SameLine();
 				ImGui::SetNextItemWidth(250);
 				ImGui::InputText("##filename", outfitName, IM_ARRAYSIZE(outfitName));
 
 				if (folder.empty())
 				{
-					ImGui::Text("Folder Name");
+					ImGui::Text("%s", L("label.folder_name", "Folder Name"));
 					ImGui::SameLine();
 					ImGui::SetNextItemWidth(250);
 					ImGui::InputText("##foldername", newFolder, IM_ARRAYSIZE(newFolder));
@@ -239,15 +240,15 @@ namespace YimMenu
 	std::shared_ptr<Category> CreateOutfitsMenu()
 	{
 		static OutfitEditorMenu editor{};
-		auto category = std::make_shared<Category>("Outfit Editor");
+		auto category = std::make_shared<Category>(L("category.outfit_editor", "Outfit Editor"));
 
 		category->AddItem(std::make_shared<ImGuiItem>([] {
-			if (ImGui::Button("Refresh Stats"))
+			if (ImGui::Button(L("outfit.refresh_stats", "Refresh Stats")))
 				FiberPool::Push([] {
 					editor.RefreshStats();
 				});
 			ImGui::SameLine();
-			if (ImGui::Button("Randomize Outfit"))
+			if (ImGui::Button(L("outfit.randomize", "Randomize Outfit")))
 				FiberPool::Push([] {
 					Self::GetPed().RandomizeOutfit2();
 				});

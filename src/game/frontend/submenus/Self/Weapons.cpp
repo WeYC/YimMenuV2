@@ -9,6 +9,7 @@
 #include "types/script/scrThread.hpp"
 #include "core/commands/Commands.hpp"
 #include "game/features/self/CustomWeapon.hpp"
+#include "core/i18n/Language.hpp"
 
 namespace YimMenu::Submenus
 {
@@ -93,7 +94,7 @@ namespace YimMenu::Submenus
 			return true;
 		}();
 
-		ImGui::BeginCombo("Weapons", selectedWeapon.c_str());
+		ImGui::BeginCombo(L("label.weapons", "Weapons"), selectedWeapon.c_str());
 		if (ImGui::IsItemActive() && !ImGui::IsPopupOpen("##weaponspopup"))
 		{
 			ImGui::OpenPopup("##weaponspopup");
@@ -101,7 +102,7 @@ namespace YimMenu::Submenus
 		}
 		if (ImGui::BeginPopup("##weaponspopup", ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove))
 		{
-			ImGui::Text("Search:");
+			ImGui::Text("%s", L("label.search", "Search:"));
 			ImGui::SameLine();
 			ImGui::SetNextItemWidth(250.f);
 			ImGui::InputText("##searchweapon", searchWeapon, sizeof(searchWeapon));
@@ -141,14 +142,14 @@ namespace YimMenu::Submenus
 			ImGui::EndPopup();
 		}
 
-		if (ImGui::Button("Give Weapon"))
+		if (ImGui::Button(L("weapon.give", "Give Weapon")))
 		{
 			FiberPool::Push([] {
 				Self::GetPed().GiveWeapon(selectedWeaponHash, true);
 			});
 		}
 		ImGui::SameLine();
-		if (ImGui::Button("Remove Weapon"))
+		if (ImGui::Button(L("weapon.remove", "Remove Weapon")))
 		{
 			FiberPool::Push([] {
 				Self::GetPed().RemoveWeapon(selectedWeaponHash);
@@ -157,17 +158,17 @@ namespace YimMenu::Submenus
 
 		if (*Pointers.IsSessionStarted && selectedWeaponHash != 0)
 		{
-			ImGui::Text("Kills With: %d", kills);
-			ImGui::Text("Deaths By: %d", deaths);
-			ImGui::Text("K/D Ratio: %.2f", kdRatio);
-			ImGui::Text("Headshots: %d", headshots);
-			ImGui::Text("Accuracy: %d%%", accuracy);
+			ImGui::Text(L("weapon.kills_with", "Kills With: %d"), kills);
+			ImGui::Text(L("weapon.deaths_by", "Deaths By: %d"), deaths);
+			ImGui::Text(L("weapon.kd_ratio", "K/D Ratio: %.2f"), kdRatio);
+			ImGui::Text(L("weapon.headshots", "Headshots: %d"), headshots);
+			ImGui::Text(L("weapon.accuracy", "Accuracy: %d%%"), accuracy);
 		}
 	}
 
 	static std::shared_ptr<Group> RenderCustomWeaponsMenu()
 	{
-		auto customWeaponsGroup = std::make_shared<Group>("Custom Weapons");
+		auto customWeaponsGroup = std::make_shared<Group>(L("group.custom_weapons", "Custom Weapons"));
 
 		auto cutomWeaponTypes = std::make_shared<Group>("", 1);
 		auto customWeapons = std::make_shared<Group>("");
@@ -208,12 +209,12 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildWeaponsMenu()
 	{
-		auto weapons = std::make_shared<Category>("Weapons");
+		auto weapons = std::make_shared<Category>(L("category.weapons", "Weapons"));
 
-		auto weaponsGlobalsGroup = std::make_shared<Group>("Globals", 12);
-		auto weaponsToolsGroup = std::make_shared<Group>("Tools", 1);
-		auto weaponsAmmuNationGroup = std::make_shared<Group>("Ammu-Nation");
-		auto weaponsAimbotGroup = std::make_shared<Group>("Aimbot", 1);
+		auto weaponsGlobalsGroup = std::make_shared<Group>(L("group.globals", "Globals"), 12);
+		auto weaponsToolsGroup = std::make_shared<Group>(L("group.tools", "Tools"), 1);
+		auto weaponsAmmuNationGroup = std::make_shared<Group>(L("group.ammu_nation", "Ammu-Nation"));
+		auto weaponsAimbotGroup = std::make_shared<Group>(L("group.aimbot", "Aimbot"), 1);
 
 		weaponsGlobalsGroup->AddItem(std::make_shared<BoolCommandItem>("infiniteammo"_J));
 		weaponsGlobalsGroup->AddItem(std::make_shared<BoolCommandItem>("infiniteclip"_J));
