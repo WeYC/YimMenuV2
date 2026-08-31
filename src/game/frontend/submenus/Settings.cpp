@@ -15,8 +15,8 @@ namespace YimMenu::Submenus
 	// TODO: refactor this
 	static void Hotkeys()
 	{
-		ImGui::BulletText("Hold the button with the command name and enter a keystroke to change its hotkey");
-		ImGui::BulletText("If a command has an existing hotkey, clicking the button will remove it");
+		ImGui::BulletText("%s", L("hotkey.hold_button_hint", "Hold the button with the command name and enter a keystroke to change its hotkey").c_str());
+		ImGui::BulletText("%s", L("hotkey.existing_hotkey_hint", "If a command has an existing hotkey, clicking the button will remove it").c_str());
 
 		ImGui::Spacing();
 		ImGui::Separator();
