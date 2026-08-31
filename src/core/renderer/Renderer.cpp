@@ -62,6 +62,7 @@ namespace YimMenu
 
         ImGuiIO& io = ImGui::GetIO();
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+        io.ConfigDebugHighlightIdConflicts = false;
         ImGui::StyleColorsDark();
 
         ImGui_ImplWin32_Init(m_Window);

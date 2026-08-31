@@ -20,6 +20,8 @@ namespace YimMenu
 			return;
 		}
 
+		ImGui::PushID(m_Command->GetHash());
+
 		bool enabled = m_Command->GetState();
 		if (ImGui::Toggle(m_LabelOverride.has_value() ? m_LabelOverride.value().data() : m_Command->GetLabel().data(), &enabled))
 			m_Command->SetState(enabled);
@@ -49,5 +51,7 @@ namespace YimMenu
 
 			ImGui::EndPopup();
 		}
+
+		ImGui::PopID();
 	}
 }

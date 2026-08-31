@@ -21,6 +21,8 @@ namespace YimMenu
 			return;
 		}
 
+		ImGui::PushID(m_Command->GetHash());
+
 		if (ImGui::Button(m_LabelOverride.has_value() ? m_LabelOverride.value().data() : m_Command->GetLabel().data()))
 		{
 			// Capture the command by value, not 'this'. This item may be drawn from a 
@@ -63,5 +65,7 @@ namespace YimMenu
 
 			ImGui::EndPopup();
 		}
+
+		ImGui::PopID();
 	}
 }
