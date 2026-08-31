@@ -10,7 +10,7 @@ namespace YimMenu::I18n
 		ZH
 	};
 
-	inline Language g_CurrentLanguage = Language::EN;
+	inline Language g_CurrentLanguage = Language::ZH;
 
 	struct TranslationEntry
 	{
