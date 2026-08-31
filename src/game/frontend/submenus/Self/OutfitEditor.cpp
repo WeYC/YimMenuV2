@@ -11,25 +11,25 @@
 
 namespace YimMenu
 {
-	static const char* TranslateComponent(const std::string& label)
+	static std::string TranslateComponent(const std::string& label)
 	{
-		if (label == "Mask") return L("outfit.mask", "Mask");
-		if (label == "Hair") return L("outfit.hair", "Hair");
-		if (label == "Torso") return L("outfit.torso", "Torso");
-		if (label == "Leg") return L("outfit.leg", "Leg");
-		if (label == "Bag") return L("outfit.bag", "Bag");
-		if (label == "Shoe") return L("outfit.shoe", "Shoe");
-		if (label == "Accessory") return L("outfit.accessory", "Accessory");
-		if (label == "Undershirt") return L("outfit.undershirt", "Undershirt");
-		if (label == "Kevlar/Armor") return L("outfit.kevlar", "Kevlar/Armor");
-		if (label == "Decals") return L("outfit.decals", "Decals");
-		if (label == "Tops") return L("outfit.tops", "Tops");
-		if (label == "Hats") return L("outfit.hats", "Hats");
-		if (label == "Glasses") return L("outfit.glasses", "Glasses");
-		if (label == "Ears") return L("outfit.ears", "Ears");
-		if (label == "Watches") return L("outfit.watches", "Watches");
-		if (label == "Bracelets") return L("outfit.bracelets", "Bracelets");
-		return label.c_str();
+		if (label == "Mask") return std::string(L("outfit.mask", "Mask"));
+		if (label == "Hair") return std::string(L("outfit.hair", "Hair"));
+		if (label == "Torso") return std::string(L("outfit.torso", "Torso"));
+		if (label == "Leg") return std::string(L("outfit.leg", "Leg"));
+		if (label == "Bag") return std::string(L("outfit.bag", "Bag"));
+		if (label == "Shoe") return std::string(L("outfit.shoe", "Shoe"));
+		if (label == "Accessory") return std::string(L("outfit.accessory", "Accessory"));
+		if (label == "Undershirt") return std::string(L("outfit.undershirt", "Undershirt"));
+		if (label == "Kevlar/Armor") return std::string(L("outfit.kevlar", "Kevlar/Armor"));
+		if (label == "Decals") return std::string(L("outfit.decals", "Decals"));
+		if (label == "Tops") return std::string(L("outfit.tops", "Tops"));
+		if (label == "Hats") return std::string(L("outfit.hats", "Hats"));
+		if (label == "Glasses") return std::string(L("outfit.glasses", "Glasses"));
+		if (label == "Ears") return std::string(L("outfit.ears", "Ears"));
+		if (label == "Watches") return std::string(L("outfit.watches", "Watches"));
+		if (label == "Bracelets") return std::string(L("outfit.bracelets", "Bracelets"));
+		return label;
 	}
 
 	class OutfitEditorMenu

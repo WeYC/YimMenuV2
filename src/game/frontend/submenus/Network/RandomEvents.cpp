@@ -207,7 +207,7 @@ namespace YimMenu::Submenus
 				ImGui::EndCombo();
 			}
 
-			if (ImGui::InputInt(std::format(L("random_events.select_location", "Select Location (0-{})").c_str(), numSubvariations).c_str(), &selectedSubvariation))
+			if (ImGui::InputInt(std::format("Select Location (0-{})", numSubvariations).c_str(), &selectedSubvariation))
 			{
 				selectedSubvariation = std::clamp(selectedSubvariation, 0, numSubvariations);
 			}
