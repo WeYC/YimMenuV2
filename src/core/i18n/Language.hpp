@@ -4,6 +4,14 @@
 
 namespace YimMenu::I18n
 {
+	enum class Language
+	{
+		EN,
+		ZH
+	};
+
+	inline Language g_CurrentLanguage = Language::EN;
+
 	struct TranslationEntry
 	{
 		std::string_view key;
@@ -671,6 +679,7 @@ namespace YimMenu::I18n
 		{"group.object_esp", "物体透视"},
 		{"group.overlay", "叠加层"},
 		{"group.chat", "聊天"},
+		{"group.language", "语言"},
 		{"group.editor", "编辑器"},
 		{"group.vehicle", "载具"},
 		{"group.challenges", "挑战"},
@@ -1047,9 +1056,12 @@ namespace YimMenu::I18n
 	};
 
 	// Look up a translation by key
-	// Returns empty string_view if not found
+	// Returns empty string_view if not found or if language is English
 	inline std::string_view Get(std::string_view key)
 	{
+		if (g_CurrentLanguage == Language::EN)
+			return {};
+
 		for (const auto& entry : g_Translations)
 		{
 			if (entry.key == key)

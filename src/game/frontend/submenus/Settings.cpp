@@ -52,6 +52,7 @@ namespace YimMenu::Submenus
 		auto game = std::make_shared<Category>(L("category.game", "Game"));
 
 		auto uiStyle = std::make_shared<Group>(L("group.ui", "UI"));
+		auto langGroup = std::make_shared<Group>(L("group.language", "Language"));
 		auto playerEsp = std::make_shared<Group>(L("group.player_esp", "Player ESP"), 10);
 		auto pedEsp = std::make_shared<Group>(L("group.ped_esp", "Ped ESP"), 10);
 		auto objectEsp = std::make_shared<Group>(L("group.object_esp", "Object ESP"));
@@ -59,6 +60,16 @@ namespace YimMenu::Submenus
 		auto chat = std::make_shared<Group>(L("group.chat", "Chat"));
 
 		hotkeys->AddItem(std::make_shared<ImGuiItem>(Hotkeys));
+
+		// Language
+		langGroup->AddItem(std::make_shared<ImGuiItem>([] {
+			const char* languages[] = { "English", "中文" };
+			int current = static_cast<int>(I18n::g_CurrentLanguage);
+			if (ImGui::Combo("##language", &current, languages, 2))
+			{
+				I18n::g_CurrentLanguage = static_cast<I18n::Language>(current);
+			}
+		}));
 
 		// Players
 		uiStyle->AddItem(std::make_shared<ListCommandItem>("styleselector"_J));
@@ -106,6 +117,7 @@ namespace YimMenu::Submenus
 		game->AddItem(pedEsp);
 		game->AddItem(objectEsp);
 
+		gui->AddItem(langGroup);
 		gui->AddItem(uiStyle);
 		gui->AddItem(overlay);
 		gui->AddItem(chat);
