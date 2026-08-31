@@ -22,13 +22,135 @@ namespace YimMenu
 		return full;
 	}();
 
+	static std::string GetStyleChineseName(const std::string& name)
+	{
+		static const std::unordered_map<std::string, std::string> map = {
+			// Colors
+			{"Text", "文本"},
+			{"TextDisabled", "禁用文本"},
+			{"WindowBg", "窗口背景"},
+			{"ChildBg", "子窗口背景"},
+			{"PopupBg", "弹窗背景"},
+			{"Border", "边框"},
+			{"BorderShadow", "边框阴影"},
+			{"FrameBg", "框架背景"},
+			{"FrameBgHovered", "框架背景（悬停）"},
+			{"FrameBgActive", "框架背景（激活）"},
+			{"TitleBg", "标题背景"},
+			{"TitleBgActive", "标题背景（激活）"},
+			{"TitleBgCollapsed", "标题背景（折叠）"},
+			{"MenuBarBg", "菜单栏背景"},
+			{"ScrollbarBg", "滚动条背景"},
+			{"ScrollbarGrab", "滚动条滑块"},
+			{"ScrollbarGrabHovered", "滚动条滑块（悬停）"},
+			{"ScrollbarGrabActive", "滚动条滑块（激活）"},
+			{"CheckMark", "选中标记"},
+			{"SliderGrab", "滑块"},
+			{"SliderGrabActive", "滑块（激活）"},
+			{"Button", "按钮"},
+			{"ButtonHovered", "按钮（悬停）"},
+			{"ButtonActive", "按钮（激活）"},
+			{"Header", "标题栏"},
+			{"HeaderHovered", "标题栏（悬停）"},
+			{"HeaderActive", "标题栏（激活）"},
+			{"Separator", "分隔线"},
+			{"SeparatorHovered", "分隔线（悬停）"},
+			{"SeparatorActive", "分隔线（激活）"},
+			{"ResizeGrip", "调整大小手柄"},
+			{"ResizeGripHovered", "调整大小手柄（悬停）"},
+			{"ResizeGripActive", "调整大小手柄（激活）"},
+			{"TabHovered", "标签页（悬停）"},
+			{"Tab", "标签页"},
+			{"TabSelected", "标签页（选中）"},
+			{"TabSelectedOverline", "标签页（选中覆盖线）"},
+			{"TabDimmed", "标签页（暗淡）"},
+			{"TabDimmedSelected", "标签页（暗淡选中）"},
+			{"TabDimmedSelectedOverline", "标签页（暗淡选中覆盖线）"},
+			{"PlotLines", "折线图"},
+			{"PlotLinesHovered", "折线图（悬停）"},
+			{"PlotHistogram", "柱状图"},
+			{"PlotHistogramHovered", "柱状图（悬停）"},
+			{"TableHeader", "表格标题"},
+			{"TableBorderStrong", "表格边框（粗）"},
+			{"TableBorderLight", "表格边框（细）"},
+			{"TableRowBg", "表格行背景"},
+			{"TableRowBgAlt", "表格行背景（交替）"},
+			{"TextLink", "文本链接"},
+			{"TextSelectedBg", "文本选中背景"},
+			{"DragDropTarget", "拖放目标"},
+			{"NavCursorHighlight", "导航光标高亮"},
+			{"NavWindowingHighlight", "导航窗口高亮"},
+			{"NavWindowingDimBg", "导航窗口暗背景"},
+			{"ModalWindowDimBg", "模态窗口暗背景"},
+			// Rounding
+			{"WindowRounding", "窗口圆角"},
+			{"FrameRounding", "框架圆角"},
+			{"GrabRounding", "滑块圆角"},
+			{"ScrollbarRounding", "滚动条圆角"},
+			{"ChildRounding", "子窗口圆角"},
+			{"PopupRounding", "弹窗圆角"},
+			{"TabRounding", "标签页圆角"},
+			// Layout
+			{"WindowPadding", "窗口内边距"},
+			{"ItemSpacing", "项目间距"},
+			{"ItemInnerSpacing", "项目内部间距"},
+			{"TouchExtraPadding", "触控额外边距"},
+			{"DisplaySafeAreaPadding", "安全区域边距"},
+			{"IndentSpacing", "缩进间距"},
+			{"ColumnsMinSpacing", "列最小间距"},
+			{"WindowTitleAlign", "窗口标题对齐"},
+			{"ButtonTextAlign", "按钮文本对齐"},
+			{"SelectableTextAlign", "可选项文本对齐"},
+			// Border
+			{"WindowBorderSize", "窗口边框大小"},
+			{"FrameBorderSize", "框架边框大小"},
+			{"TabBorderSize", "标签页边框大小"},
+			{"PopupBorderSize", "弹窗边框大小"},
+			// Global
+			{"GlobalAlpha", "全局透明度"},
+			{"DisabledAlpha", "禁用透明度"},
+			{"MouseCursorScale", "鼠标光标缩放"},
+			{"CurveTessellationTol", "曲线细分容差"},
+			// Misc
+			{"Horizontal", "水平"},
+			{"Vertical", "垂直"},
+			{"Modify Colors", "修改颜色"},
+			{"Adjust Rounding", "调整圆角"},
+			{"Layout & Alignment", "布局与对齐"},
+			{"Border Sizes", "边框大小"},
+			{"Global Settings", "全局设置"},
+			{"Font Configuration", "字体配置"},
+			{"Current Scale", "当前缩放"},
+			{"Font Scale", "字体缩放"},
+			{"Apply Font Scale", "应用字体缩放"},
+			{"Colors", "颜色"},
+			{"Rounding", "圆角"},
+			{"Layout", "布局"},
+			{"Border", "边框"},
+			{"Global", "全局"},
+			{"Fonts", "字体"},
+		};
+
+		auto it = map.find(name);
+		if (it != map.end())
+			return it->second;
+		return "";
+	}
+
 	static std::string PrettyPrintLabel(const std::string& raw)
 	{
 		std::string out = raw;
+		std::string suffix;
 		if (out.size() > 2 && out.compare(out.size() - 2, 2, "_X") == 0)
-			out.replace(out.size() - 2, 2, " Horizontal");
+		{
+			out.erase(out.size() - 2);
+			suffix = (I18n::g_CurrentLanguage == I18n::Language::ZH) ? "（水平）" : " Horizontal";
+		}
 		else if (out.size() > 2 && out.compare(out.size() - 2, 2, "_Y") == 0)
-			out.replace(out.size() - 2, 2, " Vertical");
+		{
+			out.erase(out.size() - 2);
+			suffix = (I18n::g_CurrentLanguage == I18n::Language::ZH) ? "（垂直）" : " Vertical";
+		}
 
 		std::string spaced;
 		spaced.reserve(out.size() + 10);
@@ -42,7 +164,14 @@ namespace YimMenu
 		std::regex uscore_re("_");
 		spaced = std::regex_replace(spaced, uscore_re, " ");
 
-		return spaced;
+		if (I18n::g_CurrentLanguage == I18n::Language::ZH)
+		{
+			std::string zh = GetStyleChineseName(out);
+			if (!zh.empty())
+				return zh + "（" + spaced + "）" + suffix;
+		}
+
+		return spaced + suffix;
 	}
 
 	void SyncColorCommandsToStyle()
