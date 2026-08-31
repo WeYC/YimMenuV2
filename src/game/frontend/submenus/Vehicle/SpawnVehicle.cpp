@@ -63,7 +63,7 @@ namespace YimMenu::Submenus
 
 		static char search[64];
 		ImGui::SetNextItemWidth(300.f);
-		ImGui::InputTextWithHint("Name", L("spawn_vehicle.search", "Search").c_str(), search, sizeof(search));
+		ImGui::InputTextWithHint(L("spawn_vehicle.name", "Name").c_str(), L("spawn_vehicle.search", "Search").c_str(), search, sizeof(search));
 
 		ImGui::SetNextItemWidth(300.f);
 		if (ImGui::BeginCombo(L("spawn_vehicle.class", "Class").c_str(), selectedClass == -1 ? L("spawn_vehicle.all", "All").c_str() : g_VehicleClassNames[selectedClass]))
@@ -155,7 +155,7 @@ namespace YimMenu::Submenus
 
 		static char search[64];
 		ImGui::SetNextItemWidth(300.f);
-		ImGui::InputTextWithHint("Name", L("spawn_vehicle.search", "Search").c_str(), search, sizeof(search));
+		ImGui::InputTextWithHint(L("spawn_vehicle.name", "Name").c_str(), L("spawn_vehicle.search", "Search").c_str(), search, sizeof(search));
 
 		ImGui::SetNextItemWidth(300.f);
 		if (ImGui::BeginCombo(L("spawn_vehicle.garage", "Garage").c_str(), selectedGarageStr.empty() ? L("spawn_vehicle.all", "All").c_str() : selectedGarageStr.c_str()))

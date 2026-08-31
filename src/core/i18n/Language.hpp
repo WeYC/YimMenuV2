@@ -873,6 +873,7 @@ namespace YimMenu::I18n
 		{"spawn_vehicle.spawn_clone", "克隆生成"},
 		{"spawn_vehicle.spawn_clone_desc", "克隆个人载具"},
 		{"spawn_vehicle.search", "搜索"},
+		{"spawn_vehicle.name", "名称"},
 		{"spawn_vehicle.class", "类别"},
 		{"spawn_vehicle.garage", "车库"},
 		{"spawn_vehicle.all", "全部"},
