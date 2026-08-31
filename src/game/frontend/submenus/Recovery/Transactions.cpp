@@ -195,7 +195,7 @@ namespace YimMenu::Submenus
 
 					if (!NETSHOPPING::NET_GAMESERVER_BASKET_START(&txn_id, info.m_Category.m_Hash, info.m_Action.m_Hash, 4))
 					{
-						Notifications::Show("Transactions", "Failed to create basket", NotificationType::Error);
+						Notifications::Show(L("txn.title", "Transactions").c_str(), L("txn.failed_create_basket", "Failed to create basket").c_str(), NotificationType::Error);
 						txn_failed = true;
 						NETSHOPPING::NET_GAMESERVER_BASKET_END();
 						return;
@@ -220,9 +220,9 @@ namespace YimMenu::Submenus
 
 						if (!NETSHOPPING::NET_GAMESERVER_BASKET_ADD_ITEM(&scr_item, item.m_Quantity))
 						{
-							Notifications::Show("Transactions",
-							    std::format("Failed to add {} (x{}) to basket", item.m_PrimaryItem.m_Name, item.m_Quantity),
-							    NotificationType::Error);
+						Notifications::Show(L("txn.title", "Transactions").c_str(),
+						    std::format("Failed to add {} (x{}) to basket", item.m_PrimaryItem.m_Name, item.m_Quantity),
+						    NotificationType::Error);
 							txn_failed = true;
 							NETSHOPPING::NET_GAMESERVER_BASKET_END();
 							return;
@@ -233,7 +233,7 @@ namespace YimMenu::Submenus
 				{
 					if (!NETSHOPPING::NET_GAMESERVER_BEGIN_SERVICE(&txn_id, info.m_Category.m_Hash, info.m_Service.m_Item.m_Hash, info.m_Action.m_Hash, info.m_Service.m_Price, 4))
 					{
-						Notifications::Show("Transactions", "Failed to create service", NotificationType::Error);
+						Notifications::Show(L("txn.title", "Transactions").c_str(), L("txn.failed_create_service", "Failed to create service").c_str(), NotificationType::Error);
 						txn_failed = true;
 						return;
 					}
@@ -246,7 +246,7 @@ namespace YimMenu::Submenus
 
 				if (!NETSHOPPING::NET_GAMESERVER_CHECKOUT_START(txn_id))
 				{
-					Notifications::Show("Transactions", "Failed to begin checkout", NotificationType::Error);
+					Notifications::Show(L("txn.title", "Transactions").c_str(), L("txn.failed_begin_checkout", "Failed to begin checkout").c_str(), NotificationType::Error);
 					txn_failed = true;
 					return;
 				}
@@ -259,11 +259,11 @@ namespace YimMenu::Submenus
 
 				if (txn->m_Status == 3)
 				{
-					Notifications::Show("Transactions", "Transaction complete", NotificationType::Success);
+					Notifications::Show(L("txn.title", "Transactions").c_str(), L("txn.complete", "Transaction complete").c_str(), NotificationType::Success);
 				}
 				else
 				{
-					Notifications::Show("Transactions", "Transaction failed", NotificationType::Error);
+					Notifications::Show(L("txn.title", "Transactions").c_str(), L("txn.failed", "Transaction failed").c_str(), NotificationType::Error);
 				}
 			}
 		});
@@ -455,20 +455,20 @@ namespace YimMenu::Submenus
 				EditTransactionItem("Secondary Item", info, item.m_SecondaryItem, txn_valid, false, false); // TODO: is this ever used outside of inventory stuff?
 			}
 
-			ImGui::SetNextItemWidth(180.0f);
-			if (ImGui::InputScalar("Quantity", ImGuiDataType_U32, &item.m_Quantity))
+		ImGui::SetNextItemWidth(180.0f);
+		if (ImGui::InputScalar(L("txn.quantity", "Quantity").c_str(), ImGuiDataType_U32, &item.m_Quantity))
 			{
 				if (item.m_Quantity == 0)
 					item_to_delete = i; // assume the user wants this item gone
 			}
 
-			ImGui::SetNextItemWidth(180.0f);
-			ImGui::InputInt("Price", &item.m_Price);
+		ImGui::SetNextItemWidth(180.0f);
+		ImGui::InputInt(L("txn.price", "Price").c_str(), &item.m_Price);
 
-			ImGui::SetNextItemWidth(180.0f);
-			ImGui::InputInt("Stat Value", &item.m_StatValue); // I'm not actually sure what this does ngl
+		ImGui::SetNextItemWidth(180.0f);
+		ImGui::InputInt(L("txn.stat_value", "Stat Value").c_str(), &item.m_StatValue); // I'm not actually sure what this does ngl
 
-			if (info.m_Basket.m_BasketItems.size() > 1 && ImGui::Button("Delete"))
+		if (info.m_Basket.m_BasketItems.size() > 1 && ImGui::Button(L("txn.delete", "Delete").c_str()))
 				item_to_delete = i;
 			ImGui::PopID();
 
@@ -479,7 +479,7 @@ namespace YimMenu::Submenus
 		if (item_to_delete.has_value())
 			info.m_Basket.m_BasketItems.erase(std::next(info.m_Basket.m_BasketItems.begin(), *item_to_delete));
 
-		if (ImGui::Button("Add Item"))
+		if (ImGui::Button(L("txn.add_item", "Add Item").c_str()))
 		{
 			info.m_Basket.m_BasketItems.push_back({});
 		}
@@ -491,8 +491,8 @@ namespace YimMenu::Submenus
 			info.m_Service.m_Price = info.m_Service.m_Item.m_IntendedPrice;
 		if (info.m_Service.m_Item.m_IntendedPrice != 0 || info.m_Action.m_Hash != "NET_SHOP_ACTION_EARN"_J)
 		{
-			ImGui::SetNextItemWidth(180.0f);
-			ImGui::InputInt("Price", &info.m_Service.m_Price);
+		ImGui::SetNextItemWidth(180.0f);
+		ImGui::InputInt(L("txn.price", "Price").c_str(), &info.m_Service.m_Price);
 			if (info.m_Service.m_Price > info.m_Service.m_Item.m_IntendedPrice && info.m_Action.m_Hash == "NET_SHOP_ACTION_EARN"_J)
 			{
 				SetTransactionError(std::format("Item price exceeds maximum allowed ({})", info.m_Service.m_Item.m_IntendedPrice));
@@ -506,27 +506,27 @@ namespace YimMenu::Submenus
 		auto menu = std::make_shared<Category>(L("category.transactions", "Transactions"));
 		auto normal = std::make_shared<Group>(L("group.triggerer", "Triggerer"));
 
-		normal->AddItem(std::make_unique<ImGuiItem>([] {
-			if (!NativeInvoker::AreHandlersCached())
-				return ImGui::TextDisabled("Natives not cached yet");
+	normal->AddItem(std::make_unique<ImGuiItem>([] {
+		if (!NativeInvoker::AreHandlersCached())
+			return ImGui::TextDisabled(L("txn.natives_not_cached", "Natives not cached yet").c_str());
 
-			if (AnticheatBypass::IsFSLProvidingLocalSaves())
-				return ImGui::TextDisabled("Transactions are not supported with FSL local saves enabled");
+		if (AnticheatBypass::IsFSLProvidingLocalSaves())
+			return ImGui::TextDisabled(L("txn.fsl_not_supported", "Transactions are not supported with FSL local saves enabled").c_str());
 
-			if (!NETSHOPPING::NET_GAMESERVER_CATALOG_IS_VALID())
-				return ImGui::TextDisabled("Catalog not loaded yet");
+		if (!NETSHOPPING::NET_GAMESERVER_CATALOG_IS_VALID())
+			return ImGui::TextDisabled(L("txn.catalog_not_loaded", "Catalog not loaded yet").c_str());
 
-			ImGui::Text("Warning: You are solely responsible for what you do with this tool. If you don't know what you're doing, you'll likely get banned");
+		ImGui::Text(L("txn.warning", "Warning: You are solely responsible for what you do with this tool. If you don't know what you're doing, you'll likely get banned").c_str());
 
 			static TransactionInfo info{};
 			bool txn_valid{true};
 
-			ImGui::SetNextItemWidth(180.0f);
-			if (ImGui::Combo("Type", reinterpret_cast<int*>(&info.m_Type), "Basket\0Service\0"))
+		ImGui::SetNextItemWidth(180.0f);
+		if (ImGui::Combo(L("txn.type", "Type").c_str(), reinterpret_cast<int*>(&info.m_Type), "Basket\0Service\0"))
 				OnTransactionTypeChanged(info);
 
-			ImGui::SetNextItemWidth(250.0f);
-			if (ImGui::BeginCombo("Category", info.m_Category.m_Name))
+		ImGui::SetNextItemWidth(250.0f);
+		if (ImGui::BeginCombo(L("txn.category", "Category").c_str(), info.m_Category.m_Name))
 			{
 				for (auto& item : NET_SHOP_CATEGORIES)
 				{
@@ -545,8 +545,8 @@ namespace YimMenu::Submenus
 				ImGui::EndCombo();
 			}
 
-			ImGui::SetNextItemWidth(250.0f);
-			if (ImGui::BeginCombo("Action", info.m_Action.m_Name))
+		ImGui::SetNextItemWidth(250.0f);
+		if (ImGui::BeginCombo(L("txn.action", "Action").c_str(), info.m_Action.m_Name))
 			{
 				for (auto& item : NET_SHOP_ACTIONS)
 				{
@@ -578,13 +578,13 @@ namespace YimMenu::Submenus
 
 			ImGui::Separator();
 
-			ImGui::BeginDisabled(!txn_valid);
-			if (ImGui::Button("Trigger"))
-				FiberPool::Push([] {
-					ProcessTransaction(info);
-				});
-			if (!txn_valid && ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
-				ImGui::SetTooltip("The transaction isn't valid. Ensure that all fields are filled out correctly");
+		ImGui::BeginDisabled(!txn_valid);
+		if (ImGui::Button(L("txn.trigger", "Trigger").c_str()))
+			FiberPool::Push([] {
+				ProcessTransaction(info);
+			});
+		if (!txn_valid && ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+			ImGui::SetTooltip(L("txn.invalid_transaction", "The transaction isn't valid. Ensure that all fields are filled out correctly").c_str());
 			ImGui::EndDisabled();
 		}));
 

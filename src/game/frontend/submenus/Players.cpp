@@ -57,7 +57,7 @@ namespace YimMenu::Submenus
 			ImGui::SetNextWindowPos(
 			    ImVec2(ImGui::GetWindowPos().x + ImGui::GetWindowSize().x + offset, ImGui::GetWindowPos().y));
 			ImGui::SetNextWindowSize(ImVec2(215, ImGui::GetWindowSize().y));
-			ImGui::Begin("Player List", nullptr, ImGuiWindowFlags_NoDecoration);
+			ImGui::Begin(L("player_list.title", "Player List").c_str(), nullptr, ImGuiWindowFlags_NoDecoration);
 
 			BoolCommandItem("spectate"_J).Draw();
 			for (auto& [id, player] : sortedPlayers)
@@ -100,7 +100,7 @@ namespace YimMenu::Submenus
 		}
 		else
 		{
-			if (ImGui::BeginCombo("Players", YimMenu::Players::GetSelected().GetName()))
+			if (ImGui::BeginCombo(L("player_list.players", "Players").c_str(), YimMenu::Players::GetSelected().GetName()))
 			{
 				for (auto& [id, player] : sortedPlayers)
 				{

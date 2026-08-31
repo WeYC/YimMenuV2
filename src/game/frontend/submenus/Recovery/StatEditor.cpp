@@ -362,59 +362,59 @@ namespace YimMenu::Submenus
 		switch (data->GetType())
 		{
 		case sStatData::Type::_BOOL:
-			return ImGui::Checkbox("Value", &value.m_AsBool);
+			return ImGui::Checkbox(L("stat.value", "Value").c_str(), &value.m_AsBool);
 		case sStatData::Type::FLOAT:
-			return ImGui::InputFloat("Value", &value.m_AsFloat[0]);
+			return ImGui::InputFloat(L("stat.value", "Value").c_str(), &value.m_AsFloat[0]);
 		case sStatData::Type::INT:
-			return ImGui::InputInt("Value", &value.m_AsInt);
+			return ImGui::InputInt(L("stat.value", "Value").c_str(), &value.m_AsInt);
 		case sStatData::Type::UINT32:
-			return ImGui::InputScalar("Value", ImGuiDataType_U32, &value.m_AsInt);
+			return ImGui::InputScalar(L("stat.value", "Value").c_str(), ImGuiDataType_U32, &value.m_AsInt);
 		case sStatData::Type::UINT16:
-			return ImGui::InputScalar("Value", ImGuiDataType_U16, &value.m_AsInt);
+			return ImGui::InputScalar(L("stat.value", "Value").c_str(), ImGuiDataType_U16, &value.m_AsInt);
 		case sStatData::Type::UINT8:
-			return ImGui::InputScalar("Value", ImGuiDataType_U8, &value.m_AsInt);
+			return ImGui::InputScalar(L("stat.value", "Value").c_str(), ImGuiDataType_U8, &value.m_AsInt);
 		case sStatData::Type::INT64:
-			return ImGui::InputScalar("Value", ImGuiDataType_S64, &value.m_AsU64);
+			return ImGui::InputScalar(L("stat.value", "Value").c_str(), ImGuiDataType_S64, &value.m_AsU64);
 		case sStatData::Type::UINT64:
 		case sStatData::Type::USERID:
-			return ImGui::InputScalar("Value", ImGuiDataType_U64, &value.m_AsU64);
+			return ImGui::InputScalar(L("stat.value", "Value").c_str(), ImGuiDataType_U64, &value.m_AsU64);
 		case sStatData::Type::STRING:
-			return ImGui::InputText("Value", value.m_AsString, sizeof(value.m_AsString));
+			return ImGui::InputText(L("stat.value", "Value").c_str(), value.m_AsString, sizeof(value.m_AsString));
 		case sStatData::Type::PACKED:
-			return ImGui::Bitfield("Value", &value.m_AsU64);
+			return ImGui::Bitfield(L("stat.value", "Value").c_str(), &value.m_AsU64);
 		case sStatData::Type::POS:
 			ImGui::PushItemWidth(50.0f);
-			ImGui::InputFloat("X", &value.m_AsFloat[0]);
+			ImGui::InputFloat(L("stat.x", "X").c_str(), &value.m_AsFloat[0]);
 			ImGui::SameLine();
-			ImGui::InputFloat("Y", &value.m_AsFloat[1]);
+			ImGui::InputFloat(L("stat.y", "Y").c_str(), &value.m_AsFloat[1]);
 			ImGui::SameLine();
-			ImGui::InputFloat("Z", &value.m_AsFloat[2]);
+			ImGui::InputFloat(L("stat.z", "Z").c_str(), &value.m_AsFloat[2]);
 			ImGui::PopItemWidth();
 			return true;
 		case sStatData::Type::DATE:
 		{
 			ImGui::PushItemWidth(60.0f);
-			ImGui::InputScalar("Year", ImGuiDataType_U32, &value.m_Date.Year);
+			ImGui::InputScalar(L("stat.year", "Year").c_str(), ImGuiDataType_U32, &value.m_Date.Year);
 			ImGui::SameLine();
 			ImGui::PopItemWidth();
 			ImGui::PushItemWidth(50.0f);
-			ImGui::InputScalar("Month", ImGuiDataType_U32, &value.m_Date.Month);
+			ImGui::InputScalar(L("stat.month", "Month").c_str(), ImGuiDataType_U32, &value.m_Date.Month);
 			ImGui::SameLine();
-			ImGui::InputScalar("Day", ImGuiDataType_U32, &value.m_Date.Day);
+			ImGui::InputScalar(L("stat.day", "Day").c_str(), ImGuiDataType_U32, &value.m_Date.Day);
 			ImGui::SameLine();
-			ImGui::InputScalar("Hour", ImGuiDataType_U32, &value.m_Date.Hour);
+			ImGui::InputScalar(L("stat.hour", "Hour").c_str(), ImGuiDataType_U32, &value.m_Date.Hour);
 			ImGui::SameLine();
-			ImGui::InputScalar("Minute", ImGuiDataType_U32, &value.m_Date.Minute);
+			ImGui::InputScalar(L("stat.minute", "Minute").c_str(), ImGuiDataType_U32, &value.m_Date.Minute);
 			ImGui::SameLine();
-			ImGui::InputScalar("Second", ImGuiDataType_U32, &value.m_Date.Second);
+			ImGui::InputScalar(L("stat.second", "Second").c_str(), ImGuiDataType_U32, &value.m_Date.Second);
 			ImGui::SameLine();
-			ImGui::InputScalar("Millisecond", ImGuiDataType_U32, &value.m_Date.Millisecond);
+			ImGui::InputScalar(L("stat.millisecond", "Millisecond").c_str(), ImGuiDataType_U32, &value.m_Date.Millisecond);
 			ImGui::PopItemWidth();
 			if (CheckDate(value.m_Date))
 				return true;
 			else
 			{
-				ImGui::TextColored(ImVec4(0.957f, 0.643f, 0.376f, 1.00f), "The entered date or time is invalid, please recheck the input data.");
+				ImGui::TextColored(ImVec4(0.957f, 0.643f, 0.376f, 1.00f), L("stat.invalid_date", "The entered date or time is invalid, please recheck the input data.").c_str());
 				return false;
 			}
 		}
@@ -422,7 +422,7 @@ namespace YimMenu::Submenus
 		case sStatData::Type::TEXTLABEL:
 		default:
 			ImGui::BeginDisabled();
-			ImGui::Text("Data type not supported");
+			ImGui::Text(L("stat.type_not_supported", "Data type not supported").c_str());
 			ImGui::EndDisabled();
 			return false; // data type not supported
 		}
@@ -476,9 +476,9 @@ namespace YimMenu::Submenus
 	{
 		ImGui::SetNextItemWidth(150.f);
 		if (info.m_IsBoolStat)
-			return ImGui::Checkbox("Value##packed", &value.m_AsBool);
-		else
-			return ImGui::InputScalar("Value##packed", ImGuiDataType_U8, &value.m_AsInt);
+		return ImGui::Checkbox(L("stat.value_packed", "Value##packed").c_str(), &value.m_AsBool);
+	else
+		return ImGui::InputScalar(L("stat.value_packed", "Value##packed").c_str(), ImGuiDataType_U8, &value.m_AsInt);
 	}
 
 	std::shared_ptr<Category> BuildStatEditorMenu()
@@ -490,38 +490,38 @@ namespace YimMenu::Submenus
 		auto from_clipboard = std::make_shared<Group>(L("group.from_clipboard", "From Clipboard"));
 
 		normal->AddItem(std::make_unique<ImGuiItem>([] {
-			if (!NativeInvoker::AreHandlersCached())
-				return ImGui::TextDisabled("Natives not cached yet");
+		if (!NativeInvoker::AreHandlersCached())
+			return ImGui::TextDisabled(L("stat.natives_not_cached", "Natives not cached yet").c_str());
 
-			static StatInfo current_info;
-			static char stat_buf[48]{};
-			static StatValue value{};
+		static StatInfo current_info;
+		static char stat_buf[48]{};
+		static StatValue value{};
 
-			ImGui::SetNextItemWidth(300.f);
-			if (ImGui::InputText("Name", stat_buf, sizeof(stat_buf)))
+		ImGui::SetNextItemWidth(300.f);
+		if (ImGui::InputText(L("stat.name", "Name").c_str(), stat_buf, sizeof(stat_buf)))
 			{
 				current_info = GetStatInfo(stat_buf);
 				if (current_info.IsValid())
 					ReadStat(current_info.m_NameHash,value, current_info.m_Data);
 			}
 
-			if (!current_info.IsValid())
-				return ImGui::TextDisabled("Stat not found");
-			else if (current_info.m_Normalized)
-			{
-				ImGui::Text("Normalized name to: %s", current_info.m_Name.data());
-			}
+		if (!current_info.IsValid())
+			return ImGui::TextDisabled(L("stat.not_found", "Stat not found").c_str());
+		else if (current_info.m_Normalized)
+		{
+			ImGui::Text(L("stat.normalized_name", "%s: %s").c_str(), L("stat.normalized", "Normalized name").c_str(), current_info.m_Name.data());
+		}
 
 			bool can_edit = RenderStatEditor(value, current_info.m_Data);
 
 			if (can_edit)
 				can_edit = !current_info.m_Data->IsControlledByNetshop();			
 
-			if (ImGui::Button("Refresh"))
-				ReadStat(current_info.m_NameHash,value, current_info.m_Data);
-			ImGui::SameLine();
-			ImGui::BeginDisabled(!can_edit);
-			if (ImGui::Button("Write"))
+		if (ImGui::Button(L("stat.refresh", "Refresh").c_str()))
+			ReadStat(current_info.m_NameHash,value, current_info.m_Data);
+		ImGui::SameLine();
+		ImGui::BeginDisabled(!can_edit);
+		if (ImGui::Button(L("stat.write", "Write").c_str()))
 				FiberPool::Push([] {
 					WriteStat(current_info.m_NameHash, value, current_info.m_Data);
 				});
@@ -530,65 +530,65 @@ namespace YimMenu::Submenus
 					WriteStat(current_info.m_NameHash, value, current_info.m_Data);
 				});
 			if (!can_edit && ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
-				ImGui::SetTooltip("This stat should not be edited by the client. Right-click to force the write anyway");
+				ImGui::SetTooltip(L("stat.controlled_by_netshop", "This stat should not be edited by the client. Right-click to force the write anyway").c_str());
 			ImGui::EndDisabled();
 		}));
 
 		packed->AddItem(std::make_unique<ImGuiItem>([] {
-			if (!NativeInvoker::AreHandlersCached())
-				return ImGui::TextDisabled("Natives not cached yet");
+		if (!NativeInvoker::AreHandlersCached())
+			return ImGui::TextDisabled(L("stat.natives_not_cached", "Natives not cached yet").c_str());
 
-			// TODO: improve packed stat editor
-			static PackedStatInfo current_info{0, false, true};
-			static StatValue value{};
+		// TODO: improve packed stat editor
+		static PackedStatInfo current_info{0, false, true};
+		static StatValue value{};
 
-			ImGui::SetNextItemWidth(200.f);
-			if (ImGui::InputInt("Index", &current_info.m_Index))
+		ImGui::SetNextItemWidth(200.f);
+		if (ImGui::InputInt(L("stat.index", "Index").c_str(), &current_info.m_Index))
 			{
 				current_info = GetPackedStatInfo(current_info.m_Index);
 				if (current_info.IsValid())
 					ReadPackedStat(value, current_info);
 			}
 
-			if (!current_info.IsValid())
-				return ImGui::TextDisabled("Index not valid");
+		if (!current_info.IsValid())
+			return ImGui::TextDisabled(L("stat.index_not_valid", "Index not valid").c_str());
 
-			RenderPackedStatEditor(value, current_info);
+		RenderPackedStatEditor(value, current_info);
 
-			if (ImGui::Button("Refresh##packed"))
-				ReadPackedStat(value, current_info);
-			ImGui::SameLine();
-			if (ImGui::Button("Write##packed"))
+		if (ImGui::Button(L("stat.refresh_packed", "Refresh##packed").c_str()))
+			ReadPackedStat(value, current_info);
+		ImGui::SameLine();
+		if (ImGui::Button(L("stat.write_packed", "Write##packed").c_str()))
 				FiberPool::Push([] {
 					WritePackedStat(value, current_info);
 				});
 		}));
 
-		packed_range->AddItem(std::make_unique<ImGuiItem>([] {
-			if (!NativeInvoker::AreHandlersCached())
-				return ImGui::TextDisabled("Natives not cached yet");
+	packed_range->AddItem(std::make_unique<ImGuiItem>([] {
+		if (!NativeInvoker::AreHandlersCached())
+			return ImGui::TextDisabled(L("stat.natives_not_cached", "Natives not cached yet").c_str());
 
-			static int start{}, end{}, value{};
+		static int start{}, end{}, value{};
 
-			ImGui::SetNextItemWidth(150.f);
-			ImGui::InputInt("Start", &start);
-			ImGui::SameLine();
-			ImGui::SetNextItemWidth(150.f);
-			ImGui::InputInt("End", &end);
-			ImGui::SetNextItemWidth(150.f);
-			ImGui::InputScalar("Value##packed_range", ImGuiDataType_U8, &value);
-			ImGui::SameLine();
-			if (ImGui::Button("Write##packed_range"))
-				FiberPool::Push([] {
-					WritePackedStatRange(start, end, value);
-				});
-		}));
+		ImGui::SetNextItemWidth(150.f);
+		ImGui::InputInt(L("stat.start", "Start").c_str(), &start);
+		ImGui::SameLine();
+		ImGui::SetNextItemWidth(150.f);
+		ImGui::InputInt(L("stat.end", "End").c_str(), &end);
+		ImGui::SetNextItemWidth(150.f);
+		ImGui::InputScalar(L("stat.value_packed_range", "Value##packed_range").c_str(), ImGuiDataType_U8, &value);
+		ImGui::SameLine();
+		if (ImGui::Button(L("stat.write_packed_range", "Write##packed_range").c_str()))
+			FiberPool::Push([] {
+				WritePackedStatRange(start, end, value);
+			});
+	}));
 
-		from_clipboard->AddItem(std::make_unique<ImGuiItem>([] {
-			if (!NativeInvoker::AreHandlersCached())
-				return ImGui::TextDisabled("Natives not cached yet");
+	from_clipboard->AddItem(std::make_unique<ImGuiItem>([] {
+		if (!NativeInvoker::AreHandlersCached())
+			return ImGui::TextDisabled(L("stat.natives_not_cached", "Natives not cached yet").c_str());
 
-			if (ImGui::Button("Load from Clipboard"))
+		if (ImGui::Button(L("stat.load_from_clipboard", "Load from Clipboard").c_str()))
 			{
 				auto clip_text = std::string(ImGui::GetClipboardText());
 				FiberPool::Push([clip_text] {

@@ -26,25 +26,25 @@ namespace YimMenu
 
 		// TODO: refactor this
 
-		auto windowLabel = std::format("{} Hotkey", m_Command->GetLabel());
+		auto windowLabel = std::format("{} {}", m_Command->GetLabel(), L("hotkey.suffix", "Hotkey"));
 
 		if (ImGui::IsItemHovered())
 		{
 			ImGui::SetTooltip("%s", m_Command->GetDescription().data());
 			if (GetAsyncKeyState(VK_OEM_3) & 0x8000)
-				ImGui::OpenPopup(std::format("{} Hotkey", m_Command->GetLabel()).data());
+				ImGui::OpenPopup(windowLabel.c_str());
 		}
 
 		ImGui::SetNextWindowSize(ImVec2(500, 120));
 		if (ImGui::BeginPopupModal(windowLabel.data(), nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar))
 		{
-			ImGui::BulletText("Hover over the command name to change its hotkey");
-			ImGui::BulletText("Press any registered key to remove");
+			ImGui::BulletText(L("hotkey.hover_instruction", "Hover over the command name to change its hotkey").c_str());
+			ImGui::BulletText(L("hotkey.press_remove", "Press any registered key to remove").c_str());
 			ImGui::Separator();
 
 
 			ImGui::Spacing();
-			if (ImGui::Button("Close") || ((!ImGui::IsWindowHovered() && !ImGui::IsAnyItemHovered()) && ImGui::IsMouseClicked(ImGuiMouseButton_Left)))
+			if (ImGui::Button(L("item.close", "Close").c_str()) || ((!ImGui::IsWindowHovered() && !ImGui::IsAnyItemHovered()) && ImGui::IsMouseClicked(ImGuiMouseButton_Left)))
 				ImGui::CloseCurrentPopup();
 
 			ImGui::EndPopup();

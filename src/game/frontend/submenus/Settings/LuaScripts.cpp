@@ -36,7 +36,7 @@ namespace YimMenu::Submenus
 
 					if (ImGui::IsItemHovered())
 					{
-						ImGui::SetTooltip("Click to load this script");
+						ImGui::SetTooltip("%s", L("lua_scripts.click_to_load", "Click to load this script").c_str());
 					}
 				});
 
@@ -60,7 +60,7 @@ namespace YimMenu::Submenus
 				ImGui::Text("%s", selectedScript->GetName().data());
 
 				bool paused = selectedScript->GetLoadState() == LuaScript::LoadState::PAUSED;
-				if (ImGui::Button(paused ? "Resume" : "Pause"))
+				if (ImGui::Button(paused ? L("lua_scripts.resume", "Resume").c_str() : L("lua_scripts.pause", "Pause").c_str()))
 				{
 					if (paused)
 						selectedScript->Resume();
@@ -68,12 +68,12 @@ namespace YimMenu::Submenus
 						selectedScript->Pause();
 				}
 				ImGui::SameLine();
-				if (ImGui::Button("Reload"))
+				if (ImGui::Button(L("lua_scripts.reload", "Reload").c_str()))
 				{
 					selectedScript->Reload();
 				}
 				ImGui::SameLine();
-				if (ImGui::Button("Unload"))
+				if (ImGui::Button(L("lua_scripts.unload", "Unload").c_str()))
 				{
 					selectedScript->Unload();
 				}

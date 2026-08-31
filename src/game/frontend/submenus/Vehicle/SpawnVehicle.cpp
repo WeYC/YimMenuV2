@@ -11,10 +11,10 @@
 
 namespace YimMenu::Submenus
 {
-	static BoolCommand spawnInsideVehicle{"spawninsideveh", "Spawn Inside", "Spawn inside the vehicle."};
-	static BoolCommand spawnVehicleMaxed{"spawnvehmaxed", "Spawn Maxed", "Spawn the vehicle maxed."};
-	static BoolCommand spawnInsidePersonalVehicle{"spawninsidepv", "Spawn Inside", "Spawn inside the personal vehicle."};
-	static BoolCommand spawnClonePersonalVehicle{"spawnclonepv", "Spawn Clone", "Spawn a clone of the persone vehicle."};
+	static BoolCommand spawnInsideVehicle{"spawninsideveh", L("spawn_vehicle.spawn_inside", "Spawn Inside"), L("spawn_vehicle.spawn_inside_desc", "Spawn inside the vehicle.")};
+	static BoolCommand spawnVehicleMaxed{"spawnvehmaxed", L("spawn_vehicle.spawn_maxed", "Spawn Maxed"), L("spawn_vehicle.spawn_maxed_desc", "Spawn the vehicle maxed.")};
+	static BoolCommand spawnInsidePersonalVehicle{"spawninsidepv", L("spawn_vehicle.spawn_inside", "Spawn Inside"), L("spawn_vehicle.spawn_inside_pv_desc", "Spawn inside the personal vehicle.")};
+	static BoolCommand spawnClonePersonalVehicle{"spawnclonepv", L("spawn_vehicle.spawn_clone", "Spawn Clone"), L("spawn_vehicle.spawn_clone_desc", "Spawn a clone of the persone vehicle.")};
 
 	std::shared_ptr<TabItem> RenderSpawnNewVehicle()
 	{
@@ -61,14 +61,14 @@ namespace YimMenu::Submenus
 				return true;
 			}();
 
-			static char search[64];
-			ImGui::SetNextItemWidth(300.f);
-			ImGui::InputTextWithHint("Name", "Search", search, sizeof(search));
+		static char search[64];
+		ImGui::SetNextItemWidth(300.f);
+		ImGui::InputTextWithHint("Name", L("spawn_vehicle.search", "Search").c_str(), search, sizeof(search));
 
-			ImGui::SetNextItemWidth(300.f);
-			if (ImGui::BeginCombo("Class", selectedClass == -1 ? "All" : g_VehicleClassNames[selectedClass]))
+		ImGui::SetNextItemWidth(300.f);
+		if (ImGui::BeginCombo(L("spawn_vehicle.class", "Class").c_str(), selectedClass == -1 ? L("spawn_vehicle.all", "All").c_str() : g_VehicleClassNames[selectedClass]))
 			{
-				if (ImGui::Selectable("All", selectedClass == -1))
+				if (ImGui::Selectable(L("spawn_vehicle.all", "All").c_str(), selectedClass == -1))
 				{
 					selectedClass = -1;
 				}
@@ -90,7 +90,7 @@ namespace YimMenu::Submenus
 			{
 				if (vehicleNames.empty())
 				{
-					ImGui::Text("Natives not cached yet.");
+					ImGui::Text(L("spawn_vehicle.natives_not_cached", "Natives not cached yet.").c_str());
 				}
 				else
 				{
@@ -148,18 +148,18 @@ namespace YimMenu::Submenus
 
 		spawn->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!*Pointers.IsSessionStarted)
-				return ImGui::TextDisabled("Join GTA Online.");
+				return ImGui::TextDisabled(L("spawn_vehicle.join_gta_online", "Join GTA Online.").c_str());
 
 			PersonalVehicles::Update();
 
-			static char search[64];
-			ImGui::SetNextItemWidth(300.f);
-			ImGui::InputTextWithHint("Name", "Search", search, sizeof(search));
+		static char search[64];
+		ImGui::SetNextItemWidth(300.f);
+		ImGui::InputTextWithHint("Name", L("spawn_vehicle.search", "Search").c_str(), search, sizeof(search));
 
-			ImGui::SetNextItemWidth(300.f);
-			if (ImGui::BeginCombo("Garage", selectedGarageStr.empty() ? "All" : selectedGarageStr.c_str()))
+		ImGui::SetNextItemWidth(300.f);
+		if (ImGui::BeginCombo(L("spawn_vehicle.garage", "Garage").c_str(), selectedGarageStr.empty() ? L("spawn_vehicle.all", "All").c_str() : selectedGarageStr.c_str()))
 			{
-				if (ImGui::Selectable("All", selectedGarageStr.empty()))
+				if (ImGui::Selectable(L("spawn_vehicle.all", "All").c_str(), selectedGarageStr.empty()))
 				{
 					selectedGarageStr.clear();
 				}
@@ -180,7 +180,7 @@ namespace YimMenu::Submenus
 			{
 				if (PersonalVehicles::GetPersonalVehicles().empty())
 				{
-					ImGui::Text("Stats not loaded yet.");
+					ImGui::Text(L("spawn_vehicle.stats_not_loaded", "Stats not loaded yet.").c_str());
 				}
 				else
 				{
@@ -213,8 +213,8 @@ namespace YimMenu::Submenus
 									}
 									else
 									{
-										if (!personalVeh->Request(spawnInsidePersonalVehicle.GetState()))
-											Notifications::Show("Spawn Personal Vehicle", "Failed to spawn Personal Vehicle.", NotificationType::Error);
+						if (!personalVeh->Request(spawnInsidePersonalVehicle.GetState()))
+							Notifications::Show(L("spawn_vehicle.spawn_personal_vehicle", "Spawn Personal Vehicle").c_str(), L("spawn_vehicle.failed_to_spawn", "Failed to spawn Personal Vehicle.").c_str(), NotificationType::Error);
 									}
 								});
 							}

@@ -32,7 +32,7 @@ namespace YimMenu::Submenus
 		menu->AddItem(std::make_unique<ImGuiItem>([] {
 			static char search[64];
 			ImGui::SetNextItemWidth(300.f);
-			ImGui::InputTextWithHint("Name", "Search", search, sizeof(search));
+			ImGui::InputTextWithHint("Name", L("spawn_ped.search", "Search").c_str(), search, sizeof(search));
 
 			const int visible = std::min(20, static_cast<int>(g_PedModels.size()));
 			const float height = visible * ImGui::GetTextLineHeightWithSpacing();
@@ -62,10 +62,10 @@ namespace YimMenu::Submenus
 										if (!vehicle.IsSeatFree(-2) && 
 										    !vehicle.IsSeatFree(-1))
 										{
-											Notifications::Show(
-											    "Spawn Ped",
-											    "Cannot spawn ped in vehicle, all seats are occupied, please free a seat first or disable 'Spawn In My Vehicle' option.",
-											    NotificationType::Warning);
+										Notifications::Show(
+										    L("spawn_ped.title", "Spawn Ped").c_str(),
+										    L("spawn_ped.seats_occupied", "Cannot spawn ped in vehicle, all seats are occupied, please free a seat first or disable 'Spawn In My Vehicle' option.").c_str(),
+										    NotificationType::Warning);
 											return;
 										}
 									}
@@ -198,17 +198,17 @@ namespace YimMenu::Submenus
 
 			ImGui::SameLine();
 			ImGui::BeginGroup();
-			ImGui::BulletText("Ctrl+Click to set player model");
-			ImGui::Checkbox("Invincible", &invincible);
-			ImGui::Checkbox("Spawn Dead", &spawnDead);
-			ImGui::Checkbox("Spawn As Bodyguard", &spawnAsBodyguard);
-			ImGui::Checkbox("Spawn As Cop", &spawnAsCop);
-			ImGui::Checkbox("Spawn In My Vehicle", &spawnInMyVehicle);
-			ImGui::Checkbox("Give All Weapons", &giveAllWeapons);
-			ImGui::Checkbox("Spawn As Prostitute", &spawnAsProstitute);
-			ImGui::Checkbox("Randomize Outfit", &randomizeOutfit);
-			ImGui::Checkbox("Blip Ped", &blipPed);
-			if (ImGui::Button("Remove All"))
+			ImGui::BulletText(L("spawn_ped.ctrl_click_hint", "Ctrl+Click to set player model").c_str());
+			ImGui::Checkbox(L("spawn_ped.invincible", "Invincible").c_str(), &invincible);
+			ImGui::Checkbox(L("spawn_ped.spawn_dead", "Spawn Dead").c_str(), &spawnDead);
+			ImGui::Checkbox(L("spawn_ped.spawn_as_bodyguard", "Spawn As Bodyguard").c_str(), &spawnAsBodyguard);
+			ImGui::Checkbox(L("spawn_ped.spawn_as_cop", "Spawn As Cop").c_str(), &spawnAsCop);
+			ImGui::Checkbox(L("spawn_ped.spawn_in_my_vehicle", "Spawn In My Vehicle").c_str(), &spawnInMyVehicle);
+			ImGui::Checkbox(L("spawn_ped.give_all_weapons", "Give All Weapons").c_str(), &giveAllWeapons);
+			ImGui::Checkbox(L("spawn_ped.spawn_as_prostitute", "Spawn As Prostitute").c_str(), &spawnAsProstitute);
+			ImGui::Checkbox(L("spawn_ped.randomize_outfit", "Randomize Outfit").c_str(), &randomizeOutfit);
+			ImGui::Checkbox(L("spawn_ped.blip_ped", "Blip Ped").c_str(), &blipPed);
+			if (ImGui::Button(L("spawn_ped.remove_all", "Remove All").c_str()))
 			{
 				FiberPool::Push([] {
 					for (auto& ped : spawnedPeds)

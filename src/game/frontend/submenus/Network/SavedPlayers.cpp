@@ -72,7 +72,7 @@ namespace YimMenu::Submenus
 	static void RenderPlayerList()
 	{
 		ImGui::SetNextItemWidth(200.f);
-		ImGui::InputTextWithHint("Search", "Search", g_NameToSearch, sizeof(g_NameToSearch));
+		ImGui::InputTextWithHint("##search", L("ui.search", "Search").c_str(), g_NameToSearch, sizeof(g_NameToSearch));
 
 		if (ImGui::BeginListBox("###player-list", {180, -100 /* static_cast<float>(*Pointers.ScreenResY - 700 - 38 * 4) */}))
 		{
@@ -80,7 +80,7 @@ namespace YimMenu::Submenus
 
 			if (players.size() == 0)
 			{
-				ImGui::TextDisabled("No saved players");
+				ImGui::TextDisabled(L("saved_players.no_players", "No saved players").c_str());
 				ImGui::EndListBox();
 				return;
 			}
@@ -113,56 +113,56 @@ namespace YimMenu::Submenus
 		if (ImGui::BeginChild("##player-editor", {500, -100 /* static_cast<float>(*Pointers.ScreenResY - 688 - 38 * 4) */}, 0, ImGuiWindowFlags_NoBackground))
 		{
 			ImGui::SetNextItemWidth(180.f);
-			if (ImGui::InputText("Name", g_SelectedPlayerName, sizeof(g_SelectedPlayerName)))
+			if (ImGui::InputText(L("ui.name", "Name").c_str(), g_SelectedPlayerName, sizeof(g_SelectedPlayerName)))
 			{
 				g_SelectedPlayer->m_Name = g_SelectedPlayerName;
 			}
 
 			int old_rid = g_SelectedRid;
 			ImGui::SetNextItemWidth(180.0f);
-			if (ImGui::InputScalar("Rockstar Id", ImGuiDataType_U64, &g_SelectedRid))
+			if (ImGui::InputScalar(L("ui.rockstar_id", "Rockstar Id").c_str(), ImGuiDataType_U64, &g_SelectedRid))
 			{
 				SavedPlayers::UpdateRockstarId(old_rid, g_SelectedRid);
 				g_SelectedPlayer = SavedPlayers::GetPlayerData(g_SelectedRid);
 			}
 
-			ImGui::Checkbox("Track Player", &g_SelectedPlayer->m_TrackPlayer);
+			ImGui::Checkbox(L("saved_players.track_player", "Track Player").c_str(), &g_SelectedPlayer->m_TrackPlayer);
 
 			if (g_SelectedPlayer->m_FetchedData)
 			{
 				auto& data = *g_SelectedPlayer->m_FetchedData;
-				ImGui::Text("Session Type: %s", FetchedPlayerData::GameStateToString(data.m_GameState).data());
-				ImGui::Text("Host of Session: %s", data.m_HostOfSession ? "Yes" : "No");
-				ImGui::Text("Is Spectating: %s", data.m_Spectating ? "Yes" : "No");
-				ImGui::Text("Is Job Lobby: %s", data.m_InTransition ? "Yes" : "No");
-				ImGui::Text("Host of Job Lobby: %s", data.m_HostOfTransition ? "Yes" : "No");
+				ImGui::Text("%s: %s", L("saved_players.session_type", "Session Type").c_str(), FetchedPlayerData::GameStateToString(data.m_GameState).data());
+				ImGui::Text("%s: %s", L("saved_players.host_of_session", "Host of Session").c_str(), data.m_HostOfSession ? "Yes" : "No");
+				ImGui::Text("%s: %s", L("saved_players.is_spectating", "Is Spectating").c_str(), data.m_Spectating ? "Yes" : "No");
+				ImGui::Text("%s: %s", L("saved_players.is_job_lobby", "Is Job Lobby").c_str(), data.m_InTransition ? "Yes" : "No");
+				ImGui::Text("%s: %s", L("saved_players.host_of_job_lobby", "Host of Job Lobby").c_str(), data.m_HostOfTransition ? "Yes" : "No");
 				if (data.m_MissionType != FetchedPlayerData::MissionType::NONE)
 				{
-					ImGui::Text("Mission Type: %s", FetchedPlayerData::MissionTypeToString(data.m_MissionType).data());
+					ImGui::Text("%s: %s", L("saved_players.mission_type", "Mission Type").c_str(), FetchedPlayerData::MissionTypeToString(data.m_MissionType).data());
 					if (data.m_MissionName)
-						ImGui::Text("Mission Name: %s", data.m_MissionName->data());
+						ImGui::Text("%s: %s", L("saved_players.mission_name", "Mission Name").c_str(), data.m_MissionName->data());
 					else
 						; // TODO: add fetch mission name
 				}
 			}
 			else
 			{
-				ImGui::TextDisabled("Data not fetched yet");
+				ImGui::TextDisabled(L("saved_players.not_fetched", "Data not fetched yet").c_str());
 			}
 
-			if (ImGui::Button("Join"))
+			if (ImGui::Button(L("btn.join", "Join").c_str()))
 			{
 				FiberPool::Push([] {
 					Network::JoinRockstarId(g_SelectedRid);
 				});
 			}
 
-			if (ImGui::Button("Save"))
+			if (ImGui::Button(L("btn.save", "Save").c_str()))
 			{
 				SavedPlayers::Save();
 			}
 			ImGui::SameLine();
-			if (ImGui::Button("Remove"))
+			if (ImGui::Button(L("btn.remove", "Remove").c_str()))
 			{
 				SavedPlayers::RemovePlayerData(g_SelectedRid);
 				g_SelectedPlayer = nullptr;
@@ -184,9 +184,9 @@ namespace YimMenu::Submenus
 		static char name_buf[24]{};
 
 		ImGui::SetNextItemWidth(180.0f);
-		ImGui::InputText("Username", name_buf, sizeof(name_buf));
+		ImGui::InputText(L("ui.username", "Username").c_str(), name_buf, sizeof(name_buf));
 		ImGui::SameLine();
-		if (ImGui::Button("Add"))
+		if (ImGui::Button(L("btn.add", "Add").c_str()))
 			FiberPool::Push([] {
 				auto rid = YimMenu::Network::ResolveRockstarId(name_buf);
 				if (rid)
@@ -195,7 +195,7 @@ namespace YimMenu::Submenus
 				}
 				else
 				{
-					Notifications::Show("Saved Players", "Failed to get RID from username", NotificationType::Error);
+					Notifications::Show(L("category.saved_players", "Saved Players").c_str(), L("saved_players.failed_rid", "Failed to get RID from username").c_str(), NotificationType::Error);
 				}
 			});
 	}
@@ -225,11 +225,11 @@ namespace YimMenu::Submenus
 		notifications->AddItem(std::make_shared<BoolCommandItem>("playerdbnotifyonjoblobby"_J));
 
 		auto update = std::make_shared<Group>("", 1);
-		update->AddItem(std::make_shared<BoolCommandItem>("playerdbautoupdate"_J, "Auto Update"));
-		update->AddItem(std::make_shared<CommandItem>("playerdbupdatenow"_J, "Update Now"));
+		update->AddItem(std::make_shared<BoolCommandItem>("playerdbautoupdate"_J, L("saved_players.auto_update", "Auto Update").c_str()));
+		update->AddItem(std::make_shared<CommandItem>("playerdbupdatenow"_J, L("saved_players.update_now", "Update Now").c_str()));
 
 		tracking->AddItem(std::move(update));
-		tracking->AddItem(std::make_shared<BoolCommandItem>("playerdbnotify"_J, "Tracking Notifications"));
+		tracking->AddItem(std::make_shared<BoolCommandItem>("playerdbnotify"_J, L("saved_players.tracking_notifications", "Tracking Notifications").c_str()));
 		tracking->AddItem(std::make_shared<ConditionalItem>("playerdbnotify"_J, std::move(notifications)));
 
 		menu->AddItem(players);
