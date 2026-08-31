@@ -33,7 +33,7 @@ namespace YimMenu::Submenus
 			static char name_buf[24]{};
 
 			ImGui::SetNextItemWidth(150.0f);
-			ImGui::InputText("##username", name_buf, sizeof(name_buf), 0, L("network.label.username", "Username").c_str());
+			ImGui::InputText(L("network.label.username", "Username").c_str(), name_buf, sizeof(name_buf));
 			ImGui::SameLine();
 			if (ImGui::Button(L("btn.join_username", "Join##username").c_str()))
 				FiberPool::Push([] {
