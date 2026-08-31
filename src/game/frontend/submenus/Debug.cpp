@@ -1,4 +1,5 @@
 #include "Debug.hpp"
+#include "core/i18n/Language.hpp"
 
 #include "Debug/Misc.hpp"
 #include "Debug/Globals.hpp"

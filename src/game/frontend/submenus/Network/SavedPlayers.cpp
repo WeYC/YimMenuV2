@@ -2,6 +2,7 @@
 #include "core/backend/FiberPool.hpp"
 #include "core/frontend/widgets/imgui_colors.h"
 #include "core/frontend/Notifications.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/backend/SavedPlayers.hpp"
 #include "game/gta/Network.hpp"
 #include "game/pointers/Pointers.hpp"

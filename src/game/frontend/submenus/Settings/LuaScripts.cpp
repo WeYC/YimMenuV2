@@ -1,6 +1,7 @@
 #include "LuaScripts.hpp"
 #include "core/backend/ScriptMgr.hpp"
 #include "core/backend/FiberPool.hpp"
+#include "core/i18n/Language.hpp"
 #include "core/scripting/LuaManager.hpp"
 #include "core/frontend/widgets/imgui_colors.h"
 

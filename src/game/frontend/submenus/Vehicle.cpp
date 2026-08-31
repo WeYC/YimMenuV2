@@ -1,4 +1,5 @@
 #include "Vehicle.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/frontend/items/Items.hpp"
 #include "game/frontend/submenus/Vehicle/SpawnVehicle.hpp"
 #include "Vehicle/VehicleEditor.hpp"

@@ -1,6 +1,7 @@
 #include "DrawVariable.hpp"
 #include "Locals.hpp"
 #include "core/filemgr/FileMgr.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/backend/Self.hpp"
 #include "game/pointers/Pointers.hpp"
 #include "core/backend/FiberPool.hpp"

@@ -1,5 +1,6 @@
 #include "Globals.hpp"
 #include "DrawVariable.hpp"
+#include "core/i18n/Language.hpp"
 
 // TODO: name compares are expensive, but this is way better than the old impl that reads the json file every frame
 

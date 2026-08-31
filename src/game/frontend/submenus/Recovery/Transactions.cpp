@@ -3,6 +3,7 @@
 #include "core/backend/ScriptMgr.hpp"
 #include "core/frontend/Notifications.hpp"
 #include "core/frontend/widgets/imgui_colors.h"
+#include "core/i18n/Language.hpp"
 #include "game/backend/AnticheatBypass.hpp"
 #include "game/gta/Natives.hpp"
 #include "game/gta/Scripts.hpp"

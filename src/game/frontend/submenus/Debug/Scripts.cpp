@@ -2,6 +2,7 @@
 #include "core/backend/FiberPool.hpp"
 #include "core/backend/ScriptMgr.hpp"
 #include "core/frontend/Notifications.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/gta/data/ScriptNames.hpp"
 #include "game/gta/data/StackSizes.hpp"
 #include "game/gta/Scripts.hpp"

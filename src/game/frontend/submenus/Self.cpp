@@ -1,5 +1,6 @@
 #include "Self.hpp"
 
+#include "core/i18n/Language.hpp"
 #include "core/util/Joaat.hpp"
 #include "game/frontend/items/Items.hpp"
 #include "Self/OutfitEditor.hpp"

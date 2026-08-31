@@ -1,5 +1,6 @@
 ﻿#include "core/backend/FiberPool.hpp"
 #include "core/frontend/widgets/imgui_bitfield.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/backend/AnticheatBypass.hpp"
 #include "game/gta/Natives.hpp"
 #include "game/gta/Stats.hpp"

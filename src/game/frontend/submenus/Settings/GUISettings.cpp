@@ -3,6 +3,7 @@
 #include "core/commands/Command.hpp"
 #include "core/commands/FloatCommand.hpp"
 #include "core/frontend/manager/styles/Themes.hpp"
+#include "core/i18n/Language.hpp"
 #include <regex>
 
 namespace YimMenu

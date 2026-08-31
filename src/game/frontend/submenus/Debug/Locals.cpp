@@ -1,5 +1,6 @@
 #include "Locals.hpp"
 #include "DrawVariable.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/gta/Scripts.hpp"
 #include "types/script/scrThread.hpp"
 

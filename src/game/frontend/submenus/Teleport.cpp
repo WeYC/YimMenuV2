@@ -2,6 +2,7 @@
 
 #include "core/frontend/Notifications.hpp"
 #include "core/backend/FiberPool.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/backend/SavedLocations.hpp"
 #include "game/backend/Self.hpp"
 #include "game/frontend/items/Items.hpp"

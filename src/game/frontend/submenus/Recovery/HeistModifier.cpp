@@ -4,6 +4,7 @@
 #include "Heist/CayoPericoHeist.hpp"
 #include "Heist/DoomsdayHeist.hpp"
 #include "Heist/KortzCenterHeist.hpp"
+#include "core/i18n/Language.hpp"
 
 namespace YimMenu::Submenus
 {

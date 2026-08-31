@@ -3,6 +3,7 @@
 #include "Recovery/StatEditor.hpp"
 #include "Recovery/Transactions.hpp"
 #include "Recovery/DailyActivities.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/frontend/items/Items.hpp"
 
 namespace YimMenu::Submenus

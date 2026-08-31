@@ -1,7 +1,8 @@
 #include "UIManager.hpp"
+#include "core/commands/ListCommand.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/pointers/Pointers.hpp"
 #include "game/frontend/Menu.hpp"
-#include "core/commands/ListCommand.hpp"
 
 namespace YimMenu::Features
 {

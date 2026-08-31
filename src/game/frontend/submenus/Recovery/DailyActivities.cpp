@@ -1,4 +1,5 @@
 #include "DailyActivities.hpp"
+#include "core/i18n/Language.hpp"
 
 namespace YimMenu::Submenus
 {
