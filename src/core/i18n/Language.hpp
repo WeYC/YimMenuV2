@@ -1583,6 +1583,7 @@ namespace YimMenu::I18n
 		{"vehicle.max", "升级载具"},
 		{"label.file_name", "文件名"},
 		{"label.folder_name", "文件夹名"},
+		{"saved_vehicles.root", "根目录"},
 
 		// Teleport
 		{"v3.click_to_select", "点击选择位置。在 传送 > 已保存 中添加更多"},

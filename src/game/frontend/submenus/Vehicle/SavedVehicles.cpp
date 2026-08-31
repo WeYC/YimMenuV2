@@ -12,7 +12,7 @@
 
 namespace YimMenu::Submenus
 {
-	static BoolCommand spawnInsideSavedVehicle{"spawninsidesavedveh", "Spawn Inside", "Spawn inside the vehicle."};
+	static BoolCommand spawnInsideSavedVehicle{"spawninsidesavedveh", L("spawn_vehicle.spawn_inside", "Spawn Inside").c_str(), L("spawn_vehicle.spawn_inside_desc", "Spawn inside the vehicle.").c_str()};
 
 	std::shared_ptr<Category> BuildSavedVehiclesMenu()
 	{
@@ -65,10 +65,11 @@ namespace YimMenu::Submenus
 				});
 
 			ImGui::SetNextItemWidth(300.f);
-			auto folder_display = folder.empty() ? "Root" : folder.c_str();
+			static std::string rootLabel = L("saved_vehicles.root", "Root");
+			auto folder_display = folder.empty() ? rootLabel.c_str() : folder.c_str();
 			if (ImGui::BeginCombo(L("label.folder", "Folder").c_str(), folder_display))
 			{
-				if (ImGui::Selectable("Root", folder == ""))
+				if (ImGui::Selectable(rootLabel.c_str(), folder == ""))
 				{
 					folder.clear();
 					FiberPool::Push([] {
