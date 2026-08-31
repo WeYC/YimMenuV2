@@ -21,6 +21,8 @@ namespace YimMenu
 			return;
 		}
 
+		ImGui::PushID(m_Command->GetHash());
+
 		int current_val = m_Command->GetState();
 		auto& list = m_Command->GetList();
 		const char* largest_string = "";
@@ -73,5 +75,7 @@ namespace YimMenu
 			}
 			ImGui::EndCombo();
 		}
+
+		ImGui::PopID();
 	}
 }
