@@ -1798,6 +1798,30 @@ namespace YimMenu::I18n
 			return std::string(text);
 
 		static const std::pair<std::string_view, std::string_view> items[] = {
+			// Vehicle Classes
+			{"Compact", "紧凑型"},
+			{"Sedan", "轿车"},
+			{"SUV", "SUV"},
+			{"Coupe", "跑车"},
+			{"Muscle", "肌肉车"},
+			{"Sport Classic", "经典跑车"},
+			{"Sport", "跑车"},
+			{"Super", "超级跑车"},
+			{"Motorcycle", "摩托车"},
+			{"Off-road", "越野车"},
+			{"Industrial", "工业车"},
+			{"Utility", "工具车"},
+			{"Van", "厢型车"},
+			{"Cycle", "自行车"},
+			{"Boat", "船"},
+			{"Helicopter", "直升机"},
+			{"Plane", "飞机"},
+			{"Service", "服务车"},
+			{"Emergency", "紧急车辆"},
+			{"Military", "军用车辆"},
+			{"Commercial", "商用车"},
+			{"Rail", "火车"},
+			{"Open Wheel", "开轮式"},
 			// Difficulty
 			{"Normal", "普通"},
 			{"Hard", "困难"},
