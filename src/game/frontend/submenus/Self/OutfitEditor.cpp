@@ -145,9 +145,9 @@ namespace YimMenu
 			{
 				// folders
 				ImGui::SetNextItemWidth(300.f);
-				if (ImGui::BeginCombo("", folder.empty() ? L("outfit.root", "Root") : folder.c_str()))
+				if (ImGui::BeginCombo("", folder.empty() ? L("outfit.root", "Root").c_str() : folder.c_str()))
 				{
-					if (ImGui::Selectable(L("outfit.root", "Root"), folder == ""))
+					if (ImGui::Selectable(L("outfit.root", "Root").c_str(), folder == ""))
 					{
 						folder.clear();
 						FiberPool::Push([this] {
