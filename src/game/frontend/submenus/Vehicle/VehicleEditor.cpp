@@ -29,6 +29,14 @@ namespace YimMenu::Submenus
 		static int front_wheel_stock_mod = -1;
 		static int rear_wheel_stock_mod = -1;
 
+		// Force re-prepare on language change
+		static I18n::Language lastVehLang = I18n::g_CurrentLanguage;
+		if (lastVehLang != I18n::g_CurrentLanguage)
+		{
+			lastVehLang = I18n::g_CurrentLanguage;
+			currentVeh = -1;
+		}
+
 		static auto prepareVehicle = [] {
 			if (currentVeh != -1) // when == -1 dont change selected slot
 				selected_slot = -1;

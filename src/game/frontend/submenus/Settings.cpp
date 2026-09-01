@@ -24,15 +24,12 @@ namespace YimMenu::Submenus
 		ImGui::Spacing();
 		
 		// this assumes we can't add new commands in runtime, but a lot of other subsystems assume that too
-		static std::map<std::string, CommandLink*> sortedCommands;
-		static bool commandsSorted = []() {
-			for (auto& [hash, command] : Commands::GetCommands())
-			{
-				if (auto it = g_HotkeySystem.m_CommandHotkeys.find(hash); it != g_HotkeySystem.m_CommandHotkeys.end())
-					sortedCommands.emplace(command->GetLabel(), &it->second);
-			}
-			return true;
-		}();
+		std::map<std::string, CommandLink*> sortedCommands;
+		for (auto& [hash, command] : Commands::GetCommands())
+		{
+			if (auto it = g_HotkeySystem.m_CommandHotkeys.find(hash); it != g_HotkeySystem.m_CommandHotkeys.end())
+				sortedCommands.emplace(command->GetLabel(), &it->second);
+		}
 
 		HotkeySystem::SetBeingModifed(false);
 

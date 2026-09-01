@@ -60,7 +60,10 @@ namespace YimMenu::Submenus
 		static int headshots{};
 		static int accuracy{};
 
-		static bool init = [] {
+		static I18n::Language lastLang = I18n::g_CurrentLanguage;
+		static bool init = false;
+
+		auto fetchWeapons = [] {
 			FiberPool::Push([] {
 				while (Scripts::IsScriptActive("startup"_J))
 					ScriptMgr::Yield();
@@ -77,7 +80,7 @@ namespace YimMenu::Submenus
 							static ScriptFunction getWeaponNameLabel("mp_weapons"_J, ScriptPointer("GetWeaponNameLabel", "2D 02 2B 00 00"));
 							static ScriptFunction getWeaponDescLabel("mp_weapons"_J, ScriptPointer("GetWeaponDescLabel", "2D 02 A0 00 00"));
 
-							std::string nameGxt = getWeaponNameLabel.Call<const char*>(weap, false); // second arg is for uppercase
+							std::string nameGxt = getWeaponNameLabel.Call<const char*>(weap, false);
 							std::string descGxt = getWeaponDescLabel.Call<const char*>(weap, false);
 
 							std::string nameDisplay = HUD::GET_FILENAME_FOR_AUDIO_CONVERSATION(nameGxt.c_str());
@@ -91,8 +94,21 @@ namespace YimMenu::Submenus
 					}
 				}
 			});
-			return true;
-		}();
+		};
+
+		if (!init)
+		{
+			init = true;
+			fetchWeapons();
+		}
+
+		// Re-fetch on language change
+		if (lastLang != I18n::g_CurrentLanguage)
+		{
+			lastLang = I18n::g_CurrentLanguage;
+			weaponDisplays.clear();
+			fetchWeapons();
+		}
 
 		ImGui::BeginCombo(L("label.weapons", "Weapons").c_str(), selectedWeapon.c_str());
 		if (ImGui::IsItemActive() && !ImGui::IsPopupOpen("##weaponspopup"))
