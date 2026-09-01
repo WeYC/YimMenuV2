@@ -17,7 +17,7 @@ namespace YimMenu::Submenus
 		auto misc = std::make_unique<Category>(L("category.misc", "Misc"));
 
 		misc->AddItem(std::make_unique<ImGuiItem>([] {
-			if (ImGui::Button(L("debug.misc.network_bail", "Network Bail").c_str()))
+			if (ImGui::Button("Network Bail"))
 			{
 				FiberPool::Push([] {
 					NETWORK::NETWORK_BAIL(0, 24, 0);
@@ -25,12 +25,12 @@ namespace YimMenu::Submenus
 			}
 
 			static int interiorIndex = 0;
-			ImGui::InputInt(L("debug.misc.interior_index", "interiorIndex").c_str(), &interiorIndex);
+			ImGui::InputInt("interiorIndex", &interiorIndex);
 
 			static bool enterOwnerInterior = false;
-			ImGui::Checkbox(L("debug.misc.enter_owner_interior", "enterOwnerInterior").c_str(), &enterOwnerInterior);
+			ImGui::Checkbox("enterOwnerInterior", &enterOwnerInterior);
 
-			if (ImGui::Button(L("debug.misc.do_teleport", "DoTeleport").c_str()))
+			if (ImGui::Button("DoTeleport"))
 			{
 				FiberPool::Push([] {
 					SCRIPT_EVENT_SEND_TO_INTERIOR message;
@@ -49,8 +49,8 @@ namespace YimMenu::Submenus
 			}
 
 			static int team;
-			ImGui::InputInt(L("debug.misc.team", "Team").c_str(), &team);
-			if (ImGui::Button(("fm_mission_controller " + L("debug.misc.do_team_swap", "DoTeamSwap")).c_str()))
+			ImGui::InputInt("Team", &team);
+			if (ImGui::Button("fm_mission_controller DoTeamSwap"))
 			{
 				FiberPool::Push([] {
 					static ScriptFunction DoTeamSwap("fm_mission_controller"_J, ScriptPointer("DoTeamSwap", "2D 02 04 00 00 38 00 50"));

@@ -49,11 +49,11 @@ namespace YimMenu::Submenus
 
 		editor->AddItem(std::make_unique<ImGuiItem>([] {
 			ImGui::SetNextItemWidth(200.f);
-			ImGui::InputText(L("debug.locals.script", "Script").c_str(), scriptName, sizeof(scriptName));
+			ImGui::InputText("Script", scriptName, sizeof(scriptName));
 
 			curThread = Scripts::FindScriptThread(Joaat(scriptName));
 			if (!curThread)
-				return ImGui::TextDisabled("%s", L("generic.invalid", "Invalid").c_str());
+				return ImGui::TextDisabled("Invalid");
 
 			DrawSavedVariable(curLocal);
 			DrawSavedVariableEdit(curLocal, curLocal.Read(curThread));
@@ -61,7 +61,7 @@ namespace YimMenu::Submenus
 
 		saved->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!curThread)
-				return ImGui::TextDisabled("%s", L("generic.invalid", "Invalid").c_str());
+				return ImGui::TextDisabled("Invalid");
 
 			auto scriptIdf = curThread->m_ScriptHash;
 			if (scriptIdf != curLocal.script)
@@ -103,13 +103,13 @@ namespace YimMenu::Submenus
 			ImGui::SetNextItemWidth(200.f);
 			ImGui::InputText("##localname", localName, sizeof(localName));
 			ImGui::SameLine();
-			if (ImGui::Button(L("generic.save", "Save").c_str()))
+			if (ImGui::Button("Save"))
 			{
 				curLocal.name = localName;
 				SaveLocal(curLocal);
 			}
 			ImGui::SameLine();
-			if (ImGui::Button(L("generic.delete", "Delete").c_str()))
+			if (ImGui::Button("Delete"))
 			{
 				curLocal.name = localName;
 				DeleteLocal(curLocal);

@@ -78,15 +78,15 @@ namespace YimMenu::Submenus
 			ImGui::BeginGroup();
 
 			ImGui::SetNextItemWidth(200.f);
-			ImGui::InputTextWithHint("##global_name", L("debug.globals.name", "Name").c_str(), globalName, sizeof(globalName));
+			ImGui::InputTextWithHint("##global_name", "Name", globalName, sizeof(globalName));
 			ImGui::SameLine();
-			if (ImGui::Button(L("generic.save", "Save").c_str()))
+			if (ImGui::Button("Save"))
 			{
 				curGlobal.name = globalName;
 				SaveGlobal(curGlobal);
 			}
 			ImGui::SameLine();
-			if (ImGui::Button(L("generic.delete", "Delete").c_str()))
+			if (ImGui::Button("Delete"))
 			{
 				curGlobal.name = globalName;
 				DeleteGlobal(curGlobal);
