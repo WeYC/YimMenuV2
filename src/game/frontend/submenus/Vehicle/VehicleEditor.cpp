@@ -40,7 +40,7 @@ namespace YimMenu::Submenus
 				auto model = Self::GetVehicle().GetModel();
 				front_wheel_stock_mod = -1;
 				rear_wheel_stock_mod = -1;
-				vehName = Self::GetVehicle().GetFullName();
+				vehName = I18n::SanitizeVehicleName(Self::GetVehicle().GetFullName());
 				owned_mods = Self::GetVehicle().GetOwnedMods();
 				isBennys = VehicleModel::IsBennys(currentVeh);
 				strcpy(plate, Self::GetVehicle().GetPlateText().c_str());

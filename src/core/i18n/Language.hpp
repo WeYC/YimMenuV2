@@ -2184,6 +2184,29 @@ namespace YimMenu::I18n
 		return std::string(text);
 	}
 
+	// Sanitize vehicle name - replace Unicode chars that fonts can't render
+	inline std::string SanitizeVehicleName(std::string_view name)
+	{
+		std::string result(name);
+		// Replace μ (Mk II) and other problematic chars
+		size_t pos = 0;
+		while ((pos = result.find('\xCE', pos)) != std::string::npos)
+		{
+			if (pos + 1 < result.size())
+			{
+				unsigned char next = static_cast<unsigned char>(result[pos + 1]);
+				if (next == 0xBC) // μ (U+03BC)
+				{
+					result.replace(pos, 2, "II");
+					pos += 2;
+					continue;
+				}
+			}
+			pos++;
+		}
+		return result;
+	}
+
 	// Translate vehicle display name to Chinese（English）format
 	inline std::string TranslateVehicleName(std::string_view name, std::string_view gxtKey)
 	{

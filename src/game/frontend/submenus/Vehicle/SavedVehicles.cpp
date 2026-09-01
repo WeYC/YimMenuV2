@@ -54,7 +54,7 @@ namespace YimMenu::Submenus
 				ImGui::SameLine();
 				if (ImGui::Button(L("vehicle.populate_name", "Populate Name").c_str()))
 					FiberPool::Push([] {
-						std::string name = Self::GetVehicle().GetFullName();
+						std::string name = I18n::SanitizeVehicleName(Self::GetVehicle().GetFullName());
 						strcpy(vehicle_file_name_input, name.c_str());
 					});
 			};

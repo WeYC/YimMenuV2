@@ -54,7 +54,7 @@ namespace YimMenu::Submenus
 							finalName = maker + " " + finalName;
 						}
 
-						vehicleNames.push_back(finalName);
+						vehicleNames.push_back(I18n::SanitizeVehicleName(finalName));
 
 						int id = VEHICLE::GET_VEHICLE_CLASS_FROM_NAME(veh);
 						vehicleClasses.push_back(id);
