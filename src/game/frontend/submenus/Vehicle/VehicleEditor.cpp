@@ -59,9 +59,9 @@ namespace YimMenu::Submenus
 				std::map<std::string, std::vector<int>> tmp_front_wheel_map;
 				std::map<std::string, std::vector<int>> tmp_rear_wheel_map;
 
-				tmp_slot_display_names[(int)CustomVehicleModType::MOD_PLATE_STYLE] = "Plate Style";
-				tmp_slot_display_names[(int)CustomVehicleModType::MOD_WINDOW_TINT] = "Window Tint";
-				tmp_slot_display_names[(int)CustomVehicleModType::MOD_WHEEL_TYPE] = "Wheel Type";
+			tmp_slot_display_names[(int)CustomVehicleModType::MOD_PLATE_STYLE] = L("vehicle_editor.plate_style", "Plate Style");
+			tmp_slot_display_names[(int)CustomVehicleModType::MOD_WINDOW_TINT] = L("vehicle_editor.window_tint", "Window Tint");
+			tmp_slot_display_names[(int)CustomVehicleModType::MOD_WHEEL_TYPE] = L("vehicle_editor.wheel_type", "Wheel Type");
 
 				tmp_mod_display_names[(int)CustomVehicleModType::MOD_PLATE_STYLE].insert(lscPlateStyles.begin(),
 				    lscPlateStyles.end());
@@ -185,7 +185,7 @@ namespace YimMenu::Submenus
 				ImGui::Spacing();
 				{
 					ImGui::SetNextItemWidth(150);
-					ImGui::InputTextWithHint("##plate", "Plate Number", plate, sizeof(plate), ImGuiInputTextFlags_None);
+					ImGui::InputTextWithHint("##plate", L("vehicle_editor.plate_number", "Plate Number").c_str(), plate, sizeof(plate), ImGuiInputTextFlags_None);
 					ImGui::SameLine();
 					if (ImGui::Button(L("vehicle.change_plate", "Change Plate").c_str()))
 						FiberPool::Push([] {
@@ -333,7 +333,7 @@ namespace YimMenu::Submenus
 										// bennys fix
 										if (!isBennys)
 										{
-											if (i == 0 && ImGui::Selectable("Stock", mod == owned_mods[selected_slot] && *wheel_custom == 0))
+											if (i == 0 && ImGui::Selectable(L("vehicle_editor.stock", "Stock").c_str(), mod == owned_mods[selected_slot] && *wheel_custom == 0))
 												FiberPool::Push([&mod] {
 													VEHICLE::SET_VEHICLE_MOD(currentVeh, selected_slot, mod, 0);
 													currentVeh = -1;
@@ -341,7 +341,7 @@ namespace YimMenu::Submenus
 											should_custom = 1;
 										}
 
-										if (ImGui::Selectable(("Style " + std::to_string(mod)).c_str(), mod == owned_mods[selected_slot] && *wheel_custom == should_custom))
+										if (ImGui::Selectable((L("vehicle_editor.style", "Style").c_str() + (" " + std::to_string(mod))).c_str(), mod == owned_mods[selected_slot] && *wheel_custom == should_custom))
 											FiberPool::Push([&mod, should_custom] {
 												VEHICLE::SET_VEHICLE_MOD(currentVeh, selected_slot, mod, should_custom);
 												currentVeh = -1;
@@ -493,19 +493,19 @@ namespace YimMenu::Submenus
 									VEHICLE::SET_VEHICLE_COLOURS(currentVeh, owned_mods[(int)CustomVehicleModType::MOD_PRIMARY_COL], owned_mods[(int)CustomVehicleModType::MOD_SECONDARY_COL]);
 								});
 
-							if (ImGui::Selectable("Chrome", color_type == 0))
+							if (ImGui::Selectable(I18n::TranslateListItem("Chrome").c_str(), color_type == 0))
 								color_type = 0;
-							if (ImGui::Selectable("Classic", color_type == 1))
+							if (ImGui::Selectable(I18n::TranslateListItem("Classic").c_str(), color_type == 1))
 								color_type = 1;
-							if (ImGui::Selectable("Matte", color_type == 2))
+							if (ImGui::Selectable(I18n::TranslateListItem("Matte").c_str(), color_type == 2))
 								color_type = 2;
-							if (ImGui::Selectable("Metals", color_type == 3))
+							if (ImGui::Selectable(I18n::TranslateListItem("Metals").c_str(), color_type == 3))
 								color_type = 3;
-							if (ImGui::Selectable("Util", color_type == 4))
+							if (ImGui::Selectable(I18n::TranslateListItem("Util").c_str(), color_type == 4))
 								color_type = 4;
-							if (ImGui::Selectable("Worn", color_type == 5))
+							if (ImGui::Selectable(I18n::TranslateListItem("Worn").c_str(), color_type == 5))
 								color_type = 5;
-							if (ImGui::Selectable("Chameleon", color_type == 6))
+							if (ImGui::Selectable(I18n::TranslateListItem("Chameleon").c_str(), color_type == 6))
 								color_type = 6;
 
 							ImGui::EndListBox();
@@ -599,7 +599,7 @@ namespace YimMenu::Submenus
 
 						ImGui::SameLine();
 						ImGui::SetNextItemWidth(214);
-						if (ImGui::ColorPicker3("Custom Vehicle Color", color, ImGuiColorEditFlags_NoAlpha | ImGuiColorEditFlags_NoDragDrop | ImGuiColorEditFlags_NoOptions | ImGuiColorEditFlags_InputRGB | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_DisplayHSV | ImGuiColorEditFlags_InputHSV | ImGuiColorEditFlags_DisplayHex))
+						if (ImGui::ColorPicker3(L("vehicle_editor.custom_vehicle_color", "Custom Vehicle Color").c_str(), color, ImGuiColorEditFlags_NoAlpha | ImGuiColorEditFlags_NoDragDrop | ImGuiColorEditFlags_NoOptions | ImGuiColorEditFlags_InputRGB | ImGuiColorEditFlags_DisplayRGB | ImGuiColorEditFlags_DisplayHSV | ImGuiColorEditFlags_InputHSV | ImGuiColorEditFlags_DisplayHex))
 						{
 							*color_r = (int)(color[0] * 255);
 							*color_g = (int)(color[1] * 255);
@@ -649,7 +649,7 @@ namespace YimMenu::Submenus
 							{
 							case 0: //Chrome
 							{
-								if (ImGui::Selectable("Chrome", selected_color == (int)VehicleColorsChrome::COLOR_CHROME))
+								if (ImGui::Selectable(I18n::TranslateListItem("Chrome").c_str(), selected_color == (int)VehicleColorsChrome::COLOR_CHROME))
 								{
 									if (color_to_change == 0)
 										owned_mods[(int)CustomVehicleModType::MOD_PRIMARY_COL] = (int)VehicleColorsChrome::COLOR_CHROME;
@@ -788,7 +788,7 @@ namespace YimMenu::Submenus
 							{
 								constexpr auto alloy_color = 156;
 
-								if (ImGui::Selectable("Alloy", selected_color == alloy_color))
+								if (ImGui::Selectable(I18n::TranslateListItem("Alloy").c_str(), selected_color == alloy_color))
 								{
 									selected_color = alloy_color;
 									owned_mods[(int)CustomVehicleModType::MOD_WHEEL_COL] = alloy_color;
