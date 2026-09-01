@@ -1829,8 +1829,10 @@ namespace YimMenu::I18n
 	// Translate dropdown list item text
 	inline std::string TranslateListItem(std::string_view text)
 	{
-		if (g_CurrentLanguage == Language::EN)
-			return std::string(text);
+		// Check if text contains CJK
+		bool hasCJK = false;
+		for (unsigned char c : text)
+			if (c >= 0xE0) { hasCJK = true; break; }
 
 		static const std::pair<std::string_view, std::string_view> items[] = {
 			// Session Types
@@ -2088,29 +2090,24 @@ namespace YimMenu::I18n
 			if (en == text)
 				return std::string(zh);
 
+		// Reverse: if text is Chinese and we're in EN mode, find English key
+		if (g_CurrentLanguage == Language::EN && hasCJK)
+		{
+			for (auto& [en, zh] : items)
+				if (zh == text)
+					return std::string(en);
+		}
+
 		return std::string(text);
 	}
 
 	// Translate vehicle display name to Chinese（English）format
 	inline std::string TranslateVehicleName(std::string_view name, std::string_view gxtKey)
 	{
-		if (g_CurrentLanguage == Language::EN)
-			return std::string(name);
+		bool hasCJK = false;
+		for (unsigned char c : name)
+			if (c >= 0xE0) { hasCJK = true; break; }
 
-		// If name already contains CJK, append original English GXT key
-		for (char c : name)
-		{
-			unsigned char uc = static_cast<unsigned char>(c);
-			if (uc >= 0xE0) // UTF-8 CJK start byte
-			{
-				// Check if gxtKey is a valid English name (not a hash or NULL)
-				if (!gxtKey.empty() && gxtKey != "NULL" && gxtKey.size() > 1)
-					return std::string(name) + "（" + std::string(gxtKey) + "）";
-				return std::string(name);
-			}
-		}
-
-		// Name is in English, look up Chinese translation
 		static const std::pair<std::string_view, std::string_view> vehicles[] = {
 			// Super
 			{"Adder", "阿德（Adder）"},
@@ -2579,9 +2576,32 @@ namespace YimMenu::I18n
 			{"Principe", "王子（Principe）"},
 		};
 
-		for (auto& [en, zh] : vehicles)
-			if (en == name)
-				return std::string(zh);
+		if (g_CurrentLanguage == Language::EN)
+		{
+			// EN mode: if name is Chinese, reverse-lookup English or use GXT key
+			if (hasCJK)
+			{
+				for (auto& [en, zh] : vehicles)
+					if (zh == name)
+						return std::string(en);
+				if (!gxtKey.empty() && gxtKey != "NULL" && gxtKey.size() > 1)
+					return std::string(gxtKey);
+			}
+			return std::string(name);
+		}
+
+		// ZH mode: if name is English, look up Chinese; if Chinese, append GXT key
+		if (!hasCJK)
+		{
+			for (auto& [en, zh] : vehicles)
+				if (en == name)
+					return std::string(zh);
+		}
+		else
+		{
+			if (!gxtKey.empty() && gxtKey != "NULL" && gxtKey.size() > 1)
+				return std::string(name) + "（" + std::string(gxtKey) + "）";
+		}
 
 		return std::string(name);
 	}
