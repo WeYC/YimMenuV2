@@ -103,13 +103,13 @@ namespace YimMenu::Submenus
 			ImGui::SetNextItemWidth(200.f);
 			ImGui::InputText("##localname", localName, sizeof(localName));
 			ImGui::SameLine();
-			if (ImGui::Button("Save"))
+			if (ImGui::Button(L("generic.save", "Save").c_str()))
 			{
 				curLocal.name = localName;
 				SaveLocal(curLocal);
 			}
 			ImGui::SameLine();
-			if (ImGui::Button("Delete"))
+			if (ImGui::Button(L("generic.delete", "Delete").c_str()))
 			{
 				curLocal.name = localName;
 				DeleteLocal(curLocal);

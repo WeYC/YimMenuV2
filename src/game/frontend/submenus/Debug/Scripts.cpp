@@ -60,7 +60,7 @@ namespace YimMenu::Submenus
 		ImGui::SetNextItemWidth(150);
 		ImGui::InputText("##jumpoffset", offsetInput, IM_ARRAYSIZE(offsetInput));
 		ImGui::SameLine();
-		if (ImGui::Button("Jump to Offset"))
+		if (ImGui::Button(L("debug.scripts.jump_to_offset", "Jump to Offset").c_str()))
 		{
 			char* end = nullptr;
 			std::uint32_t offset = strtoul(offsetInput, &end, 0);
@@ -187,13 +187,13 @@ namespace YimMenu::Submenus
 			}
 			else
 			{
-				if (ImGui::Button("Kill"))
+				if (ImGui::Button(L("debug.scripts.kill", "Kill").c_str()))
 				{
 					curThread->Kill();
 					curThread->m_Context.m_State = rage::scrThread::State::KILLED;
 				}
 				ImGui::SameLine();
-				if (ImGui::Button("Log Labels"))
+				if (ImGui::Button(L("debug.scripts.log_labels", "Log Labels").c_str()))
 				{
 					FiberPool::Push([] {
 						for (int i = 0; i < curProgram->m_StringsCount; i++)
@@ -219,7 +219,7 @@ namespace YimMenu::Submenus
 						}
 						ImGui::SameLine();
 						ImGui::BeginDisabled(netComponent->IsLocalPlayerHost());
-						if (ImGui::SmallButton("Take Control"))
+						if (ImGui::SmallButton(L("debug.scripts.take_control", "Take Control").c_str()))
 						{
 							FiberPool::Push([] {
 								Scripts::ForceScriptHost(curThread);
@@ -262,9 +262,9 @@ namespace YimMenu::Submenus
 			static int previousArgCount = 0;
 			static bool pauseAfterStarting = false;
 
-			bool modified = ImGui::InputTextWithHint("Script Name", "Search", &scriptSearch);
+			bool modified = ImGui::InputTextWithHint("##script_search", L("debug.scripts.search", "Search").c_str(), &scriptSearch);
 
-			if (ImGui::BeginCombo("Stack Size", stackSizeName.c_str()))
+			if (ImGui::BeginCombo(L("debug.scripts.stack_size2", "Stack Size").c_str(), stackSizeName.c_str()))
 			{
 				for (auto& p : stackSizes)
 				{
@@ -281,7 +281,7 @@ namespace YimMenu::Submenus
 				ImGui::EndCombo();
 			}
 
-			if (ImGui::InputInt("Arg Count", &argCount))
+			if (ImGui::InputInt(L("debug.scripts.arg_count2", "Arg Count").c_str(), &argCount))
 			{
 				if (argCount < 0) // should clamp this to a max value?
 					argCount = 0;
@@ -334,28 +334,28 @@ namespace YimMenu::Submenus
 				launcherIndex = Scripts::GetLauncherIndexFromScript(Joaat(scriptSearch));
 			}
 
-			ImGui::Checkbox("Pause After Starting", &pauseAfterStarting);
+			ImGui::Checkbox(L("debug.scripts.pause_after_starting", "Pause After Starting").c_str(), &pauseAfterStarting);
 
-			if (ImGui::Button("Start Script"))
+			if (ImGui::Button(L("debug.scripts.start_script", "Start Script").c_str()))
 			{
 				FiberPool::Push([] {
 					auto hash = Joaat(scriptSearch);
 
 					if (!SCRIPT::DOES_SCRIPT_WITH_NAME_HASH_EXIST(hash))
 					{
-						Notifications::Show("Start Script", "Script does not exist.", NotificationType::Error);
+						Notifications::Show(L("debug.scripts.start_script", "Start Script").c_str(), L("debug.scripts.script_not_exist", "Script does not exist.").c_str(), NotificationType::Error);
 						return;
 					}
 
 					if (SCRIPT::GET_NUMBER_OF_THREADS_RUNNING_THE_SCRIPT_WITH_THIS_HASH(hash) > 0)
 					{
-						Notifications::Show("Start Script", "Script is already running.", NotificationType::Error);
+						Notifications::Show(L("debug.scripts.start_script", "Start Script").c_str(), L("debug.scripts.script_already_running", "Script is already running.").c_str(), NotificationType::Error);
 						return;
 					}
 
 					if (MISC::GET_NUMBER_OF_FREE_STACKS_OF_THIS_SIZE(stackSize) == 0)
 					{
-						Notifications::Show("Start Script", "No free stack of this size.", NotificationType::Error);
+						Notifications::Show(L("debug.scripts.start_script", "Start Script").c_str(), L("debug.scripts.no_free_stack", "No free stack of this size.").c_str(), NotificationType::Error);
 						return;
 					}
 
@@ -382,21 +382,21 @@ namespace YimMenu::Submenus
 					}
 
 					SCRIPT::SET_SCRIPT_WITH_NAME_HASH_AS_NO_LONGER_NEEDED(hash);
-					Notifications::Show("Start Script", std::format("Started script with ID {}.", id), NotificationType::Success);
+					Notifications::Show(L("debug.scripts.start_script", "Start Script").c_str(), (L("debug.scripts.started_script", "Started script with ID ") + std::to_string(id) + ".").c_str(), NotificationType::Success);
 				});
 			}
 
 			if (launcherIndex && *Pointers.IsSessionStarted)
 			{
 				ImGui::SameLine();
-				if (ImGui::Button("Start Session Script"))
+				if (ImGui::Button(L("debug.scripts.start_session_script", "Start Session Script").c_str()))
 				{
 					FiberPool::Push([] {
 						Scripts::StartLauncherScript(Joaat(scriptSearch));
 					});
 				}
 				ImGui::SameLine();
-				if (ImGui::Button("Start Script With Event"))
+				if (ImGui::Button(L("debug.scripts.start_script_with_event", "Start Script With Event").c_str()))
 				{
 					FiberPool::Push([] {
 						Scripts::ForceScriptOnPlayer(Joaat(scriptSearch), -1);
