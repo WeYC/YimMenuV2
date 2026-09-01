@@ -3,6 +3,7 @@
 #include "core/commands/BoolCommand.hpp"
 #include "core/backend/ScriptMgr.hpp"
 #include "core/frontend/Notifications.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/backend/Self.hpp"
 #include "game/backend/ScriptPatches.hpp"
 #include "game/backend/Tunables.hpp"
@@ -248,7 +249,7 @@ namespace YimMenu::Features
 				return;
 
 			SetAllDailyActivitiesCompleted(true);
-			Notifications::Show("Daily Activities", "Completed all activities, switch session to apply the changes.");
+			Notifications::Show(L("notification.daily_activities", "Daily Activities").c_str(), L("notification.daily_complete", "Completed all activities, switch session to apply the changes.").c_str());
 		}
 	};
 
@@ -262,7 +263,7 @@ namespace YimMenu::Features
 				return;
 
 			SetAllDailyActivitiesCompleted(false);
-			Notifications::Show("Daily Activities", "Reset all activities, switch session to apply the changes.");
+			Notifications::Show(L("notification.daily_activities", "Daily Activities").c_str(), L("notification.daily_reset", "Reset all activities, switch session to apply the changes.").c_str());
 		}
 	};
 
@@ -300,7 +301,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Hidden Caches", "This Hidden Cache has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.hidden_caches", "Hidden Caches").c_str(), L("notification.cache_collected", "This Hidden Cache has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -320,7 +321,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Hidden Caches", "This Hidden Cache has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.hidden_caches", "Hidden Caches").c_str(), L("notification.cache_collected", "This Hidden Cache has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -340,7 +341,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Treasure Chests", "This Treasure Chest has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.treasure_chests", "Treasure Chests").c_str(), L("notification.chest_collected", "This Treasure Chest has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -360,7 +361,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Treasure Chests", "This Treasure Chest has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.treasure_chests", "Treasure Chests").c_str(), L("notification.chest_collected", "This Treasure Chest has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -404,7 +405,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Shipwreck", "Shipwreck has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.shipwreck", "Shipwreck").c_str(), L("notification.shipwreck_collected", "Shipwreck has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -424,7 +425,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Shipwreck", "Shipwreck has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.shipwreck", "Shipwreck").c_str(), L("notification.shipwreck_collected", "Shipwreck has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -444,7 +445,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Buried Stashes", "This Buried Stash has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.buried_stashes", "Buried Stashes").c_str(), L("notification.stash_collected", "This Buried Stash has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -464,7 +465,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Buried Stashes", "This Buried Stash has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.buried_stashes", "Buried Stashes").c_str(), L("notification.stash_collected", "This Buried Stash has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -567,7 +568,7 @@ namespace YimMenu::Features
 
 			if (stat.empty() || Stats::GetInt(stat) != -1)
 			{
-				Notifications::Show("Time Trials", "This Time Trial has already been beaten.", NotificationType::Error);
+				Notifications::Show(L("notification.time_trials", "Time Trials").c_str(), L("notification.trial_beaten", "This Time Trial has already been beaten.").c_str(), NotificationType::Error);
 				return;
 			}
 
@@ -589,7 +590,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Time Trials", "Please enable the blip from the Interaction Menu.", NotificationType::Error);
+				Notifications::Show(L("notification.time_trials", "Time Trials").c_str(), L("notification.enable_blip", "Please enable the blip from the Interaction Menu.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -613,7 +614,7 @@ namespace YimMenu::Features
 
 			if (stat.empty() || Stats::GetInt(stat) != -1)
 			{
-				Notifications::Show("Time Trials", "This Time Trial has already been beaten.", NotificationType::Error);
+				Notifications::Show(L("notification.time_trials", "Time Trials").c_str(), L("notification.trial_beaten", "This Time Trial has already been beaten.").c_str(), NotificationType::Error);
 				return;
 			}
 
@@ -678,7 +679,7 @@ namespace YimMenu::Features
 
 			if (GPBD_Flow::Get()->Entries[Self::GetPlayer().GetId()].TunerCBVDeliveredFlags.Value == 1023)
 			{
-				Notifications::Show("Exotic Exports", "You have already delivered all the vehicles.", NotificationType::Error);
+				Notifications::Show(L("notification.exotic_exports", "Exotic Exports").c_str(), L("notification.all_delivered", "You have already delivered all the vehicles.").c_str(), NotificationType::Error);
 				return;
 			}
 
@@ -701,13 +702,13 @@ namespace YimMenu::Features
 
 			if (GPBD_Flow::Get()->Entries[Self::GetPlayer().GetId()].TunerCBVDeliveredFlags.Value == 1023)
 			{
-				Notifications::Show("Exotic Exports", "You have already delivered all the vehicles.", NotificationType::Error);
+				Notifications::Show(L("notification.exotic_exports", "Exotic Exports").c_str(), L("notification.all_delivered", "You have already delivered all the vehicles.").c_str(), NotificationType::Error);
 				return;
 			}
 
 			/*if (!FreemodeDelivery::Get()->DeliveryCooldown1.HasTimePassed(30000))
 			{
-				Notifications::Show("Exotic Exports", "You have just delivered a vehicle, wait a moment.", NotificationType::Error);
+				Notifications::Show(L("notification.exotic_exports", "Exotic Exports").c_str(), L("notification.just_delivered", "You have just delivered a vehicle, wait a moment.").c_str(), NotificationType::Error);
 				return;
 			}*/
 
@@ -733,7 +734,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("G's Cache", "G's Cache has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.g_cache", "G's Cache").c_str(), L("notification.g_cache_collected", "G's Cache has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -753,7 +754,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("G's Cache", "G's Cache has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.g_cache", "G's Cache").c_str(), L("notification.g_cache_collected", "G's Cache has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -778,7 +779,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Stash House", "Stash House has already been raided.", NotificationType::Error);
+				Notifications::Show(L("notification.stash_house", "Stash House").c_str(), L("notification.stash_house_raided", "Stash House has already been raided.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -848,7 +849,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("LS Tags", "This LS Tag has already been sprayed.", NotificationType::Error);
+				Notifications::Show(L("notification.ls_tags", "LS Tags").c_str(), L("notification.ls_tag_sprayed", "This LS Tag has already been sprayed.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -868,7 +869,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("LS Tags", "This LS Tag has already been sprayed.", NotificationType::Error);
+				Notifications::Show(L("notification.ls_tags", "LS Tags").c_str(), L("notification.ls_tag_sprayed", "This LS Tag has already been sprayed.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -884,7 +885,7 @@ namespace YimMenu::Features
 
 			if (Stats::GetInt("MPX_BAIL_OFFICE_OWNED") == 0)
 			{
-				Notifications::Show("Madrazo Hits", "You must own a Bail Office.", NotificationType::Error);
+				Notifications::Show(L("notification.madrazo_hits", "Madrazo Hits").c_str(), L("notification.need_bail_office", "You must own a Bail Office.").c_str(), NotificationType::Error);
 				return;
 			}
 
@@ -899,7 +900,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Madrazo Hits", "Madrazo Hit has already been completed.", NotificationType::Error);
+				Notifications::Show(L("notification.madrazo_hits", "Madrazo Hits").c_str(), L("notification.hit_completed", "Madrazo Hit has already been completed.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -942,7 +943,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Shoot Animals Photography", "This animal has already been photographed.", NotificationType::Error);
+				Notifications::Show(L("notification.animal_photo", "Shoot Animals Photography").c_str(), L("notification.animal_photographed", "This animal has already been photographed.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -968,7 +969,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Shoot Animals Photography", "This animal has already been photographed.", NotificationType::Error);
+				Notifications::Show(L("notification.animal_photo", "Shoot Animals Photography").c_str(), L("notification.animal_photographed", "This animal has already been photographed.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -984,7 +985,7 @@ namespace YimMenu::Features
 
 			if (Stats::GetInt("MPX_SB_WEED_SHOP_OWNED") == 0)
 			{
-				Notifications::Show("Smoke on the Water", "You must own a Smoke on the Water property.", NotificationType::Error);
+				Notifications::Show(L("notification.smoke_water", "Smoke on the Water").c_str(), L("notification.need_smoke_property", "You must own a Smoke on the Water property.").c_str(), NotificationType::Error);
 				return;
 			}
 
@@ -994,7 +995,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Smoke on the Water", "This product has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.smoke_water", "Smoke on the Water").c_str(), L("notification.product_collected", "This product has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -1010,7 +1011,7 @@ namespace YimMenu::Features
 
 			if (Stats::GetInt("MPX_SB_WEED_SHOP_OWNED") == 0)
 			{
-				Notifications::Show("Smoke on the Water", "You must own a Smoke on the Water property.", NotificationType::Error);
+				Notifications::Show(L("notification.smoke_water", "Smoke on the Water").c_str(), L("notification.need_smoke_property", "You must own a Smoke on the Water property.").c_str(), NotificationType::Error);
 				return;
 			}
 
@@ -1020,7 +1021,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Smoke on the Water", "This product has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.smoke_water", "Smoke on the Water").c_str(), L("notification.product_collected", "This product has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -1040,7 +1041,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Golden Clover", "Golden Clover has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.golden_clover", "Golden Clover").c_str(), L("notification.clover_collected", "Golden Clover has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};
@@ -1060,7 +1061,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Golden Clover", "Golden Clover has already been collected.", NotificationType::Error);
+				Notifications::Show(L("notification.golden_clover", "Golden Clover").c_str(), L("notification.clover_collected", "Golden Clover has already been collected.").c_str(), NotificationType::Error);
 			}
 		}
 	};

@@ -2,6 +2,7 @@
 #include "core/commands/Command.hpp"
 #include "core/backend/ScriptMgr.hpp"
 #include "core/frontend/Notifications.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/backend/Self.hpp"
 #include "game/gta/Scripts.hpp"
 #include "game/gta/ScriptFunction.hpp"
@@ -93,26 +94,26 @@ namespace YimMenu::Features
 		{
 			if (!*Pointers.IsSessionStarted)
 			{
-				Notifications::Show("Save Personal Vehicle", "Please join GTA Online.", NotificationType::Error);
+				Notifications::Show(L("notification.save_personal_vehicle", "Save Personal Vehicle").c_str(), L("notification.join_gta_online", "Please join GTA Online.").c_str(), NotificationType::Error);
 				return;
 			}
 
 			if (!Self::GetVehicle().IsValid())
 			{
-				Notifications::Show("Save Personal Vehicle", "Please get in a vehicle.", NotificationType::Error);
+				Notifications::Show(L("notification.save_personal_vehicle", "Save Personal Vehicle").c_str(), L("notification.get_in_vehicle", "Please get in a vehicle.").c_str(), NotificationType::Error);
 				return;
 			}
 
 			static ScriptFunction isVehicleValidForPV("freemode"_J, ScriptPointer("IsVehicleValidForPV", "5D ? ? ? 2A 06 56 13 00 38 00").Add(1).Rip());
 			if (s_BlacklistedVehicles.contains(Self::GetVehicle().GetModel()) || !isVehicleValidForPV.Call<bool>(Self::GetVehicle().GetModel()))
 			{
-				Notifications::Show("Save Personal Vehicle", "This vehicle cannot be saved as a personal vehicle.", NotificationType::Error);
+				Notifications::Show(L("notification.save_personal_vehicle", "Save Personal Vehicle").c_str(), L("notification.cannot_save_vehicle", "This vehicle cannot be saved as a personal vehicle.").c_str(), NotificationType::Error);
 				return;
 			}
 
 			if (Self::GetVehicle().GetHandle() == FreemodeGeneral::Get()->PersonalVehicleIndex)
 			{
-				Notifications::Show("Save Personal Vehicle", "This vehicle is already a personal vehicle.", NotificationType::Error);
+				Notifications::Show(L("notification.save_personal_vehicle", "Save Personal Vehicle").c_str(), L("notification.already_personal", "This vehicle is already a personal vehicle.").c_str(), NotificationType::Error);
 				return;
 			}
 

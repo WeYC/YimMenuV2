@@ -1,6 +1,7 @@
 #include "Items.hpp"
 #include "core/commands/Commands.hpp"
 #include "core/commands/StringCommand.hpp"
+#include "core/i18n/Language.hpp"
 #include "imgui.h"
 
 namespace YimMenu
@@ -15,7 +16,7 @@ namespace YimMenu
 	{
 		if (!m_Command)
 		{
-			ImGui::Text("Unknown string command!");
+			ImGui::Text("%s", L("generic.unknown_string", "Unknown string command!").c_str());
 			return;
 		}
 

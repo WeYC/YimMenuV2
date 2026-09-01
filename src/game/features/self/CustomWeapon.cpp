@@ -2,6 +2,7 @@
 #include "core/backend/FiberPool.hpp"
 #include "core/backend/ScriptMgr.hpp"
 #include "core/frontend/Notifications.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/backend/Self.hpp"
 #include "game/gta/Object.hpp"
 #include "types/entity/DecalTypes.hpp"
@@ -44,7 +45,7 @@ namespace YimMenu::Features
 							}
 							else
 							{
-								Notifications::Show("Custom Weapon", "Entity is not a ped.", NotificationType::Warning);
+								Notifications::Show(L("notification.custom_weapon", "Custom Weapon").c_str(), L("notification.entity_not_ped", "Entity is not a ped.").c_str(), NotificationType::Warning);
 							}
 						}
 					});
@@ -61,14 +62,14 @@ namespace YimMenu::Features
 					if (RayCast(&m_Entity).Cast())
 					{
 						if (m_Entity.IsPed() && m_Entity.IsPlayer())
-							Notifications::Show("Custom Weapon", "Player entity cannot be deleted.", NotificationType::Warning);
+							Notifications::Show(L("notification.custom_weapon", "Custom Weapon").c_str(), L("notification.cannot_delete_player", "Player entity cannot be deleted.").c_str(), NotificationType::Warning);
 						else
 						{
 							auto location = m_Entity.GetPosition();
 							auto distance = Self::GetPed().GetPosition().GetDistance(location);
 
 							if (distance > 500)
-								Notifications::Show("Custom Weapon", "Entity is too far.", NotificationType::Warning);
+								Notifications::Show(L("notification.custom_weapon", "Custom Weapon").c_str(), L("notification.entity_too_far", "Entity is too far.").c_str(), NotificationType::Warning);
 							else
 								m_Entity.Delete();
 						}
@@ -134,7 +135,7 @@ namespace YimMenu::Features
 
 							if (m_Entity.IsPed() && m_Entity.IsPlayer())
 							{
-								Notifications::Show("Custom Weapon", "Gravity gun cannot be applied on player entity.", NotificationType::Warning);
+								Notifications::Show(L("notification.custom_weapon", "Custom Weapon").c_str(), L("notification.gravity_gun_player", "Gravity gun cannot be applied on player entity.").c_str(), NotificationType::Warning);
 							}
 							else
 							{
@@ -147,7 +148,7 @@ namespace YimMenu::Features
 
 								if (tempDistance > 500)
 								{
-									Notifications::Show("Custom Weapon", "Entity is too far.", NotificationType::Warning);
+									Notifications::Show(L("notification.custom_weapon", "Custom Weapon").c_str(), L("notification.entity_too_far", "Entity is too far.").c_str(), NotificationType::Warning);
 								}
 								else
 								{
@@ -218,7 +219,7 @@ namespace YimMenu::Features
 						}
 						else
 						{
-							Notifications::Show("Custom Weapon", "Invalid vehicle.", NotificationType::Warning);
+							Notifications::Show(L("notification.custom_weapon", "Custom Weapon").c_str(), L("notification.invalid_vehicle", "Invalid vehicle.").c_str(), NotificationType::Warning);
 						}
 					}
 				}
@@ -239,7 +240,7 @@ namespace YimMenu::Features
 						}
 						else
 						{
-							Notifications::Show("Custom Weapon", "Invalid vehicle.", NotificationType::Warning);
+							Notifications::Show(L("notification.custom_weapon", "Custom Weapon").c_str(), L("notification.invalid_vehicle", "Invalid vehicle.").c_str(), NotificationType::Warning);
 						}
 					}
 				}
@@ -256,14 +257,14 @@ namespace YimMenu::Features
 				{
 					if (!_VehicleGunModel.GetString().length())
 					{
-						Notifications::Show("Custom Weapon", "No vehicle model name provided.", NotificationType::Error);
+						Notifications::Show(L("notification.custom_weapon", "Custom Weapon").c_str(), L("notification.no_vehicle_model", "No vehicle model name provided.").c_str(), NotificationType::Error);
 						return;
 					}
 
 					auto modelHash = Joaat(_VehicleGunModel.GetString());
 					if (!STREAMING::IS_MODEL_IN_CDIMAGE(modelHash))
 					{
-						Notifications::Show("Custom Weapon", "Invalid vehicle model name provided.", NotificationType::Error);
+						Notifications::Show(L("notification.custom_weapon", "Custom Weapon").c_str(), L("notification.invalid_vehicle_model", "Invalid vehicle model name provided.").c_str(), NotificationType::Error);
 					}
 					else
 					{

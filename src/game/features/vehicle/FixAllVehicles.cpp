@@ -1,5 +1,6 @@
 #include "core/commands/Command.hpp"
 #include "core/frontend/Notifications.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/backend/PersonalVehicles.hpp"
 #include "game/pointers/Pointers.hpp"
 
@@ -23,9 +24,9 @@ namespace YimMenu::Features
 			}
 
 			if (count > 0)
-				Notifications::Show("Fix All Vehicles", std::format("{} vehicles fixed.", count), NotificationType::Success);
+				Notifications::Show(L("notification.fix_all_vehicles", "Fix All Vehicles").c_str(), (L("notification.vehicles_fixed", "Fixed ") + std::to_string(count) + L("notification.vehicles_fixed2", " vehicles.")).c_str(), NotificationType::Success);
 			else
-				Notifications::Show("Fix All Vehicles", "No vehicles to fix.");
+				Notifications::Show(L("notification.fix_all_vehicles", "Fix All Vehicles").c_str(), L("notification.no_vehicles_fix", "No vehicles to fix.").c_str());
 		}
 	};
 

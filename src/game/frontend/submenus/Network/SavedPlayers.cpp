@@ -132,10 +132,10 @@ namespace YimMenu::Submenus
 			{
 				auto& data = *g_SelectedPlayer->m_FetchedData;
 				ImGui::Text("%s: %s", L("saved_players.session_type", "Session Type").c_str(), FetchedPlayerData::GameStateToString(data.m_GameState).data());
-				ImGui::Text("%s: %s", L("saved_players.host_of_session", "Host of Session").c_str(), data.m_HostOfSession ? "Yes" : "No");
-				ImGui::Text("%s: %s", L("saved_players.is_spectating", "Is Spectating").c_str(), data.m_Spectating ? "Yes" : "No");
-				ImGui::Text("%s: %s", L("saved_players.is_job_lobby", "Is Job Lobby").c_str(), data.m_InTransition ? "Yes" : "No");
-				ImGui::Text("%s: %s", L("saved_players.host_of_job_lobby", "Host of Job Lobby").c_str(), data.m_HostOfTransition ? "Yes" : "No");
+				ImGui::Text("%s: %s", L("saved_players.host_of_session", "Host of Session").c_str(), (data.m_HostOfSession ? L("generic.yes", "Yes") : L("generic.no", "No")).c_str());
+				ImGui::Text("%s: %s", L("saved_players.is_spectating", "Is Spectating").c_str(), (data.m_Spectating ? L("generic.yes", "Yes") : L("generic.no", "No")).c_str());
+				ImGui::Text("%s: %s", L("saved_players.is_job_lobby", "Is Job Lobby").c_str(), (data.m_InTransition ? L("generic.yes", "Yes") : L("generic.no", "No")).c_str());
+				ImGui::Text("%s: %s", L("saved_players.host_of_job_lobby", "Host of Job Lobby").c_str(), (data.m_HostOfTransition ? L("generic.yes", "Yes") : L("generic.no", "No")).c_str());
 				if (data.m_MissionType != FetchedPlayerData::MissionType::NONE)
 				{
 					ImGui::Text("%s: %s", L("saved_players.mission_type", "Mission Type").c_str(), FetchedPlayerData::MissionTypeToString(data.m_MissionType).data());

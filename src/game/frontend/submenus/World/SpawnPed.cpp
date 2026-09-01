@@ -32,7 +32,7 @@ namespace YimMenu::Submenus
 		menu->AddItem(std::make_unique<ImGuiItem>([] {
 			static char search[64];
 			ImGui::SetNextItemWidth(300.f);
-			ImGui::InputTextWithHint("Name", L("spawn_ped.search", "Search").c_str(), search, sizeof(search));
+			ImGui::InputTextWithHint("##ped_name", L("spawn_ped.name", "Name").c_str(), search, sizeof(search));
 
 			const int visible = std::min(20, static_cast<int>(g_PedModels.size()));
 			const float height = visible * ImGui::GetTextLineHeightWithSpacing();

@@ -2,6 +2,7 @@
 #include "core/commands/Command.hpp"
 #include "core/backend/ScriptMgr.hpp"
 #include "core/frontend/Notifications.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/backend/Self.hpp"
 #include "game/backend/ScriptPatches.hpp"
 #include "game/gta/Scripts.hpp"
@@ -68,13 +69,13 @@ namespace YimMenu::Features
 		{
 			if (!*Pointers.IsSessionStarted)
 			{
-				Notifications::Show("Open Gun Locker", "Please join GTA Online.", NotificationType::Error);
+				Notifications::Show(L("notification.gun_locker", "Open Gun Locker").c_str(), L("notification.join_gta_online", "Please join GTA Online.").c_str(), NotificationType::Error);
 				return;
 			}
 
 			if (GlobalPlayerBD::Get()->Entries[Self::GetPlayer().GetId()].SimpleInteriorData.Index != eSimpleInteriorIndex::SIMPLE_INTERIOR_INVALID)
 			{
-				Notifications::Show("Open Gun Locker", "Cannot open gun locker while in an interior.", NotificationType::Error);
+				Notifications::Show(L("notification.gun_locker", "Open Gun Locker").c_str(), L("notification.gun_locker_interior", "Cannot open gun locker while in an interior.").c_str(), NotificationType::Error);
 				return;
 			}
 

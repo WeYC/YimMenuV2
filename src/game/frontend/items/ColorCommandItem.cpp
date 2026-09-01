@@ -3,6 +3,7 @@
 #include "core/commands/Command.hpp"
 #include "core/commands/Commands.hpp"
 #include "core/frontend/widgets/toggle/imgui_toggle.hpp"
+#include "core/i18n/Language.hpp"
 
 namespace YimMenu
 {
@@ -16,7 +17,7 @@ namespace YimMenu
 	{
 		if (!m_Command)
 		{
-			ImGui::Text("Unknown color picker!");
+			ImGui::Text("%s", L("generic.unknown_color", "Unknown color picker!").c_str());
 			return;
 		}
 

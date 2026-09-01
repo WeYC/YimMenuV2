@@ -2,6 +2,7 @@
 #include "game/commands/PlayerCommand.hpp"
 #include "core/commands/Commands.hpp"
 #include "core/backend/FiberPool.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/backend/Players.hpp"
 
 namespace YimMenu
@@ -16,7 +17,7 @@ namespace YimMenu
 	{
 		if (!m_Command)
 		{
-			ImGui::Text("Unknown!");
+			ImGui::Text("%s", L("generic.unknown", "Unknown!").c_str());
 			return;
 		}
 

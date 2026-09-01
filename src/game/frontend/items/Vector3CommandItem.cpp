@@ -2,6 +2,7 @@
 #include "core/commands/Command.hpp"
 #include "core/commands/Commands.hpp"
 #include "core/commands/Vector3Command.hpp"
+#include "core/i18n/Language.hpp"
 #include "game/backend/SavedLocations.hpp"
 #include "game/backend/Self.hpp"
 #include "game/pointers/Pointers.hpp"
@@ -18,7 +19,7 @@ namespace YimMenu
 	{
 		if (!m_Command)
 		{
-			ImGui::Text("Unknown!");
+			ImGui::Text("%s", L("generic.unknown", "Unknown!").c_str());
 			return;
 		}
 

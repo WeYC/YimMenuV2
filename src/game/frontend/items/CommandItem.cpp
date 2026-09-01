@@ -3,6 +3,7 @@
 #include "core/commands/Command.hpp"
 #include "core/commands/HotkeySystem.hpp"
 #include "core/backend/FiberPool.hpp"
+#include "core/i18n/Language.hpp"
 #include "DrawHotkey.hpp"
 
 namespace YimMenu
@@ -17,7 +18,7 @@ namespace YimMenu
 	{
 		if (!m_Command)
 		{
-			ImGui::Text("Unknown!");
+			ImGui::Text("%s", L("generic.unknown", "Unknown!").c_str());
 			return;
 		}
 

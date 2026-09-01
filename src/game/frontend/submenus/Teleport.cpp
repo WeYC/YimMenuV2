@@ -47,10 +47,10 @@ namespace YimMenu::Submenus
 		}
 
 		ImGui::PushItemWidth(300);
-		InputTextWithHint("Category", "Category", &category).Draw();
+		InputTextWithHint("##teleport_cat", L("teleport.category", "Category").c_str(), &category).Draw();
 
 		ImGui::PushItemWidth(200);
-		InputTextWithHint("Location Name", L("item.new_location", "New location"), &newLocationName).Draw();
+		InputTextWithHint("##teleport_loc", L("teleport.location_name", "Location Name").c_str(), &newLocationName).Draw();
 		ImGui::PopItemWidth();
 
 		if (ImGui::Button(L("item.save_current_location", "Save Current Location").c_str())) // Button widget still crashes
@@ -58,11 +58,11 @@ namespace YimMenu::Submenus
 			FiberPool::Push([=] {
 				if (newLocationName.empty())
 				{
-					Notifications::Show("Custom Teleport", "Please enter a valid name", NotificationType::Warning);
+					Notifications::Show(L("teleport.custom_title", "Custom Teleport").c_str(), L("teleport.enter_valid_name", "Please enter a valid name").c_str(), NotificationType::Warning);
 				}
 				else if (SavedLocations::GetSavedLocationByName(newLocationName))
 				{
-					Notifications::Show("Custom Teleport", std::format("Location with name {} already exists", newLocationName));
+					Notifications::Show(L("teleport.custom_title", "Custom Teleport").c_str(), (L("teleport.name_exists", "Location with name ") + newLocationName + L("teleport.name_exists2", " already exists")).c_str());
 				}
 				else
 				{
@@ -92,7 +92,7 @@ namespace YimMenu::Submenus
 		ImGui::Spacing();
 
 		static std::string filter{};
-		InputTextWithHint("##filter", "Search", &filter).Draw();
+		InputTextWithHint("##filter", L("spawn_vehicle.search", "Search").c_str(), &filter).Draw();
 
 		ImGui::BeginGroup();
 		ImGui::Text("%s", L("item.categories", "Categories").c_str());
