@@ -1965,11 +1965,25 @@ namespace YimMenu::I18n
 	}
 
 	// Translate vehicle display name to Chinese（English）format
-	inline std::string TranslateVehicleName(std::string_view name)
+	inline std::string TranslateVehicleName(std::string_view name, std::string_view gxtKey)
 	{
 		if (g_CurrentLanguage == Language::EN)
 			return std::string(name);
 
+		// If name already contains CJK, append original English GXT key
+		for (char c : name)
+		{
+			unsigned char uc = static_cast<unsigned char>(c);
+			if (uc >= 0xE0) // UTF-8 CJK start byte
+			{
+				// Check if gxtKey is a valid English name (not a hash or NULL)
+				if (!gxtKey.empty() && gxtKey != "NULL" && gxtKey.size() > 1)
+					return std::string(name) + "（" + std::string(gxtKey) + "）";
+				return std::string(name);
+			}
+		}
+
+		// Name is in English, look up Chinese translation
 		static const std::pair<std::string_view, std::string_view> vehicles[] = {
 			// Super
 			{"Adder", "阿德（Adder）"},

@@ -24,6 +24,7 @@ namespace YimMenu::Submenus
 		auto settings = std::make_shared<Group>(L("submenu.settings", "Settings"));
 
 		static std::vector<std::string> vehicleNames{};
+		static std::vector<std::string> vehicleGxtKeys{};
 		static std::vector<int> vehicleClasses{};
 		static int selectedClass{-1};
 
@@ -34,10 +35,12 @@ namespace YimMenu::Submenus
 
 					for (auto& veh : g_VehicleHashes)
 					{
-						std::string gxt = VEHICLE::GET_DISPLAY_NAME_FROM_VEHICLE_MODEL(veh);
-						std::string display = HUD::GET_FILENAME_FOR_AUDIO_CONVERSATION(gxt.c_str());
+					std::string gxt = VEHICLE::GET_DISPLAY_NAME_FROM_VEHICLE_MODEL(veh);
+					std::string display = HUD::GET_FILENAME_FOR_AUDIO_CONVERSATION(gxt.c_str());
 
-						int& count = nameCount[display == "NULL" ? gxt : display];
+					vehicleGxtKeys.push_back(gxt);
+
+					int& count = nameCount[display == "NULL" ? gxt : display];
 						std::string finalName = display == "NULL" ? gxt : display;
 						if (count > 0)
 						{
@@ -66,7 +69,7 @@ namespace YimMenu::Submenus
 		ImGui::InputTextWithHint(L("spawn_vehicle.name", "Name").c_str(), L("spawn_vehicle.search", "Search").c_str(), search, sizeof(search));
 
 		ImGui::SetNextItemWidth(300.f);
-		if (ImGui::BeginCombo(L("spawn_vehicle.class", "Class").c_str(), selectedClass == -1 ? L("spawn_vehicle.all", "All").c_str() : g_VehicleClassNames[selectedClass]))
+		if (ImGui::BeginCombo(L("spawn_vehicle.class", "Class").c_str(), selectedClass == -1 ? L("spawn_vehicle.all", "All").c_str() : I18n::TranslateListItem(g_VehicleClassNames[selectedClass]).c_str()))
 			{
 				if (ImGui::Selectable(L("spawn_vehicle.all", "All").c_str(), selectedClass == -1))
 				{
@@ -75,7 +78,7 @@ namespace YimMenu::Submenus
 
 				for (int i = 0; i < g_VehicleClassNames.size(); i++)
 				{
-					if (ImGui::Selectable(g_VehicleClassNames[i], selectedClass == i))
+					if (ImGui::Selectable(I18n::TranslateListItem(g_VehicleClassNames[i]).c_str(), selectedClass == i))
 					{
 						selectedClass = i;
 					}
@@ -108,7 +111,7 @@ namespace YimMenu::Submenus
 						if (matchesSearch && matchesClass)
 						{
 							ImGui::PushID(hash);
-							auto translatedName = I18n::TranslateVehicleName(name);
+							auto translatedName = I18n::TranslateVehicleName(name, vehicleGxtKeys[veh]);
 							if (ImGui::Selectable(translatedName.c_str()))
 							{
 								FiberPool::Push([hash] {
