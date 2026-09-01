@@ -231,8 +231,12 @@ namespace YimMenu::Submenus
 						if (ImGui::BeginListBox("##slot", ImVec2(200, 200)))
 						{
 							for (const auto& [slot, name] : slot_display_names)
-								if (ImGui::Selectable(name.c_str(), slot == selected_slot))
+							{
+								auto translatedName = I18n::TranslateListItem(name.substr(0, name.find("##")));
+								auto displayName = translatedName + name.substr(name.find("##"));
+								if (ImGui::Selectable(displayName.c_str(), slot == selected_slot))
 									selected_slot = slot;
+							}
 
 							ImGui::EndListBox();
 						}
@@ -665,7 +669,7 @@ namespace YimMenu::Submenus
 							{
 								for (const auto& [color, name] : lscClassicColors)
 								{
-									if (ImGui::Selectable(name, selected_color == color))
+									if (ImGui::Selectable(I18n::TranslateListItem(name).c_str(), selected_color == color))
 									{
 										selected_color = color;
 										if (color_to_change == 0)
@@ -683,7 +687,7 @@ namespace YimMenu::Submenus
 							{
 								for (const auto& [color, name] : lscMatteColors)
 								{
-									if (ImGui::Selectable(name, selected_color == color))
+									if (ImGui::Selectable(I18n::TranslateListItem(name).c_str(), selected_color == color))
 									{
 										selected_color = color;
 										if (color_to_change == 0)
@@ -701,7 +705,7 @@ namespace YimMenu::Submenus
 							{
 								for (const auto& [color, name] : lscMetalColors)
 								{
-									if (ImGui::Selectable(name, selected_color == color))
+									if (ImGui::Selectable(I18n::TranslateListItem(name).c_str(), selected_color == color))
 									{
 										selected_color = color;
 										if (color_to_change == 0)
@@ -719,7 +723,7 @@ namespace YimMenu::Submenus
 							{
 								for (const auto& [color, name] : lscUtilColors)
 								{
-									if (ImGui::Selectable(name, selected_color == color))
+									if (ImGui::Selectable(I18n::TranslateListItem(name).c_str(), selected_color == color))
 									{
 										selected_color = color;
 										if (color_to_change == 0)
@@ -737,7 +741,7 @@ namespace YimMenu::Submenus
 							{
 								for (const auto& [color, name] : lscWornColors)
 								{
-									if (ImGui::Selectable(name, selected_color == color))
+									if (ImGui::Selectable(I18n::TranslateListItem(name).c_str(), selected_color == color))
 									{
 										selected_color = color;
 										if (color_to_change == 0)
@@ -755,7 +759,7 @@ namespace YimMenu::Submenus
 							{
 								for (const auto& [color, name] : lscChameleonColors)
 								{
-									if (ImGui::Selectable(name, selected_color == color))
+									if (ImGui::Selectable(I18n::TranslateListItem(name).c_str(), selected_color == color))
 									{
 										selected_color = color;
 										if (color_to_change == 0)
@@ -773,7 +777,7 @@ namespace YimMenu::Submenus
 							{
 								for (const auto& [color, name] : lscClassicColors)
 								{
-									if (ImGui::Selectable(name, selected_color == color))
+									if (ImGui::Selectable(I18n::TranslateListItem(name).c_str(), selected_color == color))
 									{
 										selected_color = color;
 										owned_mods[(int)CustomVehicleModType::MOD_PEARLESCENT_COL] = color;
@@ -799,7 +803,7 @@ namespace YimMenu::Submenus
 
 								for (const auto& [color, name] : lscClassicColors)
 								{
-									if (ImGui::Selectable(name, selected_color == color))
+									if (ImGui::Selectable(I18n::TranslateListItem(name).c_str(), selected_color == color))
 									{
 										selected_color = color;
 										owned_mods[(int)CustomVehicleModType::MOD_WHEEL_COL] = color;
@@ -811,7 +815,7 @@ namespace YimMenu::Submenus
 
 								for (const auto& [color, name] : lscChameleonColors)
 								{
-									if (ImGui::Selectable(name, selected_color == color))
+									if (ImGui::Selectable(I18n::TranslateListItem(name).c_str(), selected_color == color))
 									{
 										selected_color = color;
 										owned_mods[(int)CustomVehicleModType::MOD_WHEEL_COL] = color;
@@ -827,7 +831,7 @@ namespace YimMenu::Submenus
 							{
 								for (const auto& [color, name] : lscClassicColors)
 								{
-									if (ImGui::Selectable(name, selected_color == color))
+									if (ImGui::Selectable(I18n::TranslateListItem(name).c_str(), selected_color == color))
 									{
 										selected_color = color;
 										owned_mods[(int)CustomVehicleModType::MOD_INTERIOR_COL] = color;
@@ -842,7 +846,7 @@ namespace YimMenu::Submenus
 							{
 								for (const auto& [color, name] : lscClassicColors)
 								{
-									if (ImGui::Selectable(name, selected_color == color))
+									if (ImGui::Selectable(I18n::TranslateListItem(name).c_str(), selected_color == color))
 									{
 										selected_color = color;
 										owned_mods[(int)CustomVehicleModType::MOD_DASHBOARD_COL] = color;
@@ -857,7 +861,7 @@ namespace YimMenu::Submenus
 							{
 								for (const auto& [color, name] : lscHeadlightColors)
 								{
-									if (ImGui::Selectable(name, selected_color == color))
+									if (ImGui::Selectable(I18n::TranslateListItem(name).c_str(), selected_color == color))
 									{
 										selected_color = color;
 										owned_mods[(int)CustomVehicleModType::MOD_XENON_COL] = color;
